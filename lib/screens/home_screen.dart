@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   onPrimary: Colors.white,
                   shadowColor: SecondaryColor,
                   elevation: 5,
-                  padding: EdgeInsets.fromLTRB(120, 10, 120, 10),
+                  padding: EdgeInsets.fromLTRB(100, 10, 100, 10),
                 ),
                 onPressed: () {},
               ),

@@ -34,11 +34,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 240),
+            SizedBox(height: 160),
             Image.asset(
               "assets/images/logo-parking-u.png",
-              width: 60.0,
-              height: 60.0,
+              width: 100.0,
+              height: 100.0,
             ),
             Image.asset(
               "assets/images/logo-parking-u-text.png",
@@ -51,12 +51,12 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
                 fontSize: 16,
               ),
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Image.asset(
-                "assets/images/wave.png",
-                width: 370.0,
-                height: 345.0,
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Image.asset(
+                  "assets/images/wave.png",
+                ),
               ),
             ),
           ],
