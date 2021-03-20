@@ -8,8 +8,10 @@ class HomeScreen extends StatelessWidget {
         title: new Text('Home'),
       ),
       body: new Center(
-        child: new Text('Home Screen',
-        style: TextStyle(fontSize: 20.0),),
+        child: new Text(
+          'Home Screen',
+          style: TextStyle(fontSize: 20.0),
+        ),
       ),
     );
   }
