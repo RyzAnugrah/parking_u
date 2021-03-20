@@ -6,7 +6,7 @@ class SplashScreenPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new SplashScreen(
-      seconds: 5,
+      seconds: 3,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text(
         'Parking.u',
