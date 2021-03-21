@@ -15,11 +15,11 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   }
 
   startSplashScreen() async {
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 3);
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return HomeScreen();
+          return HomeScreenPage();
         }),
       );
     });
@@ -43,12 +43,13 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
             Image.asset(
               "assets/images/logo-parking-u-text.png",
               width: 200.0,
-              height: 90.0,
+              height: 100.0,
             ),
             Text(
               'Cari parkir tidak pernah semudah ini',
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 15,
+                color: Color(0xFF08080D)
               ),
             ),
             Expanded(
