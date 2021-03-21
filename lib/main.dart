@@ -1,16 +1,34 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/services.dart';
+
 import 'package:parking_u/screens/splash_screen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(
+      DevicePreview(
+        enabled: !kReleaseMode, // Ensures that it is disabled in release mode
+        builder: (context) => MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
-      title: 'SplashScreen',
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      title: 'Parking.u',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          textTheme: Theme.of(context).textTheme.apply(
+                fontFamily: 'Poppins',
+                bodyColor: Color(0xFF08080D)
+              )),
       home: SplashScreenPage(),
     );
   }
