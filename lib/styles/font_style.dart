@@ -20,3 +20,9 @@ TextStyle headlineInfoBold = TextStyle(
   color: textColor,
   fontWeight: FontWeight.w800,
 );
+
+TextStyle textBreadCrumb = TextStyle(
+  fontFamily: 'Poppins',
+  fontSize: 10.0.sp,
+  color: textColor,
+);
