@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/screens/home_screen.dart';
+import 'package:parking_u/screens/login_screen.dart';
+import 'package:parking_u/styles/color_style.dart';
+import 'package:parking_u/styles/font_style.dart';
 import 'dart:async';
+import 'package:sizer/sizer.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -19,7 +22,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
     return Timer(duration, () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (_) {
-          return HomeScreenPage();
+          return LoginScreenPage();
         }),
       );
     });
@@ -28,41 +31,38 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0XFFFFFFFF),
+      backgroundColor: backgroundColor,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 160),
-            Image.asset(
-              "assets/images/logo-parking-u.png",
-              width: 100.0,
-              height: 100.0,
-            ),
-            Image.asset(
-              "assets/images/logo-parking-u-text.png",
-              width: 200.0,
-              height: 100.0,
-            ),
-            Text(
-              'Cari parkir tidak pernah semudah ini',
-              style: TextStyle(
-                fontSize: 15,
-                color: Color(0xFF08080D)
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 30.0.h),
+              Image.asset(
+                "assets/images/logo-parking-u.png",
+                height: 16.0.h,
               ),
-            ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Image.asset(
-                  "assets/images/wave.png",
+              SizedBox(height: 2.0.h),
+              Image.asset(
+                "assets/images/logo-parking-u-text.png",
+                height: 10.0.h,
+              ),
+              SizedBox(height: 2.0.h),
+              Text(
+                'Cari parkir tidak pernah semudah ini',
+                style: headlineInfo,
+              ),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: Image.asset(
+                    "assets/images/wave.png",
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
     );
   }
 }
