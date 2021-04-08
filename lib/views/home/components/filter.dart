@@ -15,11 +15,11 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
 
     void displayBottomSheet(BuildContext context) {
       SizeConfig().init(context);
-      Size size = MediaQuery.of(context).size;
+      // Size size = MediaQuery.of(context).size;
       showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius,

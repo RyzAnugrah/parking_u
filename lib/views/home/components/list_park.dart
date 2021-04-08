@@ -20,7 +20,7 @@ class ListPark extends StatelessWidget {
                 price: 3000,
                 length: 2,
                 availability: 'Tersedia',
-                rating: 5,
+                rating: 2,
                 startTimes: '09:00',
                 finishTimes: '20:00',
                 press: () {},

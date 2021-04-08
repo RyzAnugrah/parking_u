@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:provider/provider.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import 'package:parking_u/routes.dart';
 import 'package:parking_u/theme.dart';
-import 'package:parking_u/views/profile/profile_screen.dart';
-import 'package:parking_u/views/home/home_screen.dart';
-import 'package:parking_u/views/login/login_screen.dart';
+// import 'package:parking_u/views/profile/profile_screen.dart';
+// import 'package:parking_u/views/home/home_screen.dart';
+// import 'package:parking_u/views/login/login_screen.dart';
 import 'package:parking_u/views/splash_screen/splash_screen.dart';
 
 void main() => runApp(
@@ -33,14 +33,14 @@ class MyApp extends StatelessWidget {
           builder: (context, orientation) {
             SizerUtil().init(constraints, orientation);
             return MaterialApp(
-                locale: DevicePreview.locale(context),
-                builder: DevicePreview.appBuilder,
-                title: 'Parking.u',
-                debugShowCheckedModeBanner: false,
-                theme: theme(),
-                initialRoute: SplashScreen.routeName,
-                routes: routes,
-              );
+              locale: DevicePreview.locale(context),
+              builder: DevicePreview.appBuilder,
+              title: 'Parking.u',
+              debugShowCheckedModeBanner: false,
+              theme: theme(),
+              initialRoute: SplashScreen.routeName,
+              routes: routes,
+            );
           },
         );
       },
