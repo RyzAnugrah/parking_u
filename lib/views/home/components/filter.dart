@@ -12,6 +12,13 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
+  int _filterGroup = 1;
+
+  final List<RadioGroup> _filterList = [
+    RadioGroup(index: 1, text: "Terdekat"),
+    RadioGroup(index: 2, text: "Termurah"),
+  ];
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -31,31 +38,26 @@ class _FilterState extends State<Filter> {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(defaultPadding),
                 vertical: getProportionateScreenHeight(defaultPadding + 10)),
-            height: 55.0.h,
+            height: 30.0.h,
             child: ListView(
               children: [
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Urutkan berdasarkan',
+                      'Filter Pencarian',
                       style: TextStyle(
                         fontSize: bodyText1.sp,
                         color: secondaryTextColor,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(height: 2.0.h),
-                SizedBox(height: 2.0.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Belum punya akun? ',
-                      style: TextStyle(
-                          fontSize: caption.sp, color: secondaryTextColor),
+                    SizedBox(
+                      height: defaultPadding,
+                    ),
+                    _buildRadioButton(),
+                    SizedBox(
+                      height: defaultPadding,
                     ),
                   ],
                 ),
@@ -106,4 +108,37 @@ class _FilterState extends State<Filter> {
       ),
     );
   }
+
+  Widget _buildRadioButton() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: _filterList
+          .map(
+            (filterMap) => RadioListTile(
+              title: Text(filterMap.text),
+              value: filterMap.index,
+              groupValue: _filterGroup,
+              dense: false,
+              onChanged: (value) {
+                setState(
+                  () {
+                    _filterGroup = value;
+                  },
+                );
+                Navigator.pop(context);
+              },
+            ),
+          )
+          .toList(),
+    );
+  }
+}
+
+class RadioGroup {
+  final int index;
+  final String text;
+  RadioGroup({
+    this.index,
+    this.text,
+  });
 }

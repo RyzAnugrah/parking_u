@@ -12,9 +12,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: primaryBackgroundColor,
       body: Body(),
-      bottomNavigationBar: CustomBottomNavBar(
-selectedMenu: MenuState.home
-      )
+      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.home),
     );
   }
 }
