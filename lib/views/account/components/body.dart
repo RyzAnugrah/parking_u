@@ -40,14 +40,6 @@ class _BodyState extends State<Body> with Validation {
                   const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: ProfilePic(),
             ),
-            Text(
-              ("Jane Da"),
-              maxLines: 2,
-              style: TextStyle(
-                  fontSize: headline6,
-                  color: secondaryTextColor,
-                  fontWeight: FontWeight.bold),
-            ),
             Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),

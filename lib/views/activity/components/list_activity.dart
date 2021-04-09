@@ -3,10 +3,10 @@ import 'package:sizer/sizer.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
-import 'detail_book.dart';
+import 'detail_activity.dart';
 
-class ListPark extends StatelessWidget {
-  const ListPark({
+class ListActivity extends StatelessWidget {
+  const ListActivity({
     Key key,
   }) : super(key: key);
 
@@ -15,48 +15,36 @@ class ListPark extends StatelessWidget {
     return SafeArea(
       child: Column(
             children: <Widget>[
-              ListParkHere(
+              ListActivityHere(
                 image: "assets/images/list_parking/anu-jaya.png",
                 name: "Fadlan Sentosa",
                 price: 3000,
                 length: 2,
-                availability: 'Tersedia',
+                availability: 'Pending',
                 rating: 5,
                 startTimes: '09:00',
                 finishTimes: '20:00',
                 press: () {},
               ),
               SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
+              ListActivityHere(
                 image: "assets/images/list_parking/anu-jaya.png",
                 name: "Fadlan Sentosa",
                 price: 3000,
                 length: 2,
-                availability: 'Tersedia',
+                availability: 'Sedang Parkir',
                 rating: 5,
                 startTimes: '09:00',
                 finishTimes: '20:00',
                 press: () {},
               ),
               SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
+              ListActivityHere(
                 image: "assets/images/list_parking/anu-jaya.png",
                 name: "Fadlan Sentosa",
                 price: 3000,
                 length: 2,
-                availability: 'Tersedia',
-                rating: 5,
-                startTimes: '09:00',
-                finishTimes: '20:00',
-                press: () {},
-              ),
-             SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
-                image: "assets/images/list_parking/anu-jaya.png",
-                name: "Fadlan Sentosa",
-                price: 3000,
-                length: 2,
-                availability: 'Tersedia',
+                availability: 'Selesai',
                 rating: 5,
                 startTimes: '09:00',
                 finishTimes: '20:00',
@@ -69,7 +57,7 @@ class ListPark extends StatelessWidget {
   }
 }
 
-class ListParkHere extends StatelessWidget {
+class ListActivityHere extends StatelessWidget {
   Text _buildRatingStars(int rating) {
     String stars = '';
     for (int i = 0; i < rating; i++) {
@@ -79,7 +67,7 @@ class ListParkHere extends StatelessWidget {
     return Text(stars);
   }
 
-  const ListParkHere({
+  const ListActivityHere({
     Key key,
     @required this.name,
     @required this.image,

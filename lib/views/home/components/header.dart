@@ -45,7 +45,6 @@ class Header extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                      top: size.height * 0.01,
                       right: 10,
                     ),
                     child: Icon(Icons.gps_fixed, color: Colors.white, size: 6.0.w),

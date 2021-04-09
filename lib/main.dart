@@ -13,11 +13,11 @@ import 'package:parking_u/views/login/login_screen.dart';
 import 'package:parking_u/views/splash_screen/splash_screen.dart';
 
 void main() => runApp(
-      // DevicePreview(
-      //   enabled: !kReleaseMode, // Ensures that it is disabled in release mode
-      //   builder: (context) => MyApp(),
-      // ),
-      MyApp(),
+      DevicePreview(
+        enabled: !kReleaseMode, // Ensures that it is disabled in release mode
+        builder: (context) => MyApp(),
+      ),
+      // MyApp(),
     );
 
 class MyApp extends StatelessWidget {
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 title: 'Parking.u',
                 debugShowCheckedModeBanner: false,
                 theme: theme(),
-                initialRoute: SplashScreen.routeName,
+                initialRoute: HomeScreen.routeName,
                 routes: routes,
               );
           },

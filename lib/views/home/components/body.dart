@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
 import '../../../constants.dart';
-import '../../../constants.dart';
-import 'package:parking_u/components/custom_bottom_nav_bar.dart';
 import 'search.dart';
 import 'header.dart';
 import 'filter.dart';
