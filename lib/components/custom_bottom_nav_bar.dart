@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:parking_u/constants.dart';
+import 'package:sizer/sizer.dart';
 
+import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/home/home_screen.dart';
 import 'package:parking_u/views/profile/profile_screen.dart';
+import 'package:parking_u/views/activity/activity_screen.dart';
 import 'package:parking_u/enums.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
@@ -15,96 +18,117 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    // Size size = MediaQuery.of(context).size;
     final Color inActiveIconColor = Color(0xFFB6B6B6);
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 0),
-      decoration: BoxDecoration(
-        color: primaryBackgroundColor,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, -1),
-            blurRadius: 10,
-            color: Color(0xFFDADADA).withOpacity(0.5),
-          ),
-        ],
-      ),
-      child: SafeArea(
-          top: false,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
+    return SafeArea(
+      child: Container(
+        height: 8.0.h,
+        padding: EdgeInsets.symmetric(vertical: 0),
+        decoration: BoxDecoration(
+          color: primaryBackgroundColor,
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, -1),
+              blurRadius: 10,
+              color: Color(0xFFDADADA).withOpacity(0.5),
+            ),
+          ],
+        ),
+        child: SafeArea(
+            // top: false,
+            child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              child: GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  PageRouteBuilder(pageBuilder: (_, __, ___) => HomeScreen()),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.home_outlined,
+                      color: MenuState.home == selectedMenu
+                          ? primaryColor
+                          : inActiveIconColor,
+                      size: 8.0.w,
+                    ),
+                    Text(
+                      'Beranda',
+                      style: TextStyle(
+                          color: MenuState.home == selectedMenu
+                              ? primaryColor
+                              : inActiveIconColor,
+                          fontSize: 10.0.sp),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                PageRouteBuilder(pageBuilder: (_, __, ___) => ActivityScreen()),
+              ),
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.home_outlined),
-                    color: MenuState.home == selectedMenu
-                        ? primaryColor
-                        : inActiveIconColor,
-                    onPressed: () => Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => HomeScreen()),
-                    ),
-                  ),
-                  Text(
-                    'Beranda',
-                    style: TextStyle(
-                      color: MenuState.home == selectedMenu
-                          ? primaryColor
-                          : inActiveIconColor,
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.list_alt_outlined),
+                  Icon(
+                    Icons.list_alt_outlined,
                     color: MenuState.activity == selectedMenu
                         ? primaryColor
                         : inActiveIconColor,
-                    onPressed: () => {},
+                    size: 8.0.w,
                   ),
                   Text(
-                    'Aktivitas',
+                    'Riwayat',
                     style: TextStyle(
-                      color: MenuState.activity == selectedMenu
-                          ? primaryColor
-                          : inActiveIconColor,
-                    ),
+                        color: MenuState.activity == selectedMenu
+                            ? primaryColor
+                            : inActiveIconColor,
+                        fontSize: 10.0.sp),
                   )
                 ],
               ),
-              Column(
+            ),
+            GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                PageRouteBuilder(pageBuilder: (_, __, ___) => ProfileScreen()),
+              ),
+              child: Column(
                 mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: Icon(Icons.person_outline),
+                  Icon(
+                    Icons.person_outline,
                     color: MenuState.profile == selectedMenu
                         ? primaryColor
                         : inActiveIconColor,
-                    onPressed: () => Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProfileScreen()),
-                    ),
+                    size: 8.0.w,
                   ),
                   Text(
                     'Akun',
                     style: TextStyle(
-                      color: MenuState.profile == selectedMenu
-                          ? primaryColor
-                          : inActiveIconColor,
-                    ),
+                        color: MenuState.profile == selectedMenu
+                            ? primaryColor
+                            : inActiveIconColor,
+                        fontSize: 10.0.sp),
                   )
                 ],
               ),
-            ],
-          )),
+            ),
+          ],
+        )),
+      ),
     );
   }
 }

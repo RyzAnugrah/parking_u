@@ -51,7 +51,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 16.0.h,
+                        height: 30.0.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +97,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 16.0.h,
+                        height: 30.0.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +143,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 16.0.h,
+                        height: 30.0.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,

@@ -15,7 +15,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
@@ -53,7 +53,6 @@ class Header extends StatelessWidget {
                 children: [
                   Container(
                     padding: EdgeInsets.only(
-                      top: size.height * 0.01,
                       right: 10,
                     ),
                     child:
