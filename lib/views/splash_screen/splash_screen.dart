@@ -55,8 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Text(
               'Cari parkir tidak pernah semudah ini',
-              style: TextStyle(
-                  fontSize: caption.sp, color: secondaryTextColor),
+              style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
             ),
             Expanded(
               child: Align(
@@ -65,7 +64,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   "assets/images/wave.png",
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

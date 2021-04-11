@@ -8,7 +8,7 @@ import 'package:parking_u/views/home/home_screen.dart';
 
 void displayBottomSheetSuccess(BuildContext context) {
   SizeConfig().init(context);
-  Size size = MediaQuery.of(context).size;
+  // Size size = MediaQuery.of(context).size;
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: borderRadius,

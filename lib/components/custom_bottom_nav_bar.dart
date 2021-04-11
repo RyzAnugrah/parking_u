@@ -19,7 +19,7 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    Size size = MediaQuery.of(context).size;
+    // Size size = MediaQuery.of(context).size;
     final Color inActiveIconColor = Color(0xFFB6B6B6);
     return SafeArea(
       child: Container(

@@ -28,10 +28,12 @@ class Body extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.pin,
                 background: Container(
-                  decoration: BoxDecoration(color: primaryColor, borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(defaultPadding + 10),
-                          bottomRight: Radius.circular(defaultPadding + 10),
-                        )),
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(defaultPadding + 10),
+                        bottomRight: Radius.circular(defaultPadding + 10),
+                      )),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +46,6 @@ class Body extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Header(),
-
                               // SizedBox(height: 15),
                             ],
                           ),
@@ -59,7 +60,6 @@ class Body extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   Container(
-                    
                     padding: EdgeInsets.only(
                       top: size.height * 0.04,
                       bottom: size.height * 0.03,

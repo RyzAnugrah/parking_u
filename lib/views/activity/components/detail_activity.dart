@@ -4,11 +4,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
-import 'list_activity.dart';
+// import 'list_activity.dart';
 
 void displayBottomSheet(BuildContext context) {
   SizeConfig().init(context);
-  Size size = MediaQuery.of(context).size;
+  // Size size = MediaQuery.of(context).size;
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: borderRadius,

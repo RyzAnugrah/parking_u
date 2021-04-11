@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+// import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:parking_u/constants.dart';
@@ -7,6 +7,7 @@ import 'package:parking_u/size_config.dart';
 import 'profile_menu.dart';
 import 'package:parking_u/views/account/account_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
+import 'package:parking_u/views/notification/notification_screen.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -84,7 +85,12 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Notifikasi",
             icon: Icons.notifications_none_outlined,
-            press: () {},
+            press: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationScreen()),
+              )
+            },
           ),
           Divider(),
           ProfileMenu(

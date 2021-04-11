@@ -14,58 +14,58 @@ class ListPark extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-            children: <Widget>[
-              ListParkHere(
-                image: "assets/images/list_parking/anu-jaya.png",
-                name: "Fadlan Sentosa",
-                price: 3000,
-                length: 2,
-                availability: 'Tersedia',
-                rating: 5,
-                startTimes: '09:00',
-                finishTimes: '20:00',
-                press: () {},
-              ),
-              SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
-                image: "assets/images/list_parking/anu-jaya.png",
-                name: "Fadlan Sentosa",
-                price: 3000,
-                length: 2,
-                availability: 'Tersedia',
-                rating: 5,
-                startTimes: '09:00',
-                finishTimes: '20:00',
-                press: () {},
-              ),
-              SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
-                image: "assets/images/list_parking/anu-jaya.png",
-                name: "Fadlan Sentosa",
-                price: 3000,
-                length: 2,
-                availability: 'Tersedia',
-                rating: 5,
-                startTimes: '09:00',
-                finishTimes: '20:00',
-                press: () {},
-              ),
-             SizedBox(height: getProportionateScreenHeight(20)),
-              ListParkHere(
-                image: "assets/images/list_parking/anu-jaya.png",
-                name: "Fadlan Sentosa",
-                price: 3000,
-                length: 2,
-                availability: 'Tersedia',
-                rating: 5,
-                startTimes: '09:00',
-                finishTimes: '20:00',
-                press: () {},
-              ),
-              SizedBox(height: getProportionateScreenHeight(20)),
-            ],
+        children: <Widget>[
+          ListParkHere(
+            image: "assets/images/list_parking/anu-jaya.png",
+            name: "Fadlan Sentosa",
+            price: 3000,
+            length: 2,
+            availability: 'Tersedia',
+            rating: 2,
+            startTimes: '09:00',
+            finishTimes: '20:00',
+            press: () {},
           ),
-        );
+          SizedBox(height: getProportionateScreenHeight(20)),
+          ListParkHere(
+            image: "assets/images/list_parking/anu-jaya.png",
+            name: "Fadlan Sentosa",
+            price: 3000,
+            length: 2,
+            availability: 'Tersedia',
+            rating: 5,
+            startTimes: '09:00',
+            finishTimes: '20:00',
+            press: () {},
+          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          ListParkHere(
+            image: "assets/images/list_parking/anu-jaya.png",
+            name: "Fadlan Sentosa",
+            price: 3000,
+            length: 2,
+            availability: 'Tersedia',
+            rating: 5,
+            startTimes: '09:00',
+            finishTimes: '20:00',
+            press: () {},
+          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          ListParkHere(
+            image: "assets/images/list_parking/anu-jaya.png",
+            name: "Fadlan Sentosa",
+            price: 3000,
+            length: 2,
+            availability: 'Tersedia',
+            rating: 5,
+            startTimes: '09:00',
+            finishTimes: '20:00',
+            press: () {},
+          ),
+          SizedBox(height: getProportionateScreenHeight(20)),
+        ],
+      ),
+    );
   }
 }
 
@@ -142,96 +142,94 @@ class ListParkHere extends StatelessWidget {
                     left: getProportionateScreenWidth(140.0),
                   ),
                   child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  width: 20.0.w,
-                                  child: Text(
-                                    '$name',
-                                    style: TextStyle(
-                                      color: secondaryTextColor,
-                                      fontSize: caption.sp - 1,
-                                      fontWeight: FontWeight.w800,
-                                    ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
-                                  ),
-                                ),
-                                Container(
-                                  width: 20.0.w,
-                                  child: Column(
-                                    children: <Widget>[
-                                      Text(
-                                        'Rp$price',
-                                        style: TextStyle(
-                                         color: secondaryTextColor,
-                                        fontSize: caption.sp - 2,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        'per jam',
-                                        style: TextStyle(
-                                          fontSize: overline.sp - 2,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            width: 20.0.w,
+                            child: Text(
+                              '$name',
+                              style: TextStyle(
+                                color: secondaryTextColor,
+                                fontSize: caption.sp - 1,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
                             ),
-                            Row(
-                              children: [
+                          ),
+                          Container(
+                            width: 20.0.w,
+                            child: Column(
+                              children: <Widget>[
                                 Text(
-                                  '$length Km',
+                                  'Rp$price',
                                   style: TextStyle(
-                                    fontSize: overline.sp - 1,
+                                    color: secondaryTextColor,
+                                    fontSize: caption.sp - 2,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                Text(
+                                  'per jam',
+                                  style: TextStyle(
+                                    fontSize: overline.sp - 2,
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Text(
-                                  ' - $availability',
-                                  style: TextStyle(
-                                    fontSize: overline.sp - 1,
-                                    color: successColor,
-                                  ),
-                                ),
                               ],
                             ),
-                            _buildRatingStars(rating),
-                            SizedBox(height: 10.0),
-                            Row(
-                              children: <Widget>[
-                                Container(
-                                  padding: EdgeInsets.all(2.0.w),
-                                  width: getProportionateScreenWidth(90.0),
-                                  decoration: BoxDecoration(
-                                    color: primaryColor,
-                                    borderRadius: BorderRadius.circular(defaultPadding),
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    '$startTimes - $finishTimes',
-                                    style: TextStyle(
-                                fontSize: overline.sp - 3,
-                                
-                              ),
-                                  ),
-                                ),
-                                SizedBox(width: 10.0),
-                                
-                              ],
-                            )
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                
+                      Row(
+                        children: [
+                          Text(
+                            '$length Km',
+                            style: TextStyle(
+                              fontSize: overline.sp - 1,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Text(
+                            ' - $availability',
+                            style: TextStyle(
+                              fontSize: overline.sp - 1,
+                              color: successColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                      _buildRatingStars(rating),
+                      SizedBox(height: 10.0),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.all(2.0.w),
+                            width: getProportionateScreenWidth(90.0),
+                            decoration: BoxDecoration(
+                              color: primaryColor,
+                              borderRadius:
+                                  BorderRadius.circular(defaultPadding),
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              '$startTimes - $finishTimes',
+                              style: TextStyle(
+                                fontSize: overline.sp - 3,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10.0),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
