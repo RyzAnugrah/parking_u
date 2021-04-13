@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/views/profile/components/profile_pic.dart';
-// import 'package:sizer/sizer.dart';
-
-import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/constants.dart';
+import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/profile/components/profile_pic.dart';
 
 class Body extends StatefulWidget {
-  // createState() {
-  //   return BodyState();
-  // }
-
   const Body({Key key}) : super(key: key);
 
   @override
@@ -31,13 +25,15 @@ class _BodyState extends State<Body> with Validation {
   Widget build(context) {
     SizeConfig().init(context);
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding),
+      padding: EdgeInsets.symmetric(
+        horizontal: defaultPadding,
+        vertical: defaultPadding,
+      ),
       child: Center(
         child: Column(
           children: <Widget>[
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: defaultPadding),
+              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
               child: ProfilePic(),
             ),
             Container(
@@ -73,7 +69,6 @@ class _BodyState extends State<Body> with Validation {
             SizedBox(height: SizeConfig.screenHeight * 0.02),
             registerButton(),
             SizedBox(height: SizeConfig.screenHeight * 0.02),
-            
           ],
         ),
       ),
@@ -92,8 +87,8 @@ class _BodyState extends State<Body> with Validation {
         ),
         hintText: 'Isi Nama Lengkap',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            ),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -123,8 +118,8 @@ class _BodyState extends State<Body> with Validation {
         ),
         hintText: 'Isi Nomor Telepon',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            ),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -147,8 +142,8 @@ class _BodyState extends State<Body> with Validation {
       child: DropdownButtonFormField(
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(defaultPadding + 25),
-                ),
+              horizontal: getProportionateScreenWidth(defaultPadding + 25),
+            ),
             fillColor: Colors.white,
             focusedBorder: OutlineInputBorder(
               borderRadius: borderRadius,
@@ -165,16 +160,14 @@ class _BodyState extends State<Body> with Validation {
           DropdownMenuItem(
             child: Text(
               "Mobil",
-              style:
-                  TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
             ),
             value: 1,
           ),
           DropdownMenuItem(
             child: Text(
               "Motor",
-              style:
-                  TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
             ),
             value: 2,
           ),
@@ -195,16 +188,15 @@ class _BodyState extends State<Body> with Validation {
       style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
       cursorColor: secondaryTextColor,
       decoration: InputDecoration(
-        prefixIcon:
-            Icon(Icons.straighten_outlined, color: Colors.grey),
+        prefixIcon: Icon(Icons.straighten_outlined, color: Colors.grey),
         labelText: 'Plat No. Kendaraan',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
         hintText: '_ _ - _ _ _ _ - _ _',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            ),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -233,8 +225,8 @@ class _BodyState extends State<Body> with Validation {
         ),
         hintText: 'Isi Kata Sandi',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            ),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,

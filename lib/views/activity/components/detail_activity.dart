@@ -16,14 +16,14 @@ void displayBottomSheet(BuildContext context) {
     context: context,
     builder: (ctx) {
       return SafeArea(
-              child: Container(
+        child: Container(
           // padding: EdgeInsets.all(10.0.w),
           // padding: EdgeInsets.symmetric(
           //     horizontal: getProportionateScreenWidth(defaultPadding),
           //     vertical: getProportionateScreenHeight(defaultPadding + 10)),
           height: 60.0.h,
           child: ListView(
-            physics: const NeverScrollableScrollPhysics(),
+            // physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch, // add this
@@ -33,10 +33,11 @@ void displayBottomSheet(BuildContext context) {
                       topLeft: Radius.circular(8.0),
                       topRight: Radius.circular(8.0),
                     ),
-                    child: Image.asset('assets/images/list_parking/anu-jaya.png',
-                        // width: 300,
-                        height: getProportionateScreenHeight(180),
-                        fit: BoxFit.fill),
+                    child:
+                        Image.asset('assets/images/list_parking/anu-jaya.png',
+                            // width: 300,
+                            height: getProportionateScreenHeight(180),
+                            fit: BoxFit.fill),
                   ),
                   Container(
                     padding: EdgeInsets.only(
@@ -64,7 +65,8 @@ void displayBottomSheet(BuildContext context) {
                           child: Text(
                             "Pending",
                             style: TextStyle(
-                                fontSize: caption.sp, color: secondaryTextColor),
+                                fontSize: caption.sp,
+                                color: secondaryTextColor),
                           ),
                         ),
                       ],
@@ -99,7 +101,7 @@ void displayBottomSheet(BuildContext context) {
                     ),
                   ),
                   SizedBox(height: getProportionateScreenHeight(5)),
-                   Container(
+                  Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
                     ),
@@ -208,7 +210,8 @@ void displayBottomSheet(BuildContext context) {
                       ],
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(defaultPadding)),
+                  SizedBox(
+                      height: getProportionateScreenHeight(defaultPadding)),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
@@ -239,8 +242,9 @@ Widget bookingButton() {
       primary: secondaryColor,
       elevation: 5,
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(100),
-          vertical: getProportionateScreenHeight(17)),
+        horizontal: getProportionateScreenWidth(100),
+        vertical: getProportionateScreenHeight(17),
+      ),
       shape: new RoundedRectangleBorder(
         borderRadius: borderRadius,
       ),

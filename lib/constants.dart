@@ -22,8 +22,6 @@ const double bodyText2 = 13.0;
 const double caption = 12.0;
 const double overline = 10.0;
 
-// const double backIconSize = 6.0;
-
 const animationDuration = Duration(milliseconds: 200);
 
 final headingStyle = TextStyle(

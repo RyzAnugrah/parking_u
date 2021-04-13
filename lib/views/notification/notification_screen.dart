@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../../size_config.dart';
 import 'package:parking_u/constants.dart';
 
 class NotificationScreen extends StatefulWidget {
-  static String routeName = "/notification";
 
   const NotificationScreen({Key key}) : super(key: key);
 
@@ -51,7 +49,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 180.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +95,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 150.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +141,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 150.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,

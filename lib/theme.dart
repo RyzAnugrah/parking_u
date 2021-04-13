@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'constants.dart';
+import 'package:parking_u/constants.dart';
 
 ThemeData theme() {
   return ThemeData(

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../constants.dart';
+import 'package:parking_u/constants.dart';
 
 class ProfileMenu extends StatelessWidget {
   const ProfileMenu({
@@ -20,8 +18,9 @@ class ProfileMenu extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: TextButton(
-        style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.transparent),
-),
+        style: ButtonStyle(
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+        ),
         onPressed: press,
         child: Row(
           children: [
@@ -31,7 +30,10 @@ class ProfileMenu extends StatelessWidget {
             ),
             SizedBox(width: 20),
             Expanded(
-              child: Text(text, style: TextStyle(color: secondaryTextColor)),
+              child: Text(
+                text,
+                style: TextStyle(color: secondaryTextColor),
+              ),
             ),
             Icon(Icons.arrow_forward_ios, color: secondaryTextColor),
           ],

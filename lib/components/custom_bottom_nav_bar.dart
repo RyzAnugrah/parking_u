@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/constants.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/enums.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/home/home_screen.dart';
 import 'package:parking_u/views/profile/profile_screen.dart';
 import 'package:parking_u/views/activity/activity_screen.dart';
-import 'package:parking_u/enums.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -19,7 +18,6 @@ class CustomBottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // Size size = MediaQuery.of(context).size;
     final Color inActiveIconColor = Color(0xFFB6B6B6);
     return SafeArea(
       child: Container(
@@ -36,15 +34,47 @@ class CustomBottomNavBar extends StatelessWidget {
           ],
         ),
         child: SafeArea(
-            // top: false,
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              child: GestureDetector(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                child: GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => HomeScreen(),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.home_outlined,
+                        color: MenuState.home == selectedMenu
+                            ? primaryColor
+                            : inActiveIconColor,
+                        size: 8.0.w,
+                      ),
+                      Text(
+                        'Beranda',
+                        style: TextStyle(
+                            color: MenuState.home == selectedMenu
+                                ? primaryColor
+                                : inActiveIconColor,
+                            fontSize: 10.0.sp),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              GestureDetector(
                 onTap: () => Navigator.push(
                   context,
-                  PageRouteBuilder(pageBuilder: (_, __, ___) => HomeScreen()),
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => ActivityScreen(),
+                  ),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -52,82 +82,58 @@ class CustomBottomNavBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Icon(
-                      Icons.home_outlined,
-                      color: MenuState.home == selectedMenu
+                      Icons.list_alt_outlined,
+                      color: MenuState.activity == selectedMenu
                           ? primaryColor
                           : inActiveIconColor,
                       size: 8.0.w,
                     ),
                     Text(
-                      'Beranda',
+                      'Riwayat',
                       style: TextStyle(
-                          color: MenuState.home == selectedMenu
-                              ? primaryColor
-                              : inActiveIconColor,
-                          fontSize: 10.0.sp),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                PageRouteBuilder(pageBuilder: (_, __, ___) => ActivityScreen()),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.list_alt_outlined,
-                    color: MenuState.activity == selectedMenu
-                        ? primaryColor
-                        : inActiveIconColor,
-                    size: 8.0.w,
-                  ),
-                  Text(
-                    'Riwayat',
-                    style: TextStyle(
                         color: MenuState.activity == selectedMenu
                             ? primaryColor
                             : inActiveIconColor,
-                        fontSize: 10.0.sp),
-                  )
-                ],
+                        fontSize: 10.0.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                PageRouteBuilder(pageBuilder: (_, __, ___) => ProfileScreen()),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.person_outline,
-                    color: MenuState.profile == selectedMenu
-                        ? primaryColor
-                        : inActiveIconColor,
-                    size: 8.0.w,
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => ProfileScreen(),
                   ),
-                  Text(
-                    'Akun',
-                    style: TextStyle(
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.person_outline,
+                      color: MenuState.profile == selectedMenu
+                          ? primaryColor
+                          : inActiveIconColor,
+                      size: 8.0.w,
+                    ),
+                    Text(
+                      'Akun',
+                      style: TextStyle(
                         color: MenuState.profile == selectedMenu
                             ? primaryColor
                             : inActiveIconColor,
-                        fontSize: 10.0.sp),
-                  )
-                ],
+                        fontSize: 10.0.sp,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        )),
+            ],
+          ),
+        ),
       ),
     );
   }
