@@ -212,18 +212,19 @@ Widget bookingButton(BuildContext context) {
       primary: secondaryColor,
       elevation: 5,
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(100),
-          vertical: getProportionateScreenHeight(17)),
+        horizontal: getProportionateScreenWidth(95),
+        vertical: getProportionateScreenHeight(17),
+      ),
       shape: new RoundedRectangleBorder(
         borderRadius: borderRadius,
       ),
     ),
     onPressed: () {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) {
-            return BookingScreen();
-          }),
-        );
+        MaterialPageRoute(builder: (_) {
+          return BookingScreen();
+        }),
+      );
     },
   );
 }

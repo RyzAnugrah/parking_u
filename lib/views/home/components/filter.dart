@@ -38,7 +38,7 @@ class _FilterState extends State<Filter> {
             padding: EdgeInsets.symmetric(
                 horizontal: getProportionateScreenWidth(defaultPadding),
                 vertical: getProportionateScreenHeight(defaultPadding + 10)),
-            height: 30.0.h,
+            height: 35.0.h,
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
               children: [

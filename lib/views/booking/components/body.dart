@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'booking_datails.dart';
+import 'booking_details.dart';
 import 'time_list.dart';
 import 'payment.dart';
 import 'success.dart';
@@ -19,14 +19,16 @@ class Body extends StatelessWidget {
     SizeConfig().init(context);
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
-          vertical: getProportionateScreenHeight(defaultPadding),
-          horizontal: getProportionateScreenWidth(defaultPadding)),
+        vertical: getProportionateScreenHeight(defaultPadding),
+        horizontal: getProportionateScreenWidth(defaultPadding),
+      ),
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(defaultPadding * 0.1),
-                right: getProportionateScreenWidth(defaultPadding * 0.1)),
+              left: getProportionateScreenWidth(defaultPadding * 0.1),
+              right: getProportionateScreenWidth(defaultPadding * 0.1),
+            ),
             child: SizedBox(
               width: SizeConfig.screenWidth * 0.9,
               child: Text(
@@ -67,7 +69,9 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: getProportionateScreenHeight(defaultPadding)),
+          SizedBox(
+            height: getProportionateScreenHeight(defaultPadding),
+          ),
           Container(
             child: SizedBox(
               child: Row(
@@ -75,9 +79,11 @@ class Body extends StatelessWidget {
                   GestureDetector(
                     onTap: () => {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BookingDetails()))
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BookingDetails(),
+                        ),
+                      )
                     },
                     child: Text(
                       ("Pilih Lahan Parkir"),
@@ -175,10 +181,14 @@ class Body extends StatelessWidget {
           ),
           TimeList(),
           Divider(),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(
+            height: getProportionateScreenHeight(10),
+          ),
           Payment(),
-          SizedBox(height: getProportionateScreenHeight(defaultPadding)),
-          bookingButton(context)
+          SizedBox(
+            height: getProportionateScreenHeight(defaultPadding),
+          ),
+          bookingButton(context),
         ],
       ),
     );
@@ -195,16 +205,15 @@ Widget bookingButton(BuildContext context) {
       primary: secondaryColor,
       elevation: 5,
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(125),
-          vertical: getProportionateScreenHeight(17)),
+        horizontal: getProportionateScreenWidth(120),
+        vertical: getProportionateScreenHeight(17),
+      ),
       shape: new RoundedRectangleBorder(
         borderRadius: borderRadius,
       ),
     ),
     onPressed: () {
-
-            displayBottomSheetSuccess(context);
-
+      displayBottomSheetSuccess(context);
     },
   );
 }

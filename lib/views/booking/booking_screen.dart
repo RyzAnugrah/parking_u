@@ -9,19 +9,19 @@ class BookingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-         leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              color: primaryBackgroundColor,
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: primaryBackgroundColor,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
           backgroundColor: primaryColor,
           centerTitle: true,
-            title: Text(
-          "Checkout Pesanan",
-          style: TextStyle(color: primaryTextColor, fontSize:headline6),
-        )),
+          title: Text(
+            "Checkout Pesanan",
+            style: TextStyle(color: primaryTextColor, fontSize: headline6),
+          )),
       body: Body(),
     );
   }

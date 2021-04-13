@@ -1,0 +1,127 @@
+import 'package:flutter/material.dart';
+import 'package:parking_u/views/booking/components/slot_list.dart';
+import 'package:sizer/sizer.dart';
+
+import '../../../size_config.dart';
+import 'package:parking_u/constants.dart';
+import 'payment.dart';
+
+class BookingDetails extends StatefulWidget {
+  static String routeName = "/notification";
+
+  const BookingDetails({Key key}) : super(key: key);
+
+  @override
+  _BookingDetailsState createState() => _BookingDetailsState();
+}
+
+class _BookingDetailsState extends State<BookingDetails> {
+  Widget build(context) {
+    SizeConfig().init(context);
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Container(
+        padding: EdgeInsets.only(left: defaultPadding, bottom: defaultPadding),
+        child: SafeArea(
+          child: ListView(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Image.asset(
+                  "assets/images/wave-top.png",
+                ),
+              ),
+              Text(
+                'Pilih Parkiranmu !',
+                style:
+                    TextStyle(color: secondaryTextColor, fontSize: headline5),
+              ),
+              SizedBox(height: defaultPadding),
+              Text(
+                'Tentukan posisi parkir',
+                style:
+                    TextStyle(color: secondaryTextColor, fontSize: headline6),
+              ),
+              SizedBox(height: defaultPadding),
+              Text(
+                'Lantai 1 Anu Jaya',
+                style: TextStyle(
+                    color: secondaryTextColor,
+                    fontSize: bodyText1,
+                    fontWeight: FontWeight.w800),
+              ),
+              SizedBox(height: defaultPadding),
+              Container(
+                padding: EdgeInsets.only(right: defaultPadding),
+                child: SlotList(),
+              ),
+              SizedBox(height: defaultPadding),
+              Container(
+                padding: EdgeInsets.only(right: defaultPadding),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/ellipse-green.png",
+                        ),
+                        SizedBox(width: 1.0.w),
+                        Text(
+                          'Tersedia',
+                          style: TextStyle(
+                            color: secondaryTextColor,
+                            fontSize: bodyText2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/ellipse-orange.png",
+                        ),
+                        SizedBox(width: 2.0.w),
+                        Text(
+                          'Telah Dipesan',
+                          style: TextStyle(
+                            color: secondaryTextColor,
+                            fontSize: bodyText2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/ellipse-blue.png",
+                        ),
+                        SizedBox(width: 2.0.w),
+                        Text(
+                          'Dipilih',
+                          style: TextStyle(
+                            color: secondaryTextColor,
+                            fontSize: bodyText2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: defaultPadding),
+              Container(
+                padding: EdgeInsets.only(right: defaultPadding),
+                child: Payment(),
+              ),
+              SizedBox(height: defaultPadding),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
