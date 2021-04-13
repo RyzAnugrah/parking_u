@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:sizer/sizer.dart';
-
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/login/login_screen.dart';
@@ -22,13 +21,18 @@ class _SplashScreenState extends State<SplashScreen> {
 
   startSplashScreen() async {
     var duration = const Duration(seconds: 5);
-    return Timer(duration, () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) {
-          return LoginScreen();
-        }),
-      );
-    });
+    return Timer(
+      duration,
+      () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) {
+              return LoginScreen();
+            },
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -47,7 +51,14 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 30.0.w,
               height: 10.0.h,
             ),
-            Padding(padding: EdgeInsets.fromLTRB(0.0.w, 3.0.h, 0.0.w, 0.0.h)),
+            Padding(
+              padding: EdgeInsets.fromLTRB(
+                0.0.w,
+                3.0.h,
+                0.0.w,
+                0.0.h,
+              ),
+            ),
             Image.asset(
               "assets/images/logo-parking-u-text.png",
               width: 65.0.w,
@@ -55,7 +66,10 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Text(
               'Cari parkir tidak pernah semudah ini',
-              style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+              style: TextStyle(
+                fontSize: caption.sp,
+                color: secondaryTextColor,
+              ),
             ),
             Expanded(
               child: Align(

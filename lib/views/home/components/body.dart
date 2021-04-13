@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../../size_config.dart';
-import '../../../constants.dart';
-import 'search.dart';
-import 'header.dart';
-import 'filter.dart';
-import 'list_park.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/home/components/filter.dart';
+import 'package:parking_u/views/home/components/header.dart';
+import 'package:parking_u/views/home/components/list_park.dart';
+import 'package:parking_u/views/home/components/search.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,7 +19,6 @@ class Body extends StatelessWidget {
             SliverAppBar(
               automaticallyImplyLeading: false,
               floating: true,
-              // pinned: true,
               snap: true,
               elevation: 50,
               backgroundColor: Colors.transparent,
@@ -29,15 +27,15 @@ class Body extends StatelessWidget {
                 collapseMode: CollapseMode.pin,
                 background: Container(
                   decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(defaultPadding + 10),
-                        bottomRight: Radius.circular(defaultPadding + 10),
-                      )),
+                    color: primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(defaultPadding + 10),
+                      bottomRight: Radius.circular(defaultPadding + 10),
+                    ),
+                  ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +44,6 @@ class Body extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Header(),
-                              // SizedBox(height: 15),
                             ],
                           ),
                         ],
@@ -65,11 +62,12 @@ class Body extends StatelessWidget {
                       bottom: size.height * 0.03,
                     ),
                     decoration: BoxDecoration(
-                        color: primaryBackgroundColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(defaultPadding + 10),
-                          topRight: Radius.circular(defaultPadding + 10),
-                        )),
+                      color: primaryBackgroundColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(defaultPadding + 10),
+                        topRight: Radius.circular(defaultPadding + 10),
+                      ),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,

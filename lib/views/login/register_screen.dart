@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../size_config.dart';
-import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/constants.dart';
+import 'package:parking_u/mixins/validation.dart';
+import 'package:parking_u/size_config.dart';
 
 class RegisterScreenPage extends StatefulWidget {
-  // createState() {
-  //   return RegisterScreenState();
-  // }
-
   const RegisterScreenPage({Key key}) : super(key: key);
 
   @override
@@ -32,7 +27,10 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: defaultPadding, vertical: defaultPadding),
+        padding: EdgeInsets.symmetric(
+          horizontal: defaultPadding,
+          vertical: defaultPadding,
+        ),
         child: ListView(
           children: [
             Row(
@@ -55,19 +53,22 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                 children: [
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   nameField(),
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   telpField(),
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   typeField(),
@@ -79,7 +80,8 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                   numberField(),
                   Container(
                     alignment: Alignment.topLeft,
-                    padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   passwordField(),
@@ -87,8 +89,9 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                   Column(
                     children: [
                       Container(
-                        padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(15)),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(15),
+                        ),
                         child: Text(
                           'Dengan mendaftar anda berarti menyetujui kebijakan dan privasi pengguna',
                           textAlign: TextAlign.center,
@@ -112,15 +115,18 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                 Text(
                   'Sudah punya akun? ',
                   style: TextStyle(
-                      fontSize: caption, color: secondaryTextColor),
+                    fontSize: caption,
+                    color: secondaryTextColor,
+                  ),
                 ),
                 GestureDetector(
                   child: new Text(
                     'Masuk',
                     style: TextStyle(
-                        fontSize: caption,
-                        color: secondaryTextColor,
-                        fontWeight: FontWeight.w800),
+                      fontSize: caption,
+                      color: secondaryTextColor,
+                      fontWeight: FontWeight.w800,
+                    ),
                   ),
                   onTap: () {
                     Navigator.pop(context);
@@ -136,18 +142,25 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget nameField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.person_outline, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.person_outline,
+          color: Colors.grey,
+        ),
         labelText: 'Nama Lengkap',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
         hintText: 'Isi Nama Lengkap',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -177,12 +190,16 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
         ),
         hintText: 'Isi Nomor Telepon',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: BorderSide(color: primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -201,29 +218,40 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
       child: DropdownButtonFormField(
         decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding + 25),
-            vertical: getProportionateScreenHeight(12)),
+              horizontal: getProportionateScreenWidth(defaultPadding + 25),
+              vertical: getProportionateScreenHeight(12),
+            ),
             fillColor: Colors.white,
             focusedBorder: OutlineInputBorder(
               borderRadius: borderRadius,
-              borderSide: BorderSide(color: primaryColor, width: 2.0),
+              borderSide: BorderSide(
+                color: primaryColor,
+                width: 2.0,
+              ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: borderRadius,
             ),
-            labelStyle: TextStyle(fontSize: bodyText2, color: Colors.grey),
+            labelStyle: TextStyle(
+              fontSize: bodyText2,
+              color: Colors.grey,
+            ),
             labelText: 'Jenis Kendaraan'),
         value: _value,
         isExpanded: true,
         items: [
           DropdownMenuItem(
-            child: Text("Mobil", style:
-                          TextStyle(fontSize: bodyText2, color: secondaryTextColor),),
+            child: Text(
+              "Mobil",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
             value: 1,
           ),
           DropdownMenuItem(
-            child: Text("Motor", style:
-                          TextStyle(fontSize: bodyText2, color: secondaryTextColor),),
+            child: Text(
+              "Motor",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
             value: 2,
           ),
         ],
@@ -240,18 +268,25 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget numberField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.straighten_outlined, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.straighten_outlined,
+          color: Colors.grey,
+        ),
         labelText: 'Plat No. Kendaraan',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
         hintText: '_ _ - _ _ _ _ - _ _',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -269,23 +304,33 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget passwordField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       obscureText: true,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Colors.grey,
+        ),
         labelText: 'Kata Sandi',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
         hintText: 'Isi Kata Sandi',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: BorderSide(color: primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -302,16 +347,18 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     return ElevatedButton(
       child: Text(
         'Daftar',
-        style: TextStyle(fontSize: bodyText2, color: primaryTextColor),
+        style: TextStyle(
+          fontSize: bodyText2,
+          color: primaryTextColor,
+        ),
       ),
       style: ElevatedButton.styleFrom(
         primary: primaryColor,
-        // onPrimary: Colors.white,
-        // shadowColor: secondaryColor,
         elevation: 5,
         padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(142),
-            vertical: getProportionateScreenHeight(17)),
+          horizontal: getProportionateScreenWidth(142),
+          vertical: getProportionateScreenHeight(17),
+        ),
         shape: new RoundedRectangleBorder(
           borderRadius: borderRadius,
         ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:sizer/sizer.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/home/components/notification_icon.dart';
 import 'package:parking_u/views/notification/notification_screen.dart';
-
-import 'notification_icon.dart';
-import '../../../constants.dart';
-import '../../../size_config.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -15,10 +14,10 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // Size size = MediaQuery.of(context).size;
     return Padding(
-      padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+      padding: EdgeInsets.symmetric(
+        horizontal: getProportionateScreenWidth(20),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -32,7 +31,9 @@ class Header extends StatelessWidget {
                     child: Text(
                       "Cari tempat parkirmu!",
                       style: TextStyle(
-                          fontSize: caption.sp, color: primaryTextColor),
+                        fontSize: caption.sp,
+                        color: primaryTextColor,
+                      ),
                     ),
                   ),
                   NotificationIcon(
@@ -55,8 +56,11 @@ class Header extends StatelessWidget {
                     padding: EdgeInsets.only(
                       right: 10,
                     ),
-                    child:
-                        Icon(Icons.gps_fixed, color: Colors.white, size: 6.0.w),
+                    child: Icon(
+                      Icons.gps_fixed,
+                      color: Colors.white,
+                      size: 6.0.w,
+                    ),
                   ),
                   SizedBox(
                     width: SizeConfig.screenWidth * 0.7,
@@ -64,9 +68,10 @@ class Header extends StatelessWidget {
                       ("Lapangan Parkir PPBS D"),
                       maxLines: 2,
                       style: TextStyle(
-                          fontSize: bodyText1.sp,
-                          color: primaryTextColor,
-                          fontWeight: FontWeight.bold),
+                        fontSize: bodyText1.sp,
+                        color: primaryTextColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

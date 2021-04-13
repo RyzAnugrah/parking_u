@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-
-import '../../size_config.dart';
 import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
 
 class NotificationScreen extends StatefulWidget {
-  static String routeName = "/notification";
-
   const NotificationScreen({Key key}) : super(key: key);
 
   @override
@@ -19,7 +15,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.only(left: defaultPadding, bottom: defaultPadding),
+        padding: EdgeInsets.only(
+          left: defaultPadding,
+          bottom: defaultPadding,
+        ),
         child: SafeArea(
           child: ListView(
             children: [
@@ -31,8 +30,10 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
               Text(
                 'Notifikasi',
-                style:
-                    TextStyle(color: secondaryTextColor, fontSize: headline5),
+                style: TextStyle(
+                  color: secondaryTextColor,
+                  fontSize: headline5,
+                ),
               ),
               SizedBox(height: defaultPadding),
               Container(
@@ -51,7 +52,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 180.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,20 +60,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             Text(
                               'Selamat Datang di Parking.u!',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: headline6),
+                                color: secondaryTextColor,
+                                fontSize: headline6,
+                              ),
                             ),
                             Text(
                               'Greeting',
                               style: TextStyle(
-                                  color: infoColor, fontSize: bodyText2),
+                                color: infoColor,
+                                fontSize: bodyText2,
+                              ),
                             ),
                             SizedBox(height: defaultPadding),
                             Text(
                               'Ayo baca ketentuan penggunaan Parking.u biar lebih mudah cari parkir',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: bodyText1),
+                                color: secondaryTextColor,
+                                fontSize: bodyText1,
+                              ),
                             ),
                           ],
                         ),
@@ -97,7 +102,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 150.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -105,20 +110,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             Text(
                               'Yeay! Parkir anda sudah dibayarkan',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: headline6),
+                                color: secondaryTextColor,
+                                fontSize: headline6,
+                              ),
                             ),
                             Text(
                               'Pemberitahuan',
                               style: TextStyle(
-                                  color: successColor, fontSize: bodyText2),
+                                color: successColor,
+                                fontSize: bodyText2,
+                              ),
                             ),
                             SizedBox(height: defaultPadding),
                             Text(
                               'Lihat detail parkir anda disini',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: bodyText1),
+                                color: secondaryTextColor,
+                                fontSize: bodyText1,
+                              ),
                             ),
                           ],
                         ),
@@ -143,7 +152,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),
                       child: SizedBox(
-                        height: 30.0.h,
+                        height: 150.0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,20 +160,24 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             Text(
                               'Oops! Terjadi Kesalahan saat booking',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: headline6),
+                                color: secondaryTextColor,
+                                fontSize: headline6,
+                              ),
                             ),
                             Text(
                               'Peringatan',
                               style: TextStyle(
-                                  color: errorColor, fontSize: bodyText2),
+                                color: errorColor,
+                                fontSize: bodyText2,
+                              ),
                             ),
                             SizedBox(height: defaultPadding),
                             Text(
                               'Cari tahu penyebab kesalahan anda',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: bodyText1),
+                                color: secondaryTextColor,
+                                fontSize: bodyText1,
+                              ),
                             ),
                           ],
                         ),
