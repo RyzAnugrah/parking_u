@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/views/booking/components/slot_list.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../size_config.dart';
 import 'package:parking_u/constants.dart';
-import 'payment.dart';
+import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/booking/components/payment.dart';
+import 'package:parking_u/views/booking/components/slot_list.dart';
 
 class BookingDetails extends StatefulWidget {
   static String routeName = "/notification";
@@ -21,7 +20,10 @@ class _BookingDetailsState extends State<BookingDetails> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.only(left: defaultPadding, bottom: defaultPadding),
+        padding: EdgeInsets.only(
+          left: defaultPadding,
+          bottom: defaultPadding,
+        ),
         child: SafeArea(
           child: ListView(
             children: [
@@ -33,22 +35,27 @@ class _BookingDetailsState extends State<BookingDetails> {
               ),
               Text(
                 'Pilih Parkiranmu !',
-                style:
-                    TextStyle(color: secondaryTextColor, fontSize: headline5),
+                style: TextStyle(
+                  color: secondaryTextColor,
+                  fontSize: headline5,
+                ),
               ),
               SizedBox(height: defaultPadding),
               Text(
                 'Tentukan posisi parkir',
-                style:
-                    TextStyle(color: secondaryTextColor, fontSize: headline6),
+                style: TextStyle(
+                  color: secondaryTextColor,
+                  fontSize: headline6,
+                ),
               ),
               SizedBox(height: defaultPadding),
               Text(
                 'Lantai 1 Anu Jaya',
                 style: TextStyle(
-                    color: secondaryTextColor,
-                    fontSize: bodyText1,
-                    fontWeight: FontWeight.w800),
+                  color: secondaryTextColor,
+                  fontSize: bodyText1,
+                  fontWeight: FontWeight.w800,
+                ),
               ),
               SizedBox(height: defaultPadding),
               Container(

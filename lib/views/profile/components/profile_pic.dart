@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:parking_u/constants.dart';
 
 class ProfilePic extends StatelessWidget {
@@ -28,17 +27,19 @@ class ProfilePic extends StatelessWidget {
               child: TextButton(
                 style: TextButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(50),
-                  side: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(50),
+                    side: BorderSide(color: Colors.white),
+                  ),
+                  backgroundColor: Color(0xFFF5F6F9),
                 ),
-                backgroundColor: Color(0xFFF5F6F9),
-                ),
-                
                 onPressed: () {},
-                child: Icon(Icons.camera_alt_outlined, color: primaryColor),
+                child: Icon(
+                  Icons.camera_alt_outlined,
+                  color: primaryColor,
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

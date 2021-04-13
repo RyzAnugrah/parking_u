@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:parking_u/components/custom_bottom_nav_bar.dart';
-import 'package:parking_u/enums.dart';
 import 'package:parking_u/constants.dart';
-import 'components/body.dart';
+import 'package:parking_u/enums.dart';
+import 'package:parking_u/views/activity/components/body.dart';
 
 class ActivityScreen extends StatelessWidget {
   static String routeName = "/activity";
@@ -11,15 +10,21 @@ class ActivityScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: primaryColor,
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-            title: Text(
+        backgroundColor: primaryColor,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
           "Riwayat",
-          style: TextStyle(color: primaryTextColor, fontSize:headline6),
-        )),
+          style: TextStyle(
+            color: primaryTextColor,
+            fontSize: headline6,
+          ),
+        ),
+      ),
       body: Body(),
-      bottomNavigationBar: CustomBottomNavBar(selectedMenu: MenuState.activity),
+      bottomNavigationBar: CustomBottomNavBar(
+        selectedMenu: MenuState.activity,
+      ),
     );
   }
 }

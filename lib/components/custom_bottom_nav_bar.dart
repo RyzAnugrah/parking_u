@@ -60,10 +60,11 @@ class CustomBottomNavBar extends StatelessWidget {
                       Text(
                         'Beranda',
                         style: TextStyle(
-                            color: MenuState.home == selectedMenu
-                                ? primaryColor
-                                : inActiveIconColor,
-                            fontSize: 10.0.sp),
+                          color: MenuState.home == selectedMenu
+                              ? primaryColor
+                              : inActiveIconColor,
+                          fontSize: 10.0.sp,
+                        ),
                       ),
                     ],
                   ),

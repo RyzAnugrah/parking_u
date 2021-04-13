@@ -16,7 +16,10 @@ class ProfileMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20,
+        vertical: 10,
+      ),
       child: TextButton(
         style: ButtonStyle(
           overlayColor: MaterialStateProperty.all(Colors.transparent),
@@ -35,7 +38,10 @@ class ProfileMenu extends StatelessWidget {
                 style: TextStyle(color: secondaryTextColor),
               ),
             ),
-            Icon(Icons.arrow_forward_ios, color: secondaryTextColor),
+            Icon(
+              Icons.arrow_forward_ios,
+              color: secondaryTextColor,
+            ),
           ],
         ),
       ),

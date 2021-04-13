@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
-import 'detail_book.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/home/components/detail_book.dart';
 
 class ListPark extends StatelessWidget {
   const ListPark({
@@ -26,7 +25,9 @@ class ListPark extends StatelessWidget {
             finishTimes: '20:00',
             press: () {},
           ),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
           ListParkHere(
             image: "assets/images/list_parking/anu-jaya.png",
             name: "Fadlan Sentosa",
@@ -38,7 +39,9 @@ class ListPark extends StatelessWidget {
             finishTimes: '20:00',
             press: () {},
           ),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
           ListParkHere(
             image: "assets/images/list_parking/anu-jaya.png",
             name: "Fadlan Sentosa",
@@ -50,7 +53,9 @@ class ListPark extends StatelessWidget {
             finishTimes: '20:00',
             press: () {},
           ),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
           ListParkHere(
             image: "assets/images/list_parking/anu-jaya.png",
             name: "Fadlan Sentosa",
@@ -62,7 +67,9 @@ class ListPark extends StatelessWidget {
             finishTimes: '20:00',
             press: () {},
           ),
-          SizedBox(height: getProportionateScreenHeight(20)),
+          SizedBox(
+            height: getProportionateScreenHeight(20),
+          ),
         ],
       ),
     );
@@ -100,7 +107,8 @@ class ListParkHere extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(defaultPadding)),
+        horizontal: getProportionateScreenWidth(defaultPadding),
+      ),
       child: GestureDetector(
         onTap: () => displayBottomSheet(context),
         child: Container(
@@ -129,7 +137,6 @@ class ListParkHere extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: borderRadius,
                     child: Image(
-                      // width: 200.0,
                       image: AssetImage(
                         image,
                       ),
@@ -226,7 +233,7 @@ class ListParkHere extends StatelessWidget {
                           ),
                           SizedBox(width: 10.0),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

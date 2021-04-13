@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 
@@ -142,7 +141,7 @@ class TimeListCard extends StatelessWidget {
                           maxLines: 2,
                           textAlign: TextAlign.center,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

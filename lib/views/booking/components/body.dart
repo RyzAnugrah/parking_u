@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-// import 'package:auto_size_text/auto_size_text.dart';
-
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'booking_details.dart';
-import 'time_list.dart';
-import 'payment.dart';
-import 'success.dart';
+import 'package:parking_u/views/booking/components/booking_details.dart';
+import 'package:parking_u/views/booking/components/payment.dart';
+import 'package:parking_u/views/booking/components/success.dart';
+import 'package:parking_u/views/booking/components/time_list.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -36,13 +34,16 @@ class Body extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                    fontSize: headline6.sp,
-                    color: secondaryTextColor,
-                    fontWeight: FontWeight.bold),
+                  fontSize: headline6.sp,
+                  color: secondaryTextColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(
+            height: getProportionateScreenHeight(10),
+          ),
           Container(
             child: SizedBox(
               child: Row(
@@ -51,7 +52,10 @@ class Body extends StatelessWidget {
                     padding: EdgeInsets.only(
                       right: 5,
                     ),
-                    child: Icon(Icons.gps_fixed, size: 4.0.w),
+                    child: Icon(
+                      Icons.gps_fixed,
+                      size: 4.0.w,
+                    ),
                   ),
                   SizedBox(
                     width: SizeConfig.screenWidth * 0.7,
@@ -108,9 +112,10 @@ class Body extends StatelessWidget {
                         ("Lahan Terpilih: B1 - E5"),
                         maxLines: 2,
                         style: TextStyle(
-                            fontSize: caption.sp - 2,
-                            color: secondaryTextColor,
-                            fontWeight: FontWeight.w500),
+                          fontSize: caption.sp - 2,
+                          color: secondaryTextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
@@ -128,9 +133,10 @@ class Body extends StatelessWidget {
                         ("Lahan Tersedia: 10 / 20"),
                         maxLines: 2,
                         style: TextStyle(
-                            fontSize: caption.sp - 2,
-                            color: secondaryTextColor,
-                            fontWeight: FontWeight.w500),
+                          fontSize: caption.sp - 2,
+                          color: secondaryTextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
@@ -148,9 +154,10 @@ class Body extends StatelessWidget {
                         ("Waktu Buka: 09:00 - 20:00"),
                         maxLines: 2,
                         style: TextStyle(
-                            fontSize: caption.sp - 2,
-                            color: secondaryTextColor,
-                            fontWeight: FontWeight.w500),
+                          fontSize: caption.sp - 2,
+                          color: secondaryTextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
@@ -169,9 +176,10 @@ class Body extends StatelessWidget {
                         ("Pilih Waktu"),
                         maxLines: 2,
                         style: TextStyle(
-                            fontSize: caption.sp - 1,
-                            color: secondaryTextColor,
-                            fontWeight: FontWeight.w700),
+                          fontSize: caption.sp - 1,
+                          color: secondaryTextColor,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ],
                   ),
@@ -199,7 +207,10 @@ Widget bookingButton(BuildContext context) {
   return ElevatedButton(
     child: Text(
       'Checkout',
-      style: TextStyle(fontSize: bodyText1.sp, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText1.sp,
+        color: secondaryTextColor,
+      ),
     ),
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,

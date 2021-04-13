@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
 
 class Filter extends StatefulWidget {
   Filter();
@@ -22,11 +21,9 @@ class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // Size size = MediaQuery.of(context).size;
 
     void displayBottomSheet(BuildContext context) {
       SizeConfig().init(context);
-      // Size size = MediaQuery.of(context).size;
       showModalBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: borderRadius,
@@ -34,10 +31,10 @@ class _FilterState extends State<Filter> {
         context: context,
         builder: (ctx) {
           return Container(
-            // padding: EdgeInsets.all(10.0.w),
             padding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(defaultPadding),
-                vertical: getProportionateScreenHeight(defaultPadding + 10)),
+              horizontal: getProportionateScreenWidth(defaultPadding),
+              vertical: getProportionateScreenHeight(defaultPadding + 10),
+            ),
             height: 35.0.h,
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
@@ -71,8 +68,9 @@ class _FilterState extends State<Filter> {
 
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(defaultPadding + 10),
-          vertical: getProportionateScreenHeight(defaultPadding)),
+        horizontal: getProportionateScreenWidth(defaultPadding + 10),
+        vertical: getProportionateScreenHeight(defaultPadding),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -87,8 +85,9 @@ class _FilterState extends State<Filter> {
                       "Rekomendasi \nParkir Terdekat",
                       maxLines: 2,
                       style: TextStyle(
-                          fontSize: getProportionateScreenWidth(bodyText2),
-                          color: secondaryTextColor),
+                        fontSize: getProportionateScreenWidth(bodyText2),
+                        color: secondaryTextColor,
+                      ),
                     ),
                   ),
                   IconButton(

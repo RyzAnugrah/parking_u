@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../size_config.dart';
+import 'package:parking_u/size_config.dart';
 
 class NotificationIcon extends StatelessWidget {
   const NotificationIcon({
@@ -22,7 +21,8 @@ class NotificationIcon extends StatelessWidget {
       borderRadius: BorderRadius.circular(100),
       onTap: press,
       child: Stack(
-        clipBehavior: Clip.none, children: [
+        clipBehavior: Clip.none,
+        children: [
           Container(
             child: Column(
               children: [
@@ -35,7 +35,7 @@ class NotificationIcon extends StatelessWidget {
                     color: Colors.white,
                   ),
                   onPressed: () {},
-                )
+                ),
               ],
             ),
           ),
@@ -49,7 +49,10 @@ class NotificationIcon extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Color(0xFFFF4848),
                   shape: BoxShape.circle,
-                  border: Border.all(width: 0.2.w, color: Colors.white),
+                  border: Border.all(
+                    width: 0.2.w,
+                    color: Colors.white,
+                  ),
                 ),
                 child: Center(
                   child: Text(
@@ -63,7 +66,7 @@ class NotificationIcon extends StatelessWidget {
                   ),
                 ),
               ),
-            )
+            ),
         ],
       ),
     );

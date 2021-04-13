@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../../size_config.dart';
 import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key key}) : super(key: key);
@@ -16,7 +16,10 @@ class _AboutScreenState extends State<AboutScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Container(
-        padding: EdgeInsets.only(left: defaultPadding, bottom: defaultPadding),
+        padding: EdgeInsets.only(
+          left: defaultPadding,
+          bottom: defaultPadding,
+        ),
         child: SafeArea(
           child: ListView(
             children: [
@@ -28,8 +31,10 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
               Text(
                 'Tentang Kami',
-                style:
-                    TextStyle(color: secondaryTextColor, fontSize: headline5),
+                style: TextStyle(
+                  color: secondaryTextColor,
+                  fontSize: headline5,
+                ),
               ),
               SizedBox(height: defaultPadding),
               Container(
@@ -67,8 +72,9 @@ class _AboutScreenState extends State<AboutScreen> {
                             Text(
                               'Cari parkir tidak pernah semudah ini!',
                               style: TextStyle(
-                                  color: secondaryTextColor,
-                                  fontSize: bodyText1),
+                                color: secondaryTextColor,
+                                fontSize: bodyText1,
+                              ),
                             ),
                           ],
                         ),

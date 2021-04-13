@@ -19,11 +19,13 @@ class AccountScreen extends StatelessWidget {
         centerTitle: true,
         title: Text(
           "Edit Akun",
-          style: TextStyle(color: primaryTextColor, fontSize: headline6),
+          style: TextStyle(
+            color: primaryTextColor,
+            fontSize: headline6,
+          ),
         ),
       ),
       body: Body(),
-      // bottomNavigationBar: NavBar(selectedMenu: MenuState.profile),
     );
   }
 }

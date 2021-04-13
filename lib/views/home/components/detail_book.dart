@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:sizer/sizer.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/booking/booking_screen.dart';
 
 void displayBottomSheet(BuildContext context) {
   SizeConfig().init(context);
-  // Size size = MediaQuery.of(context).size;
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: borderRadius,
@@ -17,35 +15,31 @@ void displayBottomSheet(BuildContext context) {
     builder: (ctx) {
       return SafeArea(
         child: Container(
-          // padding: EdgeInsets.all(10.0.w),
-          // padding: EdgeInsets.symmetric(
-          //     horizontal: getProportionateScreenWidth(defaultPadding),
-          //     vertical: getProportionateScreenHeight(defaultPadding + 10)),
           height: 58.0.h,
           child: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: <Widget>[
               Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch, // add this
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8.0),
                       topRight: Radius.circular(8.0),
                     ),
-                    child:
-                        Image.asset('assets/images/list_parking/anu-jaya.png',
-                            // width: 300,
-                            height: getProportionateScreenHeight(180),
-                            fit: BoxFit.fill),
+                    child: Image.asset(
+                      'assets/images/list_parking/anu-jaya.png',
+                      height: getProportionateScreenHeight(180),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Container(
                     padding: EdgeInsets.only(
-                        left: getProportionateScreenWidth(defaultPadding),
-                        right: getProportionateScreenWidth(defaultPadding),
-                        top: getProportionateScreenHeight(defaultPadding),
-                        bottom:
-                            getProportionateScreenHeight(defaultPadding - 15)),
+                      left: getProportionateScreenWidth(defaultPadding),
+                      right: getProportionateScreenWidth(defaultPadding),
+                      top: getProportionateScreenHeight(defaultPadding),
+                      bottom: getProportionateScreenHeight(defaultPadding - 15),
+                    ),
                     child: Row(
                       children: [
                         SizedBox(
@@ -54,9 +48,10 @@ void displayBottomSheet(BuildContext context) {
                             "Fadlan Sentosa",
                             maxLines: 2,
                             style: TextStyle(
-                                fontSize: bodyText2.sp,
-                                fontWeight: FontWeight.w800,
-                                color: secondaryTextColor),
+                              fontSize: bodyText2.sp,
+                              fontWeight: FontWeight.w800,
+                              color: secondaryTextColor,
+                            ),
                           ),
                         ),
                         Spacer(),
@@ -65,7 +60,9 @@ void displayBottomSheet(BuildContext context) {
                           child: Text(
                             "Tersedia",
                             style: TextStyle(
-                                fontSize: caption.sp, color: successColor),
+                              fontSize: caption.sp,
+                              color: successColor,
+                            ),
                           ),
                         ),
                       ],
@@ -81,8 +78,11 @@ void displayBottomSheet(BuildContext context) {
                           padding: EdgeInsets.only(
                             right: 10,
                           ),
-                          child: Icon(Icons.gps_fixed,
-                              color: secondaryTextColor, size: 5.0.w),
+                          child: Icon(
+                            Icons.gps_fixed,
+                            color: secondaryTextColor,
+                            size: 5.0.w,
+                          ),
                         ),
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
@@ -99,7 +99,9 @@ void displayBottomSheet(BuildContext context) {
                       ],
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(5)),
+                  SizedBox(
+                    height: getProportionateScreenHeight(5),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
@@ -110,8 +112,11 @@ void displayBottomSheet(BuildContext context) {
                           padding: EdgeInsets.only(
                             right: 10,
                           ),
-                          child: Icon(Icons.access_time_outlined,
-                              color: secondaryTextColor, size: 5.0.w),
+                          child: Icon(
+                            Icons.access_time_outlined,
+                            color: secondaryTextColor,
+                            size: 5.0.w,
+                          ),
                         ),
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
@@ -126,7 +131,9 @@ void displayBottomSheet(BuildContext context) {
                       ],
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(5)),
+                  SizedBox(
+                    height: getProportionateScreenHeight(5),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
@@ -137,8 +144,11 @@ void displayBottomSheet(BuildContext context) {
                           padding: EdgeInsets.only(
                             right: 10,
                           ),
-                          child: Icon(Icons.monetization_on_outlined,
-                              color: secondaryTextColor, size: 5.0.w),
+                          child: Icon(
+                            Icons.monetization_on_outlined,
+                            color: secondaryTextColor,
+                            size: 5.0.w,
+                          ),
                         ),
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
@@ -153,7 +163,9 @@ void displayBottomSheet(BuildContext context) {
                       ],
                     ),
                   ),
-                  SizedBox(height: getProportionateScreenHeight(5)),
+                  SizedBox(
+                    height: getProportionateScreenHeight(5),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
@@ -164,8 +176,11 @@ void displayBottomSheet(BuildContext context) {
                           padding: EdgeInsets.only(
                             right: 10,
                           ),
-                          child: Icon(Icons.map_outlined,
-                              color: secondaryTextColor, size: 5.0.w),
+                          child: Icon(
+                            Icons.map_outlined,
+                            color: secondaryTextColor,
+                            size: 5.0.w,
+                          ),
                         ),
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
@@ -181,7 +196,8 @@ void displayBottomSheet(BuildContext context) {
                     ),
                   ),
                   SizedBox(
-                      height: getProportionateScreenHeight(defaultPadding)),
+                    height: getProportionateScreenHeight(defaultPadding),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: getProportionateScreenWidth(defaultPadding),
@@ -206,7 +222,10 @@ Widget bookingButton(BuildContext context) {
   return ElevatedButton(
     child: Text(
       'Booking Sekarang',
-      style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: caption.sp,
+        color: secondaryTextColor,
+      ),
     ),
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,
@@ -221,9 +240,11 @@ Widget bookingButton(BuildContext context) {
     ),
     onPressed: () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) {
-          return BookingScreen();
-        }),
+        MaterialPageRoute(
+          builder: (_) {
+            return BookingScreen();
+          },
+        ),
       );
     },
   );

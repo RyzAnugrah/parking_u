@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../../constants.dart';
-import '../../../size_config.dart';
+import 'package:parking_u/constants.dart';
+import 'package:parking_u/size_config.dart';
 
 class Payment extends StatefulWidget {
   Payment();
@@ -22,7 +21,9 @@ class _PaymentState extends State<Payment> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(0)),
+      padding: EdgeInsets.symmetric(
+        horizontal: getProportionateScreenWidth(0),
+      ),
       child: GestureDetector(
         onTap: () => displayBottomSheet(context),
         child: Container(
@@ -252,7 +253,10 @@ class _PaymentState extends State<Payment> {
     return ElevatedButton(
       child: Text(
         'Booking Sekarang',
-        style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+        style: TextStyle(
+          fontSize: caption.sp,
+          color: secondaryTextColor,
+        ),
       ),
       style: ElevatedButton.styleFrom(
         primary: secondaryColor,
@@ -273,7 +277,10 @@ class _PaymentState extends State<Payment> {
     return ElevatedButton(
       child: Text(
         'Bayar',
-        style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+        style: TextStyle(
+          fontSize: caption.sp,
+          color: secondaryTextColor,
+        ),
       ),
       style: ElevatedButton.styleFrom(
         primary: secondaryColor,

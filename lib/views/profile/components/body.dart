@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:sizer/sizer.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/about/about_screen.dart';
-import 'profile_menu.dart';
 import 'package:parking_u/views/account/account_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
 import 'package:parking_u/views/notification/notification_screen.dart';
+import 'package:parking_u/views/profile/components/profile_menu.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -47,9 +45,10 @@ class Body extends StatelessWidget {
                           ("Jane Da"),
                           maxLines: 2,
                           style: TextStyle(
-                              fontSize: headline6,
-                              color: secondaryTextColor,
-                              fontWeight: FontWeight.bold),
+                            fontSize: headline6,
+                            color: secondaryTextColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -61,16 +60,18 @@ class Body extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => AccountScreen()),
+                                    builder: (context) => AccountScreen(),
+                                  ),
                                 )
                               },
                               child: AutoSizeText(
                                 ("Edit Profil   >"),
                                 maxLines: 2,
                                 style: TextStyle(
-                                    fontSize: caption,
-                                    color: secondaryTextColor,
-                                    fontWeight: FontWeight.w100),
+                                  fontSize: caption,
+                                  color: secondaryTextColor,
+                                  fontWeight: FontWeight.w100,
+                                ),
                               ),
                             ),
                           ],
@@ -92,7 +93,7 @@ class Body extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => NotificationScreen(),
                 ),
-              )
+              ),
             },
           ),
           Divider(),
@@ -118,7 +119,7 @@ class Body extends StatelessWidget {
                 MaterialPageRoute(
                   builder: (context) => LoginScreen(),
                 ),
-              )
+              ),
             },
           ),
         ],

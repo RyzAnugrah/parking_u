@@ -77,10 +77,16 @@ class _BodyState extends State<Body> with Validation {
 
   Widget nameField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText1,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.person_outline, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.person_outline,
+          color: Colors.grey,
+        ),
         labelText: 'Nama Lengkap',
         labelStyle: TextStyle(
           color: Colors.grey,
@@ -92,7 +98,10 @@ class _BodyState extends State<Body> with Validation {
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: BorderSide(color: primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -107,11 +116,17 @@ class _BodyState extends State<Body> with Validation {
 
   Widget telpField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText1,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.phone_iphone, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.phone_iphone,
+          color: Colors.grey,
+        ),
         labelText: 'Nomor Telepon',
         labelStyle: TextStyle(
           color: Colors.grey,
@@ -123,7 +138,10 @@ class _BodyState extends State<Body> with Validation {
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: BorderSide(color: primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -141,33 +159,46 @@ class _BodyState extends State<Body> with Validation {
       alignment: Alignment.topLeft,
       child: DropdownButtonFormField(
         decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(defaultPadding + 25),
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: getProportionateScreenWidth(defaultPadding + 25),
+          ),
+          fillColor: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: borderRadius,
+            borderSide: BorderSide(
+              color: primaryColor,
+              width: 2.0,
             ),
-            fillColor: Colors.white,
-            focusedBorder: OutlineInputBorder(
-              borderRadius: borderRadius,
-              borderSide: BorderSide(color: primaryColor, width: 2.0),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: borderRadius,
-            ),
-            labelStyle: TextStyle(fontSize: bodyText1, color: Colors.grey),
-            labelText: 'Jenis Kendaraan'),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: borderRadius,
+          ),
+          labelStyle: TextStyle(
+            fontSize: bodyText1,
+            color: Colors.grey,
+          ),
+          labelText: 'Jenis Kendaraan',
+        ),
         value: _value,
         isExpanded: true,
         items: [
           DropdownMenuItem(
             child: Text(
               "Mobil",
-              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+              style: TextStyle(
+                fontSize: bodyText1,
+                color: secondaryTextColor,
+              ),
             ),
             value: 1,
           ),
           DropdownMenuItem(
             child: Text(
               "Motor",
-              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+              style: TextStyle(
+                fontSize: bodyText1,
+                color: secondaryTextColor,
+              ),
             ),
             value: 2,
           ),
@@ -185,10 +216,16 @@ class _BodyState extends State<Body> with Validation {
 
   Widget numberField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText1,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.straighten_outlined, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.straighten_outlined,
+          color: Colors.grey,
+        ),
         labelText: 'Plat No. Kendaraan',
         labelStyle: TextStyle(
           color: Colors.grey,
@@ -214,11 +251,17 @@ class _BodyState extends State<Body> with Validation {
 
   Widget passwordField() {
     return TextFormField(
-      style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
+      style: TextStyle(
+        fontSize: bodyText1,
+        color: secondaryTextColor,
+      ),
       cursorColor: secondaryTextColor,
       obscureText: true,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.lock_outline, color: Colors.grey),
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Colors.grey,
+        ),
         labelText: 'Kata Sandi',
         labelStyle: TextStyle(
           color: Colors.grey,
@@ -230,7 +273,10 @@ class _BodyState extends State<Body> with Validation {
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
-          borderSide: BorderSide(color: primaryColor, width: 2.0),
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -247,16 +293,18 @@ class _BodyState extends State<Body> with Validation {
     return ElevatedButton(
       child: Text(
         'Edit',
-        style: TextStyle(fontSize: bodyText1, color: primaryTextColor),
+        style: TextStyle(
+          fontSize: bodyText1,
+          color: primaryTextColor,
+        ),
       ),
       style: ElevatedButton.styleFrom(
         primary: primaryColor,
-        // onPrimary: Colors.white,
-        // shadowColor: secondaryColor,
         elevation: 5,
         padding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(142),
-            vertical: getProportionateScreenHeight(17)),
+          horizontal: getProportionateScreenWidth(142),
+          vertical: getProportionateScreenHeight(17),
+        ),
         shape: new RoundedRectangleBorder(
           borderRadius: borderRadius,
         ),
