@@ -44,7 +44,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                   child: InkWell(
                     borderRadius: borderRadius,
-                    splashColor: primaryColor,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () {
                       // Temp
                       print('Card tapped.');
@@ -94,7 +95,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                   child: InkWell(
                     borderRadius: borderRadius,
-                    splashColor: primaryColor,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () {
                       // Temp
                       print('Card tapped.');
@@ -144,7 +146,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   ),
                   child: InkWell(
                     borderRadius: borderRadius,
-                    splashColor: primaryColor,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () {
                       // Temp
                       print('Card tapped.');

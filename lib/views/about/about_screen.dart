@@ -45,7 +45,8 @@ class _AboutScreenState extends State<AboutScreen> {
                   ),
                   child: InkWell(
                     borderRadius: borderRadius,
-                    splashColor: primaryColor,
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () {},
                     child: Container(
                       padding: EdgeInsets.all(defaultPadding),

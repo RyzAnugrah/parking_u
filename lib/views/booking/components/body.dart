@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/booking/components/booking_details.dart';
-import 'package:parking_u/views/booking/components/payment.dart';
-import 'package:parking_u/views/booking/components/success.dart';
-import 'package:parking_u/views/booking/components/time_list.dart';
+import 'package:parking_u/views/home/home_screen.dart';
+import 'booking_details.dart';
+import 'time_list.dart';
+import 'payment.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -224,7 +225,31 @@ Widget bookingButton(BuildContext context) {
       ),
     ),
     onPressed: () {
-      displayBottomSheetSuccess(context);
+      AwesomeDialog(
+          context: context,
+          animType: AnimType.SCALE,
+          headerAnimationLoop: false,
+          dialogType: DialogType.SUCCES,
+          title: 'Checkout Berhasil',
+          desc: 'Lakukan Validasi Pesanan di Tempat Masuk Parkir',
+          btnOkOnPress: () {
+            debugPrint('Success');
+            Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) {
+            return HomeScreen();
+          }),
+        );
+          },
+          btnOkIcon: Icons.check_circle,
+          onDissmissCallback: () {
+            debugPrint('Dialog Dissmiss from callback');
+            Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (_) {
+            return HomeScreen();
+          }),
+        );
+          })
+        ..show();
     },
   );
 }

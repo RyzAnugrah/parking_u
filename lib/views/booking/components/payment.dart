@@ -105,10 +105,11 @@ class _PaymentState extends State<Payment> {
         return Container(
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(defaultPadding),
-            vertical: getProportionateScreenHeight(defaultPadding + 10),
+            vertical: getProportionateScreenHeight(defaultPadding),
           ),
           height: 50.0.h,
           child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -116,7 +117,7 @@ class _PaymentState extends State<Payment> {
                   Text(
                     'Pilih Metode Pembayaran',
                     style: TextStyle(
-                      fontSize: bodyText1.sp,
+                      fontSize: bodyText2.sp,
                       color: secondaryTextColor,
                       fontWeight: FontWeight.w600,
                     ),
@@ -187,7 +188,7 @@ class _PaymentState extends State<Payment> {
                             Text(
                               'Anu Jaya',
                               style: TextStyle(
-                                fontSize: bodyText1.sp,
+                                fontSize: bodyText2.sp,
                                 color: secondaryTextColor,
                                 fontWeight: FontWeight.w800,
                               ),
@@ -195,7 +196,7 @@ class _PaymentState extends State<Payment> {
                             Text(
                               '15.50 WIB',
                               style: TextStyle(
-                                fontSize: bodyText2.sp,
+                                fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
                             ),
@@ -208,14 +209,14 @@ class _PaymentState extends State<Payment> {
                             Text(
                               'Lantai 1',
                               style: TextStyle(
-                                fontSize: bodyText2.sp,
+                                fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
                             ),
                             Text(
                               'No.3',
                               style: TextStyle(
-                                fontSize: bodyText2.sp,
+                                fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
                             ),
@@ -249,44 +250,20 @@ class _PaymentState extends State<Payment> {
     );
   }
 
-  Widget bookingButton(BuildContext context) {
-    return ElevatedButton(
-      child: Text(
-        'Booking Sekarang',
-        style: TextStyle(
-          fontSize: caption.sp,
-          color: secondaryTextColor,
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: secondaryColor,
-        elevation: 5,
-        padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(100),
-          vertical: getProportionateScreenHeight(17),
-        ),
-        shape: new RoundedRectangleBorder(
-          borderRadius: borderRadius,
-        ),
-      ),
-      onPressed: () {},
-    );
-  }
-
   Widget payButton(BuildContext context) {
     return ElevatedButton(
       child: Text(
-        'Bayar',
+        'Pilih Pembayaran',
         style: TextStyle(
           fontSize: caption.sp,
-          color: secondaryTextColor,
+          color: primaryTextColor,
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: secondaryColor,
+        primary: primaryColor,
         elevation: 5,
         padding: EdgeInsets.symmetric(
-          horizontal: getProportionateScreenWidth(100),
+          horizontal: getProportionateScreenWidth(80),
           vertical: getProportionateScreenHeight(17),
         ),
         shape: new RoundedRectangleBorder(

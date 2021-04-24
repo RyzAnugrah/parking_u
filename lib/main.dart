@@ -8,11 +8,11 @@ import 'package:parking_u/theme.dart';
 import 'package:parking_u/views/splash_screen/splash_screen.dart';
 
 void main() => runApp(
-      DevicePreview(
-        enabled: !kReleaseMode, // Ensures that it is disabled in release mode
-        builder: (context) => MyApp(),
-      ),
-      // MyApp(),
+      // DevicePreview(
+      //   enabled: !kReleaseMode, // Ensures that it is disabled in release mode
+      //   builder: (context) => MyApp(),
+      // ),
+      MyApp(),
     );
 
 class MyApp extends StatelessWidget {

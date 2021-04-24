@@ -35,7 +35,7 @@ class _FilterState extends State<Filter> {
               horizontal: getProportionateScreenWidth(defaultPadding),
               vertical: getProportionateScreenHeight(defaultPadding + 10),
             ),
-            height: 35.0.h,
+            height: 25.0.h,
             child: ListView(
               physics: const NeverScrollableScrollPhysics(),
               children: [

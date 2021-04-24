@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/views/booking/booking_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/booking/components/payment.dart';
+import 'package:parking_u/views/booking/components/body.dart';
 import 'package:parking_u/views/booking/components/slot_list.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -21,8 +22,7 @@ class _BookingDetailsState extends State<BookingDetails> {
       resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.only(
-          left: defaultPadding,
-          bottom: defaultPadding,
+          left: getProportionateScreenWidth(defaultPadding),
         ),
         child: SafeArea(
           child: ListView(
@@ -121,9 +121,12 @@ class _BookingDetailsState extends State<BookingDetails> {
               ),
               SizedBox(height: defaultPadding),
               Container(
-                padding: EdgeInsets.only(right: defaultPadding),
-                child: Payment(),
-              ),
+                padding: EdgeInsets.only(
+          right: getProportionateScreenWidth(defaultPadding),
+          
+        ),
+                child: 
+                bookingButton(context)),
               SizedBox(height: defaultPadding),
             ],
           ),
@@ -131,4 +134,36 @@ class _BookingDetailsState extends State<BookingDetails> {
       ),
     );
   }
+}
+
+Widget bookingButton(BuildContext context) {
+  return ElevatedButton(
+    child: Text(
+      'Pilih',
+      style: TextStyle(
+        fontSize: bodyText2.sp,
+        color: primaryTextColor,
+      ),
+    ),
+    style: ElevatedButton.styleFrom(
+      primary: primaryColor,
+      elevation: 5,
+      padding: EdgeInsets.symmetric(
+        horizontal: getProportionateScreenWidth(120),
+        vertical: getProportionateScreenHeight(17),
+      ),
+      shape: new RoundedRectangleBorder(
+        borderRadius: borderRadius,
+      ),
+    ),
+    onPressed: () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (_) {
+              return BookingScreen();
+            },
+          ),
+        );
+      },
+  );
 }
