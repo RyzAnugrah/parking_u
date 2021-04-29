@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> with Validation {
   final formKey = GlobalKey<FormState>();
 
-  String telp = '';
+  String email = '';
   String password = '';
 
   Future<bool> _onWillPop() async {
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                           EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                     ),
                     SizedBox(height: SizeConfig.screenHeight * 0.01),
-                    telpField(),
+                    emailField(),
                     Container(
                       alignment: Alignment.topLeft,
                       padding:
@@ -229,18 +229,18 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     );
   }
 
-  Widget telpField() {
+  Widget emailField() {
     return TextFormField(
       cursorColor: secondaryTextColor,
       style: TextStyle(fontSize: caption, color: secondaryTextColor),
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.phone_iphone, color: Colors.grey),
-        labelText: 'Nomor Telepon',
+        prefixIcon: Icon(Icons.email_outlined, color: Colors.grey),
+        labelText: 'Email',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: 'Isi Nomor Telepon',
+        hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(defaultPadding - 5),
             vertical: getProportionateScreenHeight(12)),
@@ -256,9 +256,9 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      validator: validateTelp,
+      validator: validateEmail,
       onSaved: (String value) {
-        telp = value;
+        email = value;
       },
     );
   }
@@ -330,7 +330,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
           // Temp
-          print('Nomor Telepon: $telp');
+          print('Email: $email');
           print('Password: $password');
         }
         Navigator.of(context).pushReplacement(

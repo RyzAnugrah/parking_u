@@ -109,7 +109,6 @@ class _PaymentState extends State<Payment> {
           ),
           height: 50.0.h,
           child: ListView(
-            physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,

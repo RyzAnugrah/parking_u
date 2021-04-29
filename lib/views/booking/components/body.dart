@@ -3,10 +3,10 @@ import 'package:sizer/sizer.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/views/booking/components/booking_details.dart';
+import 'package:parking_u/views/booking/components/payment.dart';
+import 'package:parking_u/views/booking/components/time_list.dart';
 import 'package:parking_u/views/home/home_screen.dart';
-import 'booking_details.dart';
-import 'time_list.dart';
-import 'payment.dart';
 
 class Body extends StatelessWidget {
   const Body({

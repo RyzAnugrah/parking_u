@@ -1,4 +1,6 @@
 class Validation {
+  String password = '';
+
   String validateName(String value) {
     if (value.isEmpty) {
       return 'Nama Lengkap Harus Diisi';
@@ -6,9 +8,9 @@ class Validation {
     return null;
   }
 
-  String validateTelp(String value) {
+  String validateEmail(String value) {
     if (value.isEmpty) {
-      return 'Nomor Telepon Harus Diisi';
+      return 'Email Telepon Harus Diisi';
     }
     return null;
   }
@@ -29,7 +31,14 @@ class Validation {
 
   String validatePassword(String value) {
     if (value.length < 6) {
-      return 'Password Minimal 6 Karakter';
+      return 'Kata Sandi Minimal 6 Karakter';
+    }
+    return null;
+  }
+
+  String validateConfirmPassword(String value) {
+    if (value != password) {
+      return 'Isi Harus Sama Dengan Kata Sandi';
     }
     return null;
   }

@@ -15,10 +15,11 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
   final formKey = GlobalKey<FormState>();
 
   String name = '';
-  String telp = '';
+  String email = '';
   String type = '';
   String number = '';
   String password = '';
+  String confirmPassword = '';
   bool valuefirst = false;
   int _value = 1;
 
@@ -64,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                         EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
-                  telpField(),
+                  emailField(),
                   Container(
                     alignment: Alignment.topLeft,
                     padding:
@@ -85,6 +86,13 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   passwordField(),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.01),
+                  confirmPasswordField(),
                   SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Column(
                     children: [
@@ -177,18 +185,18 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     );
   }
 
-  Widget telpField() {
+  Widget emailField() {
     return TextFormField(
       style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
       cursorColor: secondaryTextColor,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.phone_iphone, color: Colors.grey),
-        labelText: 'Nomor Telepon',
+        prefixIcon: Icon(Icons.email_outlined, color: Colors.grey),
+        labelText: 'Email',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: 'Isi Nomor Telepon',
+        hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(defaultPadding - 5),
           vertical: getProportionateScreenHeight(12),
@@ -205,9 +213,9 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      validator: validateTelp,
+      validator: validateEmail,
       onSaved: (String value) {
-        telp = value;
+        email = value;
       },
     );
   }
@@ -343,6 +351,47 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     );
   }
 
+  Widget confirmPasswordField() {
+    return TextFormField(
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
+      cursorColor: secondaryTextColor,
+      obscureText: true,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Colors.grey,
+        ),
+        labelText: 'Konfirmasi Kata Sandi',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'Isi Konfirmasi Kata Sandi',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      validator: validateConfirmPassword,
+      onSaved: (String value) {
+        confirmPassword = value;
+      },
+    );
+  }
+
   Widget registerButton() {
     return ElevatedButton(
       child: Text(
@@ -368,7 +417,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
           formKey.currentState.save();
           // Temp
           print('Nama Lengkap: $name');
-          print('Nomor Telepon: $telp');
+          print('Email: $email');
           print('Tipe Kendaraan: $_value');
           print('Nomor Kendaraan: $number');
           print('Password: $password');

@@ -15,7 +15,7 @@ class _BodyState extends State<Body> with Validation {
   final formKey = GlobalKey<FormState>();
 
   String name = '';
-  String telp = '';
+  String email = '';
   String type = '';
   String number = '';
   String password = '';
@@ -47,7 +47,7 @@ class _BodyState extends State<Body> with Validation {
               padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
             ),
             SizedBox(height: SizeConfig.screenHeight * 0.01),
-            telpField(),
+            emailField(),
             Container(
               alignment: Alignment.topLeft,
               padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
@@ -114,24 +114,24 @@ class _BodyState extends State<Body> with Validation {
     );
   }
 
-  Widget telpField() {
+  Widget emailField() {
     return TextFormField(
       style: TextStyle(
         fontSize: bodyText1,
         color: secondaryTextColor,
       ),
       cursorColor: secondaryTextColor,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         prefixIcon: Icon(
-          Icons.phone_iphone,
+          Icons.email_outlined,
           color: Colors.grey,
         ),
-        labelText: 'Nomor Telepon',
+        labelText: 'Email',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: 'Isi Nomor Telepon',
+        hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(defaultPadding - 5),
         ),
@@ -147,9 +147,9 @@ class _BodyState extends State<Body> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      validator: validateTelp,
+      validator: validateEmail,
       onSaved: (String value) {
-        telp = value;
+        email = value;
       },
     );
   }
@@ -314,7 +314,7 @@ class _BodyState extends State<Body> with Validation {
           formKey.currentState.save();
           // Temp
           print('Nama Lengkap: $name');
-          print('Nomor Telepon: $telp');
+          print('Email: $email');
           print('Tipe Kendaraan: $_value');
           print('Nomor Kendaraan: $number');
           print('Password: $password');

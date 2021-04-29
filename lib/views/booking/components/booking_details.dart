@@ -3,7 +3,7 @@ import 'package:parking_u/views/booking/booking_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/booking/components/body.dart';
+// import 'package:parking_u/views/booking/components/body.dart';
 import 'package:parking_u/views/booking/components/slot_list.dart';
 
 class BookingDetails extends StatefulWidget {
