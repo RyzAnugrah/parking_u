@@ -1,11 +1,17 @@
+// import 'dart:html';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:device_preview/device_preview.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/routes.dart';
 import 'package:parking_u/theme.dart';
+import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/splash_screen/splash_screen.dart';
+import 'package:parking_u/views/home/home_screen.dart';
+import 'package:parking_u/views/login/login_screen.dart';
 
 void main() => runApp(
       // DevicePreview(
@@ -42,5 +48,41 @@ class MyApp extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class BaseWidget extends StatefulWidget {
+  const BaseWidget({Key key}) : super(key: key);
+
+  @override
+  _BaseWidgetState createState() => _BaseWidgetState();
+}
+
+class _BaseWidgetState extends State<BaseWidget> {
+  bool isLogin = false;
+
+  void checkLoginState() async {
+    String token;
+    try {
+      token = await SharedPref.getToken();
+      if (token != null) {
+        isLogin = true;
+        
+        setState(() {});
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkLoginState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return isLogin ? HomeScreen() : LoginScreen();
   }
 }

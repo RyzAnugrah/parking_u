@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/login/login_screen.dart';
+import 'package:parking_u/main.dart';
+// import 'package:parking_u/views/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "/splash_screen";
@@ -27,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
             builder: (_) {
-              return LoginScreen();
+              return BaseWidget();
             },
           ),
         );

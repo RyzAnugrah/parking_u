@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/mixins/validation.dart';
+import 'package:parking_u/models/auth_model.dart';
+import 'package:parking_u/services/auth_service.dart';
 import 'package:parking_u/views/home/home_screen.dart';
 import 'package:parking_u/views/login/register_screen.dart';
 
@@ -16,7 +20,36 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with Validation {
+  TextEditingController emailTC = TextEditingController();
+  TextEditingController passTC = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
+
+  void loginHandler() async {
+    log(emailTC.text);
+    log(passTC.text);
+    try {
+      if (formKey.currentState.validate()) {
+        formKey.currentState.save();
+        await AuthService.login(emailTC.text, passTC.text).then((value) {
+          if (value is UserModel) {
+            print('Login Successful');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return HomeScreen(
+                      // token: '38|CGrYgQsgzIjwShg2OORKNPhIoCmvOkZbkp6VPX49',
+                      );
+                },
+              ),
+            );
+          }
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   String email = '';
   String password = '';
@@ -231,6 +264,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
 
   Widget emailField() {
     return TextFormField(
+      controller: emailTC,
       cursorColor: secondaryTextColor,
       style: TextStyle(fontSize: caption, color: secondaryTextColor),
       keyboardType: TextInputType.emailAddress,
@@ -242,8 +276,9 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         ),
         hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -265,6 +300,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
 
   Widget passwordField() {
     return TextFormField(
+      controller: passTC,
       cursorColor: secondaryTextColor,
       obscureText: true,
       style: TextStyle(
@@ -326,21 +362,22 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-          // Temp
-          print('Email: $email');
-          print('Password: $password');
-        }
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) {
-              return HomeScreen();
-            },
-          ),
-        );
-      },
+      onPressed: loginHandler,
+      // onPressed: () {
+      //   if (formKey.currentState.validate()) {
+      //     formKey.currentState.save();
+      //     // Temp
+      //     print('Email: $email');
+      //     print('Password: $password');
+      //   }
+      //   Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(
+      //       builder: (_) {
+      //         return HomeScreen();
+      //       },
+      //     ),
+      //   );
+      // },
     );
   }
 }
