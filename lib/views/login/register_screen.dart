@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/models/auth_model.dart';
+import 'package:parking_u/services/auth_service.dart';
+import 'package:parking_u/views/login/login_screen.dart';
 
 class RegisterScreenPage extends StatefulWidget {
   const RegisterScreenPage({Key key}) : super(key: key);
@@ -12,20 +17,52 @@ class RegisterScreenPage extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
+  TextEditingController nameTC = TextEditingController();
+  TextEditingController emailTC = TextEditingController();
+  TextEditingController numberTC = TextEditingController();
+  TextEditingController passTC = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
 
+  void registerHandler() async {
+    log(nameTC.text);
+    log(emailTC.text);
+    log(numberTC.text);
+    log(typeTC);
+    log(passTC.text);
+    try {
+      if (formKey.currentState.validate()) {
+        formKey.currentState.save();
+        await AuthService.register(
+                nameTC.text, emailTC.text, numberTC.text, typeTC, passTC.text)
+            .then((value) {
+          if (value is UserModel) {
+            print('Register Successful');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return LoginScreen();
+                },
+              ),
+            );
+          }
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   String name = '';
-  String telp = '';
-  String type = '';
+  String email = '';
   String number = '';
+  String typeTC = 'Mobil';
   String password = '';
-  bool valuefirst = false;
-  int _value = 1;
+  String confirmPassword = '';
 
   Widget build(context) {
     SizeConfig().init(context);
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Container(
         padding: EdgeInsets.symmetric(
           horizontal: defaultPadding,
@@ -64,7 +101,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                         EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
-                  telpField(),
+                  emailField(),
                   Container(
                     alignment: Alignment.topLeft,
                     padding:
@@ -85,6 +122,13 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                   ),
                   SizedBox(height: SizeConfig.screenHeight * 0.01),
                   passwordField(),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+                  ),
+                  SizedBox(height: SizeConfig.screenHeight * 0.01),
+                  confirmPasswordField(),
                   SizedBox(height: SizeConfig.screenHeight * 0.02),
                   Column(
                     children: [
@@ -142,6 +186,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget nameField() {
     return TextFormField(
+      controller: nameTC,
       style: TextStyle(
         fontSize: bodyText2,
         color: secondaryTextColor,
@@ -177,18 +222,19 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     );
   }
 
-  Widget telpField() {
+  Widget emailField() {
     return TextFormField(
+      controller: emailTC,
       style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
       cursorColor: secondaryTextColor,
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.phone_iphone, color: Colors.grey),
-        labelText: 'Nomor Telepon',
+        prefixIcon: Icon(Icons.email_outlined, color: Colors.grey),
+        labelText: 'Email',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: 'Isi Nomor Telepon',
+        hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(defaultPadding - 5),
           vertical: getProportionateScreenHeight(12),
@@ -205,9 +251,9 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      validator: validateTelp,
+      validator: validateEmail,
       onSaved: (String value) {
-        telp = value;
+        email = value;
       },
     );
   }
@@ -237,7 +283,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
               color: Colors.grey,
             ),
             labelText: 'Jenis Kendaraan'),
-        value: _value,
+        value: typeTC,
         isExpanded: true,
         items: [
           DropdownMenuItem(
@@ -245,20 +291,20 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
               "Mobil",
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
-            value: 1,
+            value: 'Mobil',
           ),
           DropdownMenuItem(
             child: Text(
               "Motor",
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
-            value: 2,
+            value: 'Motor',
           ),
         ],
         onChanged: (value) {
           setState(
             () {
-              _value = value;
+              typeTC = value;
             },
           );
         },
@@ -268,6 +314,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget numberField() {
     return TextFormField(
+      controller: numberTC,
       style: TextStyle(
         fontSize: bodyText2,
         color: secondaryTextColor,
@@ -304,6 +351,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
 
   Widget passwordField() {
     return TextFormField(
+      controller: passTC,
       style: TextStyle(
         fontSize: bodyText2,
         color: secondaryTextColor,
@@ -343,6 +391,47 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
     );
   }
 
+  Widget confirmPasswordField() {
+    return TextFormField(
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
+      cursorColor: secondaryTextColor,
+      obscureText: true,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Colors.grey,
+        ),
+        labelText: 'Konfirmasi Kata Sandi',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'Isi Konfirmasi Kata Sandi',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      validator: validateConfirmPassword,
+      onSaved: (String value) {
+        confirmPassword = value;
+      },
+    );
+  }
+
   Widget registerButton() {
     return ElevatedButton(
       child: Text(
@@ -363,18 +452,14 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-          // Temp
-          print('Nama Lengkap: $name');
-          print('Nomor Telepon: $telp');
-          print('Tipe Kendaraan: $_value');
-          print('Nomor Kendaraan: $number');
-          print('Password: $password');
-          print('Setuju: $valuefirst');
-        }
-      },
+      onPressed: registerHandler,
     );
+  }
+
+  String validateConfirmPassword(String value) {
+    if (value != passTC.text) {
+      return 'Isi Harus Sama Dengan Kata Sandi';
+    }
+    return null;
   }
 }

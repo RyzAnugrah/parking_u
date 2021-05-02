@@ -2,18 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
+// import 'package:parking_u/models/parkir_model.dart';
 import 'package:parking_u/views/home/components/detail_book.dart';
 
 class ListPark extends StatelessWidget {
   const ListPark({
     Key key,
   }) : super(key: key);
+  // final ParkirModel item;
+  // const ListPark({Key key, this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
+          // ListTile(
+          //   title: Text(
+          //     item.namaParkir,
+          //   ),
+          // ),
           ListParkHere(
             image: "assets/images/list_parking/anu-jaya.png",
             name: "Fadlan Sentosa",

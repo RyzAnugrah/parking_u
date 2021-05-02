@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/about/about_screen.dart';
 import 'package:parking_u/views/account/account_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
@@ -113,13 +114,13 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "Log Out",
             icon: Icons.logout,
-            press: () => {
-              Navigator.push(
-                context,
+            press: () {
+              SharedPref.removeToken();
+              Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => LoginScreen(),
                 ),
-              ),
+              );
             },
           ),
         ],

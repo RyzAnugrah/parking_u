@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/mixins/validation.dart';
+import 'package:parking_u/models/auth_model.dart';
+import 'package:parking_u/services/auth_service.dart';
 import 'package:parking_u/views/home/home_screen.dart';
 import 'package:parking_u/views/login/register_screen.dart';
 
@@ -16,9 +20,38 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with Validation {
+  TextEditingController emailTC = TextEditingController();
+  TextEditingController passTC = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
 
-  String telp = '';
+  void loginHandler() async {
+    log(emailTC.text);
+    log(passTC.text);
+    try {
+      if (formKey.currentState.validate()) {
+        formKey.currentState.save();
+        await AuthService.login(emailTC.text, passTC.text).then((value) {
+          if (value is UserModel) {
+            print('Login Successful');
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) {
+                  return HomeScreen(
+                      // token: '38|CGrYgQsgzIjwShg2OORKNPhIoCmvOkZbkp6VPX49',
+                      );
+                },
+              ),
+            );
+          }
+        });
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  String email = '';
   String password = '';
 
   Future<bool> _onWillPop() async {
@@ -89,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                           EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
                     ),
                     SizedBox(height: SizeConfig.screenHeight * 0.01),
-                    telpField(),
+                    emailField(),
                     Container(
                       alignment: Alignment.topLeft,
                       padding:
@@ -229,21 +262,23 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     );
   }
 
-  Widget telpField() {
+  Widget emailField() {
     return TextFormField(
+      controller: emailTC,
       cursorColor: secondaryTextColor,
       style: TextStyle(fontSize: caption, color: secondaryTextColor),
-      keyboardType: TextInputType.number,
+      keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.phone_iphone, color: Colors.grey),
-        labelText: 'Nomor Telepon',
+        prefixIcon: Icon(Icons.email_outlined, color: Colors.grey),
+        labelText: 'Email',
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: 'Isi Nomor Telepon',
+        hintText: 'Isi Email',
         contentPadding: EdgeInsets.symmetric(
-            horizontal: getProportionateScreenWidth(defaultPadding - 5),
-            vertical: getProportionateScreenHeight(12)),
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
         fillColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderRadius: borderRadius,
@@ -256,15 +291,16 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      validator: validateTelp,
+      validator: validateEmail,
       onSaved: (String value) {
-        telp = value;
+        email = value;
       },
     );
   }
 
   Widget passwordField() {
     return TextFormField(
+      controller: passTC,
       cursorColor: secondaryTextColor,
       obscureText: true,
       style: TextStyle(
@@ -326,21 +362,22 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-          // Temp
-          print('Nomor Telepon: $telp');
-          print('Password: $password');
-        }
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) {
-              return HomeScreen();
-            },
-          ),
-        );
-      },
+      onPressed: loginHandler,
+      // onPressed: () {
+      //   if (formKey.currentState.validate()) {
+      //     formKey.currentState.save();
+      //     // Temp
+      //     print('Email: $email');
+      //     print('Password: $password');
+      //   }
+      //   Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(
+      //       builder: (_) {
+      //         return HomeScreen();
+      //       },
+      //     ),
+      //   );
+      // },
     );
   }
 }

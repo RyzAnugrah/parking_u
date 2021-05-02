@@ -6,9 +6,9 @@ class Validation {
     return null;
   }
 
-  String validateTelp(String value) {
+  String validateEmail(String value) {
     if (value.isEmpty) {
-      return 'Nomor Telepon Harus Diisi';
+      return 'Email Telepon Harus Diisi';
     }
     return null;
   }
@@ -29,7 +29,7 @@ class Validation {
 
   String validatePassword(String value) {
     if (value.length < 6) {
-      return 'Password Minimal 6 Karakter';
+      return 'Kata Sandi Minimal 6 Karakter';
     }
     return null;
   }
