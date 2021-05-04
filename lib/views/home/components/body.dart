@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-// import 'package:parking_u/models/parkir_model.dart';
 import 'package:parking_u/views/home/components/filter.dart';
 import 'package:parking_u/views/home/components/header.dart';
 import 'package:parking_u/views/home/components/list_park.dart';
 import 'package:parking_u/views/home/components/search.dart';
 
 class Body extends StatelessWidget {
-  // final ParkirModel item;
-  // const Body({Key key, this.item}) : super(key: key);
-  
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
