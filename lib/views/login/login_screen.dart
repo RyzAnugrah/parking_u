@@ -37,9 +37,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return HomeScreen(
-                      // token: '38|CGrYgQsgzIjwShg2OORKNPhIoCmvOkZbkp6VPX49',
-                      );
+                  return HomeScreen();
                 },
               ),
             );
@@ -47,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         });
       }
     } catch (e) {
+      print('catch error');
       print(e.toString());
     }
   }
@@ -85,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     SizeConfig().init(context);
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(18), topRight: Radius.circular(18)),
       ),
       context: context,
       builder: (ctx) {
@@ -363,21 +362,6 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         ),
       ),
       onPressed: loginHandler,
-      // onPressed: () {
-      //   if (formKey.currentState.validate()) {
-      //     formKey.currentState.save();
-      //     // Temp
-      //     print('Email: $email');
-      //     print('Password: $password');
-      //   }
-      //   Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(
-      //       builder: (_) {
-      //         return HomeScreen();
-      //       },
-      //     ),
-      //   );
-      // },
     );
   }
 }
