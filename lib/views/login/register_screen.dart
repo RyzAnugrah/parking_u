@@ -329,7 +329,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
         labelStyle: TextStyle(
           color: Colors.grey,
         ),
-        hintText: '_ _ - _ _ _ _ - _ _',
+        hintText: 'XX-0000-YY',
         contentPadding: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(defaultPadding - 5),
           vertical: getProportionateScreenHeight(12),

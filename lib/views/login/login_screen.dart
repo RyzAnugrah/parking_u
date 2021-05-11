@@ -45,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         });
       }
     } catch (e) {
+      print('catch error');
       print(e.toString());
     }
   }
@@ -83,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     SizeConfig().init(context);
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(18), topRight: Radius.circular(18)),
       ),
       context: context,
       builder: (ctx) {
