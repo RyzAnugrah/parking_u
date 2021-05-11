@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/views/booking/booking_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-// import 'package:parking_u/views/booking/components/body.dart';
 import 'package:parking_u/views/booking/components/slot_list.dart';
 
 class BookingDetails extends StatefulWidget {
@@ -121,12 +119,10 @@ class _BookingDetailsState extends State<BookingDetails> {
               ),
               SizedBox(height: defaultPadding),
               Container(
-                padding: EdgeInsets.only(
-          right: getProportionateScreenWidth(defaultPadding),
-          
-        ),
-                child: 
-                bookingButton(context)),
+                  padding: EdgeInsets.only(
+                    right: getProportionateScreenWidth(defaultPadding),
+                  ),
+                  child: bookingButton(context)),
               SizedBox(height: defaultPadding),
             ],
           ),
@@ -157,13 +153,7 @@ Widget bookingButton(BuildContext context) {
       ),
     ),
     onPressed: () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) {
-              return BookingScreen();
-            },
-          ),
-        );
-      },
+      Navigator.pop(context);
+    },
   );
 }

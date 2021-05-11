@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/booking/booking_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 void displayBottomSheet(BuildContext context, item) {
   SizeConfig().init(context);
@@ -210,7 +210,7 @@ void displayBottomSheet(BuildContext context, item) {
                     ),
                     child: Column(
                       children: [
-                        bookingButton(context),
+                        bookingButton(context, item),
                       ],
                     ),
                   ),
@@ -224,7 +224,7 @@ void displayBottomSheet(BuildContext context, item) {
   );
 }
 
-Widget bookingButton(BuildContext context) {
+Widget bookingButton(BuildContext context, item) {
   return ElevatedButton(
     child: Text(
       'Booking Sekarang',
@@ -248,7 +248,7 @@ Widget bookingButton(BuildContext context) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) {
-            return BookingScreen();
+            return BookingScreen(item: item);
           },
         ),
       );

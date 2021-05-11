@@ -18,13 +18,13 @@ class AuthService {
       print(res.data);
       SharedPref.saveToken(res.data['token']);
       return UserModel.fromJson(res.data['user']);
-    } catch (e) {
-      print('catch error');
-      print(e.toString());
+    } on DioError catch (_) {
+      return 'catch error';
     }
   }
 
-  static Future register(String namaLengkap, String email, String nopol, String jenisKendaraan, String password) async {
+  static Future register(String namaLengkap, String email, String nopol,
+      String jenisKendaraan, String password) async {
     Map<String, dynamic> data = {
       'nama_lengkap': namaLengkap,
       'email': email,
@@ -40,9 +40,30 @@ class AuthService {
       );
       print(res.data);
       return UserModel.fromJson(res.data['user']);
-    } catch (e) {
+    } on DioError catch (_) {
       print('catch error');
-      print(e.toString());
+    }
+  }
+
+  static Future edit(String namaLengkap, String email, String nopol,
+      String jenisKendaraan, String password, String userID) async {
+    Map<String, dynamic> data = {
+      'nama_lengkap': namaLengkap,
+      'email': email,
+      'nopol': nopol,
+      'jenis_kendaraan': jenisKendaraan,
+      'password': password,
+    };
+
+    try {
+      Response res = await Dio().put(
+        '${Const.baseUrl}/user/$userID',
+        data: data,
+      );
+      print(res.data);
+      return UserModel.fromJson(res.data);
+    } on DioError catch (_) {
+      print('catch error');
     }
   }
 }

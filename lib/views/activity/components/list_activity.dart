@@ -2,60 +2,85 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/models/riwayat_model.dart';
+import 'package:parking_u/services/riwayat_service.dart';
 import 'package:parking_u/views/activity/components/detail_activity.dart';
 
-class ListActivity extends StatelessWidget {
-  const ListActivity({
-    Key key,
-  }) : super(key: key);
+class ListActivity extends StatefulWidget {
+  const ListActivity({Key key}) : super(key: key);
+
+  @override
+  _ListActivityState createState() => _ListActivityState();
+}
+
+class _ListActivityState extends State<ListActivity> {
+  RiwayatModel riwayat;
+  bool loading = false;
+
+  void fetchRiwayatList() async {
+    try {
+      await RiwayatService.getRiwayat('1').then((value) {
+        if (value is RiwayatModel) {
+          print('Success');
+          setState(() {
+            riwayat = value;
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchRiwayatList();
+    loading = true;
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          ListActivityHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Pending',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
           SizedBox(
-            height: getProportionateScreenHeight(20),
+            height: 25.0.h,
+            child: loading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 2.0.w,
+                      vertical: 4.0.w,
+                    ),
+                    child: ListActivityHere(
+                      image: "assets/images/list_parking/anu-jaya.png",
+                      lahanTerpilih: riwayat.lahanTerpilih,
+                      tarif: riwayat.tarif,
+                      jenisPembayaran: riwayat.jenisPembayaran,
+                      statusPembayaran: riwayat.statusPembayaran,
+                      waktuBooking: riwayat.waktuBooking,
+                      press: () => displayBottomSheet(context, riwayat),
+                    ),
+                  ),
           ),
-          ListActivityHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Sedang Parkir',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          ListActivityHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Selesai',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
+          // SizedBox(
+          //   height: getProportionateScreenHeight(20),
+          // ),
+          // ListActivityHere(
+          //   image: "assets/images/list_parking/anu-jaya.png",
+          //   name: "Fadlan Sentosa",
+          //   price: 3000,
+          //   length: 2,
+          //   availability: 'Sedang Parkir',
+          //   rating: 5,
+          //   startTimes: '09:00',
+          //   finishTimes: '20:00',
+          //   press: () {},
+          // ),
         ],
       ),
     );
@@ -63,30 +88,23 @@ class ListActivity extends StatelessWidget {
 }
 
 class ListActivityHere extends StatelessWidget {
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
-
   const ListActivityHere({
     Key key,
-    @required this.name,
+    @required this.lahanTerpilih,
     @required this.image,
-    @required this.length,
+    @required this.tarif,
+    @required this.jenisPembayaran,
+    @required this.statusPembayaran,
+    @required this.waktuBooking,
     @required this.press,
-    @required this.price,
-    @required this.availability,
-    @required this.rating,
-    @required this.startTimes,
-    @required this.finishTimes,
   }) : super(key: key);
 
-  final String name, image, availability, startTimes, finishTimes;
-  final int length, price, rating;
+  final String lahanTerpilih,
+      image,
+      tarif,
+      jenisPembayaran,
+      statusPembayaran,
+      waktuBooking;
   final GestureTapCallback press;
 
   @override
@@ -96,7 +114,7 @@ class ListActivityHere extends StatelessWidget {
         horizontal: getProportionateScreenWidth(defaultPadding),
       ),
       child: GestureDetector(
-        onTap: () => displayBottomSheet(context),
+        onTap: press,
         child: Container(
           height: getProportionateScreenHeight(defaultPadding + 150),
           decoration: BoxDecoration(
@@ -146,7 +164,7 @@ class ListActivityHere extends StatelessWidget {
                           Container(
                             width: 20.0.w,
                             child: Text(
-                              '$name',
+                              '$lahanTerpilih',
                               style: TextStyle(
                                 color: secondaryTextColor,
                                 fontSize: caption.sp - 1,
@@ -161,7 +179,7 @@ class ListActivityHere extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  'Rp$price',
+                                  'Rp. $tarif',
                                   style: TextStyle(
                                     color: secondaryTextColor,
                                     fontSize: caption.sp - 2,
@@ -169,7 +187,7 @@ class ListActivityHere extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'per jam',
+                                  'Total Tarif',
                                   style: TextStyle(
                                     fontSize: overline.sp - 2,
                                     color: Colors.grey,
@@ -183,14 +201,14 @@ class ListActivityHere extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            '$length Km',
+                            '$jenisPembayaran',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
                               color: Colors.grey,
                             ),
                           ),
                           Text(
-                            ' - $availability',
+                            ' - $statusPembayaran',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
                               color: successColor,
@@ -198,7 +216,6 @@ class ListActivityHere extends StatelessWidget {
                           ),
                         ],
                       ),
-                      _buildRatingStars(rating),
                       SizedBox(height: 10.0),
                       Row(
                         children: <Widget>[
@@ -212,7 +229,7 @@ class ListActivityHere extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '$startTimes - $finishTimes',
+                              '$waktuBooking',
                               style: TextStyle(
                                 fontSize: overline.sp - 3,
                               ),

@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 
-void displayBottomSheet(BuildContext context) {
+void displayBottomSheet(BuildContext context, riwayat) {
   SizeConfig().init(context);
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -44,7 +44,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.5,
                           child: AutoSizeText(
-                            "Fadlan Sentosa",
+                            riwayat.lahanTerpilih,
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: bodyText2.sp,
@@ -57,7 +57,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           // width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            "Pending",
+                            riwayat.statusPembayaran,
                             style: TextStyle(
                               fontSize: caption.sp,
                               color: secondaryTextColor,
@@ -86,7 +86,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Jalan Mayor Oking"),
+                            riwayat.jenisPembayaran,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -120,7 +120,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Sabtu, 14 September 2021"),
+                            riwayat.kendaraan,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -154,7 +154,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("2 Jam"),
+                            riwayat.waktuBooking,
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: secondaryTextColor,
@@ -186,7 +186,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Rp6000"),
+                            'Rp. ' + riwayat.tarif,
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: secondaryTextColor,
@@ -218,7 +218,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Buka Google Maps"),
+                            riwayat.kendaraan,
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: primaryColor,

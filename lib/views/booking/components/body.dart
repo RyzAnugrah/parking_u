@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
@@ -9,9 +10,9 @@ import 'package:parking_u/views/booking/components/time_list.dart';
 import 'package:parking_u/views/home/home_screen.dart';
 
 class Body extends StatelessWidget {
-  const Body({
-    Key key,
-  }) : super(key: key);
+  final ParkirModel item;
+
+  const Body({Key key, this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class Body extends StatelessWidget {
             child: SizedBox(
               width: SizeConfig.screenWidth * 0.9,
               child: Text(
-                ("Fadlan Sentosa"),
+                item.namaParkir,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -61,7 +62,7 @@ class Body extends StatelessWidget {
                   SizedBox(
                     width: SizeConfig.screenWidth * 0.7,
                     child: Text(
-                      ("Jalan Mayor Oking"),
+                      item.lokasiParkir,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -110,7 +111,10 @@ class Body extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        ("Lahan Terpilih: B1 - E5"),
+                        "Lahan Tersedia: " +
+                            item.lahanTersedia.toString() +
+                            " / " +
+                            item.totalLahan.toString(),
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -131,7 +135,10 @@ class Body extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        ("Lahan Tersedia: 10 / 20"),
+                        "Lahan Tidak Tersedia: " +
+                            item.lahanTidakTersedia.toString() +
+                            " / " +
+                            item.totalLahan.toString(),
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -152,7 +159,7 @@ class Body extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        ("Waktu Buka: 09:00 - 20:00"),
+                        "Waktu Buka:" + item.jam,
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -235,19 +242,19 @@ Widget bookingButton(BuildContext context) {
           btnOkOnPress: () {
             debugPrint('Success');
             Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) {
-            return HomeScreen();
-          }),
-        );
+              MaterialPageRoute(builder: (_) {
+                return HomeScreen();
+              }),
+            );
           },
           btnOkIcon: Icons.check_circle,
           onDissmissCallback: () {
             debugPrint('Dialog Dissmiss from callback');
             Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) {
-            return HomeScreen();
-          }),
-        );
+              MaterialPageRoute(builder: (_) {
+                return HomeScreen();
+              }),
+            );
           })
         ..show();
     },

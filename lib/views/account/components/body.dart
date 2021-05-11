@@ -1,8 +1,15 @@
+import 'dart:developer';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/main.dart';
+import 'package:parking_u/models/auth_model.dart';
+import 'package:parking_u/services/auth_service.dart';
 import 'package:parking_u/views/profile/components/profile_pic.dart';
+import 'package:parking_u/views/profile/profile_screen.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -16,11 +23,124 @@ class _BodyState extends State<Body> with Validation {
 
   String name = '';
   String email = '';
-  String type = '';
   String number = '';
+  String typeTC = '';
   String password = '';
-  bool valuefirst = false;
-  int _value = 1;
+  String confirmPassword = '';
+
+  TextEditingController nameTC = TextEditingController();
+  TextEditingController emailTC = TextEditingController();
+  TextEditingController numberTC = TextEditingController();
+  TextEditingController passTC = TextEditingController();
+
+  setup() {
+    nameTC = TextEditingController(text: user.namaLengkap);
+    emailTC = TextEditingController(text: user.email);
+    numberTC = TextEditingController(text: user.nopol);
+    typeTC = user.jenisKendaraan;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setup();
+  }
+
+  void editHandler() async {
+    log(nameTC.text);
+    log(emailTC.text);
+    log(numberTC.text);
+    log(typeTC);
+    log(passTC.text);
+    try {
+      if (formKey.currentState.validate()) {
+        formKey.currentState.save();
+        await AuthService.edit(
+          nameTC.text,
+          emailTC.text,
+          numberTC.text,
+          typeTC,
+          passTC.text,
+          user.id.toString(),
+        ).then(
+          (value) {
+            if (value is UserModel) {
+              print('Berhasil Edit');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Berhasil Edit',
+                desc: 'Anda Berhasil Edit',
+                btnOkText: 'Kembali',
+                btnOkOnPress: () {
+                  debugPrint('Berhasil Edit');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return ProfileScreen();
+                      },
+                    ),
+                  );
+                },
+                onDissmissCallback: () {
+                  debugPrint('Berhasil Edit');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return ProfileScreen();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            } else {
+              print('Gagal Edit');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Gagal Edit',
+                desc: 'Anda Gagal Edit',
+                btnOkText: 'Isi Form Dengan Benar',
+                btnOkOnPress: () {
+                  debugPrint('Gagal Edit');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return Body();
+                      },
+                    ),
+                  );
+                },
+                onDissmissCallback: () {
+                  debugPrint('Gagal Edit');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return Body();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            }
+          },
+        );
+      }
+    } catch (e) {
+      print('catch error');
+      print(e.toString());
+    }
+  }
 
   Widget build(context) {
     SizeConfig().init(context);
@@ -30,46 +150,51 @@ class _BodyState extends State<Body> with Validation {
         vertical: defaultPadding,
       ),
       child: Center(
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-              child: ProfilePic(),
-            ),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.01),
-            nameField(),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.01),
-            emailField(),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.01),
-            typeField(),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.01),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.02),
-            numberField(),
-            Container(
-              alignment: Alignment.topLeft,
-              padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
-            ),
-            SizedBox(height: SizeConfig.screenHeight * 0.01),
-            passwordField(),
-            SizedBox(height: SizeConfig.screenHeight * 0.02),
-            registerButton(),
-            SizedBox(height: SizeConfig.screenHeight * 0.02),
-          ],
+        child: Form(
+          key: formKey,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+                child: ProfilePic(),
+              ),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
+              nameField(),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
+              emailField(),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
+              typeField(),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.01),
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.02),
+              numberField(),
+              Container(
+                alignment: Alignment.topLeft,
+                padding: EdgeInsets.only(top: SizeConfig.screenHeight * 0.02),
+              ),
+              SizedBox(height: SizeConfig.screenHeight * 0.01),
+              passwordField(),
+              SizedBox(height: SizeConfig.screenHeight * 0.02),
+              confirmPasswordField(),
+              SizedBox(height: SizeConfig.screenHeight * 0.02),
+              editButton(),
+              SizedBox(height: SizeConfig.screenHeight * 0.02),
+            ],
+          ),
         ),
       ),
     );
@@ -77,6 +202,7 @@ class _BodyState extends State<Body> with Validation {
 
   Widget nameField() {
     return TextFormField(
+      controller: nameTC,
       style: TextStyle(
         fontSize: bodyText1,
         color: secondaryTextColor,
@@ -116,6 +242,7 @@ class _BodyState extends State<Body> with Validation {
 
   Widget emailField() {
     return TextFormField(
+      controller: emailTC,
       style: TextStyle(
         fontSize: bodyText1,
         color: secondaryTextColor,
@@ -179,34 +306,28 @@ class _BodyState extends State<Body> with Validation {
           ),
           labelText: 'Jenis Kendaraan',
         ),
-        value: _value,
+        value: typeTC,
         isExpanded: true,
         items: [
           DropdownMenuItem(
             child: Text(
               "Mobil",
-              style: TextStyle(
-                fontSize: bodyText1,
-                color: secondaryTextColor,
-              ),
+              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
             ),
-            value: 1,
+            value: 'Mobil',
           ),
           DropdownMenuItem(
             child: Text(
               "Motor",
-              style: TextStyle(
-                fontSize: bodyText1,
-                color: secondaryTextColor,
-              ),
+              style: TextStyle(fontSize: bodyText1, color: secondaryTextColor),
             ),
-            value: 2,
+            value: 'Motor',
           ),
         ],
         onChanged: (value) {
           setState(
             () {
-              _value = value;
+              typeTC = value;
             },
           );
         },
@@ -216,6 +337,7 @@ class _BodyState extends State<Body> with Validation {
 
   Widget numberField() {
     return TextFormField(
+      controller: numberTC,
       style: TextStyle(
         fontSize: bodyText1,
         color: secondaryTextColor,
@@ -251,6 +373,7 @@ class _BodyState extends State<Body> with Validation {
 
   Widget passwordField() {
     return TextFormField(
+      controller: passTC,
       style: TextStyle(
         fontSize: bodyText1,
         color: secondaryTextColor,
@@ -289,7 +412,48 @@ class _BodyState extends State<Body> with Validation {
     );
   }
 
-  Widget registerButton() {
+  Widget confirmPasswordField() {
+    return TextFormField(
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
+      cursorColor: secondaryTextColor,
+      obscureText: true,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.lock_outline,
+          color: Colors.grey,
+        ),
+        labelText: 'Konfirmasi Kata Sandi',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'Isi Konfirmasi Kata Sandi',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 2.0,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      validator: validateConfirmPassword,
+      onSaved: (String value) {
+        confirmPassword = value;
+      },
+    );
+  }
+
+  Widget editButton() {
     return ElevatedButton(
       child: Text(
         'Edit',
@@ -309,18 +473,14 @@ class _BodyState extends State<Body> with Validation {
           borderRadius: borderRadius,
         ),
       ),
-      onPressed: () {
-        if (formKey.currentState.validate()) {
-          formKey.currentState.save();
-          // Temp
-          print('Nama Lengkap: $name');
-          print('Email: $email');
-          print('Tipe Kendaraan: $_value');
-          print('Nomor Kendaraan: $number');
-          print('Password: $password');
-          print('Setuju: $valuefirst');
-        }
-      },
+      onPressed: editHandler,
     );
+  }
+
+  String validateConfirmPassword(String value) {
+    if (value != passTC.text) {
+      return 'Isi Harus Sama Dengan Kata Sandi';
+    }
+    return null;
   }
 }

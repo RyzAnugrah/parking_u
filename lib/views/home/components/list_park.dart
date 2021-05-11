@@ -8,10 +8,8 @@ import 'package:parking_u/views/home/components/detail_book.dart';
 
 class ListPark extends StatefulWidget {
   final ParkirModel item;
-  const ListPark({
-    Key key,
-    this.item,
-  }) : super(key: key);
+
+  const ListPark({Key key, this.item}) : super(key: key);
 
   @override
   _ListParkState createState() => _ListParkState();
@@ -182,7 +180,7 @@ class ListParkHere extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  'Rp$price',
+                                  'Rp. $price',
                                   style: TextStyle(
                                     color: secondaryTextColor,
                                     fontSize: caption.sp - 2,
