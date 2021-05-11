@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:parking_u/utils/const.dart';
 import 'package:parking_u/utils/shared_prefs.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 
 class ParkirService {
   static Future getAllParkir() async {

@@ -66,34 +66,19 @@ class _ListParkState extends State<ListPark> {
                           vertical: 4.0.w,
                         ),
                         child: ListParkHere(
-                          image: "assets/images/list_parking/anu-jaya.png",
+                          image: item.linkImage,
                           name: item.namaParkir,
                           price: item.harga,
                           length: item.jarak,
-                          availability: 'Tersedia',
+                          availability: item.statusLahan,
                           rating: item.rating,
-                          startTimes: item.jam,
-                          finishTimes: item.jam,
-                          press: () {},
+                          times: item.jam,
+                          press: () => displayBottomSheet(context, item),
                         ),
                       );
                     },
                   ),
           ),
-          // ListParkHere(
-          //   image: "assets/images/list_parking/anu-jaya.png",
-          //   name: "Fadlan Sentosa",
-          //   price: 3000,
-          //   length: 2,
-          //   availability: 'Tersedia',
-          //   rating: 2,
-          //   startTimes: '09:00',
-          //   finishTimes: '20:00',
-          //   press: () {},
-          // ),
-          // SizedBox(
-          //   height: getProportionateScreenHeight(20),
-          // ),
         ],
       ),
     );
@@ -119,11 +104,10 @@ class ListParkHere extends StatelessWidget {
     @required this.price,
     @required this.availability,
     @required this.rating,
-    @required this.startTimes,
-    @required this.finishTimes,
+    @required this.times,
   }) : super(key: key);
 
-  final String name, image, availability, startTimes, finishTimes;
+  final String name, image, availability, times;
   final int length, price, rating;
   final GestureTapCallback press;
 
@@ -134,7 +118,7 @@ class ListParkHere extends StatelessWidget {
         horizontal: getProportionateScreenWidth(defaultPadding),
       ),
       child: GestureDetector(
-        onTap: () => displayBottomSheet(context),
+        onTap: press,
         child: Container(
           height: getProportionateScreenHeight(defaultPadding + 150),
           decoration: BoxDecoration(
@@ -161,7 +145,7 @@ class ListParkHere extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: borderRadius,
                     child: Image(
-                      image: AssetImage(
+                      image: NetworkImage(
                         image,
                       ),
                       fit: BoxFit.cover,
@@ -249,7 +233,7 @@ class ListParkHere extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '$startTimes - $finishTimes',
+                              '$times',
                               style: TextStyle(
                                 fontSize: overline.sp - 3,
                               ),

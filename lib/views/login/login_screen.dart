@@ -37,9 +37,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) {
-                  return HomeScreen(
-                      // token: '38|CGrYgQsgzIjwShg2OORKNPhIoCmvOkZbkp6VPX49',
-                      );
+                  return HomeScreen();
                 },
               ),
             );
@@ -363,21 +361,6 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         ),
       ),
       onPressed: loginHandler,
-      // onPressed: () {
-      //   if (formKey.currentState.validate()) {
-      //     formKey.currentState.save();
-      //     // Temp
-      //     print('Email: $email');
-      //     print('Password: $password');
-      //   }
-      //   Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(
-      //       builder: (_) {
-      //         return HomeScreen();
-      //       },
-      //     ),
-      //   );
-      // },
     );
   }
 }
