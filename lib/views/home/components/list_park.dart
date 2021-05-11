@@ -2,81 +2,80 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-// import 'package:parking_u/models/parkir_model.dart';
+import 'package:parking_u/models/parkir_model.dart';
+import 'package:parking_u/services/parkir_service.dart';
 import 'package:parking_u/views/home/components/detail_book.dart';
 
-class ListPark extends StatelessWidget {
-  const ListPark({
-    Key key,
-  }) : super(key: key);
-  // final ParkirModel item;
-  // const ListPark({Key key, this.item}) : super(key: key);
+class ListPark extends StatefulWidget {
+  final ParkirModel item;
+
+  const ListPark({Key key, this.item}) : super(key: key);
+
+  @override
+  _ListParkState createState() => _ListParkState();
+}
+
+class _ListParkState extends State<ListPark> {
+  List<ParkirModel> listParkir = [];
+  bool loading = false;
+
+  void fetchParkirList() async {
+    try {
+      await ParkirService.getAllParkir().then((value) {
+        if (value is List<ParkirModel>) {
+          print('Success');
+          listParkir.addAll(value);
+          setState(() {
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchParkirList();
+    loading = true;
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          // ListTile(
-          //   title: Text(
-          //     item.namaParkir,
-          //   ),
-          // ),
-          ListParkHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Tersedia',
-            rating: 2,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
           SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          ListParkHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Tersedia',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          ListParkHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Tersedia',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
-          ),
-          ListParkHere(
-            image: "assets/images/list_parking/anu-jaya.png",
-            name: "Fadlan Sentosa",
-            price: 3000,
-            length: 2,
-            availability: 'Tersedia',
-            rating: 5,
-            startTimes: '09:00',
-            finishTimes: '20:00',
-            press: () {},
-          ),
-          SizedBox(
-            height: getProportionateScreenHeight(20),
+            height: 50.0.h,
+            child: loading
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: listParkir.length,
+                    itemBuilder: (context, index) {
+                      ParkirModel item = listParkir[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 2.0.w,
+                          vertical: 4.0.w,
+                        ),
+                        child: ListParkHere(
+                          image: item.linkImage,
+                          name: item.namaParkir,
+                          price: item.harga,
+                          length: item.jarak,
+                          availability: item.statusLahan,
+                          rating: item.rating,
+                          times: item.jam,
+                          press: () => displayBottomSheet(context, item),
+                        ),
+                      );
+                    },
+                  ),
           ),
         ],
       ),
@@ -103,11 +102,10 @@ class ListParkHere extends StatelessWidget {
     @required this.price,
     @required this.availability,
     @required this.rating,
-    @required this.startTimes,
-    @required this.finishTimes,
+    @required this.times,
   }) : super(key: key);
 
-  final String name, image, availability, startTimes, finishTimes;
+  final String name, image, availability, times;
   final int length, price, rating;
   final GestureTapCallback press;
 
@@ -118,7 +116,7 @@ class ListParkHere extends StatelessWidget {
         horizontal: getProportionateScreenWidth(defaultPadding),
       ),
       child: GestureDetector(
-        onTap: () => displayBottomSheet(context),
+        onTap: press,
         child: Container(
           height: getProportionateScreenHeight(defaultPadding + 150),
           decoration: BoxDecoration(
@@ -145,7 +143,7 @@ class ListParkHere extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: borderRadius,
                     child: Image(
-                      image: AssetImage(
+                      image: NetworkImage(
                         image,
                       ),
                       fit: BoxFit.cover,
@@ -182,7 +180,7 @@ class ListParkHere extends StatelessWidget {
                             child: Column(
                               children: <Widget>[
                                 Text(
-                                  'Rp$price',
+                                  'Rp. $price',
                                   style: TextStyle(
                                     color: secondaryTextColor,
                                     fontSize: caption.sp - 2,
@@ -233,7 +231,7 @@ class ListParkHere extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '$startTimes - $finishTimes',
+                              '$times',
                               style: TextStyle(
                                 fontSize: overline.sp - 3,
                               ),

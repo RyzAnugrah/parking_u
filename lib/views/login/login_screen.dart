@@ -2,9 +2,11 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/mixins/validation.dart';
+import 'package:parking_u/main.dart';
 import 'package:parking_u/models/auth_model.dart';
 import 'package:parking_u/services/auth_service.dart';
 import 'package:parking_u/views/home/home_screen.dart';
@@ -20,10 +22,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with Validation {
+  final formKey = GlobalKey<FormState>();
+
   TextEditingController emailTC = TextEditingController();
   TextEditingController passTC = TextEditingController();
 
-  final formKey = GlobalKey<FormState>();
+  String email = '';
+  String password = '';
 
   void loginHandler() async {
     log(emailTC.text);
@@ -31,27 +36,89 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     try {
       if (formKey.currentState.validate()) {
         formKey.currentState.save();
-        await AuthService.login(emailTC.text, passTC.text).then((value) {
-          if (value is UserModel) {
-            print('Login Successful');
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return HomeScreen();
+        await AuthService.login(
+          emailTC.text,
+          passTC.text,
+        ).then(
+          (value) {
+            if (value is UserModel) {
+              user = value;
+              print('Berhasil Masuk');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Berhasil Masuk',
+                desc: 'Anda Berhasil Masuk',
+                btnOkText: 'Masuk Sekarang',
+                btnOkOnPress: () {
+                  debugPrint('Berhasil Masuk');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return HomeScreen();
+                      },
+                    ),
+                  );
                 },
-              ),
-            );
-          }
-        });
+                onDissmissCallback: () {
+                  debugPrint('Berhasil Masuk');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return HomeScreen();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            } else {
+              print('Gagal Masuk');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Gagal Masuk',
+                desc: 'Anda Gagal Masuk',
+                btnOkText: 'Email dan Password Tidak Cocok',
+                btnOkOnPress: () {
+                  debugPrint('Gagal Masuk');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
+                onDissmissCallback: () {
+                  debugPrint('Gagal Masuk');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            }
+          },
+        );
       }
     } catch (e) {
       print('catch error');
       print(e.toString());
     }
   }
-
-  String email = '';
-  String password = '';
 
   Future<bool> _onWillPop() async {
     return (await showDialog(
@@ -84,7 +151,8 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     SizeConfig().init(context);
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(topLeft: Radius.circular(18), topRight: Radius.circular(18)),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(18), topRight: Radius.circular(18)),
       ),
       context: context,
       builder: (ctx) {

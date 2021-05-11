@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sizer/sizer.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/booking/booking_screen.dart';
 
-void displayBottomSheet(BuildContext context) {
+void displayBottomSheet(BuildContext context, item) {
   SizeConfig().init(context);
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
@@ -27,8 +28,8 @@ void displayBottomSheet(BuildContext context) {
                       topLeft: Radius.circular(8.0),
                       topRight: Radius.circular(8.0),
                     ),
-                    child: Image.asset(
-                      'assets/images/list_parking/anu-jaya.png',
+                    child: Image.network(
+                      item.linkImage,
                       height: getProportionateScreenHeight(180),
                       fit: BoxFit.fill,
                     ),
@@ -45,7 +46,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.5,
                           child: AutoSizeText(
-                            "Fadlan Sentosa",
+                            item.namaParkir,
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: bodyText2.sp,
@@ -58,7 +59,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           // width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            "Tersedia",
+                            item.statusLahan,
                             style: TextStyle(
                               fontSize: caption.sp,
                               color: successColor,
@@ -87,7 +88,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Jalan Mayor Oking"),
+                            item.lokasiParkir,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -121,7 +122,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("09:00 - 20:00"),
+                            item.jam,
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: secondaryTextColor,
@@ -153,7 +154,7 @@ void displayBottomSheet(BuildContext context) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            ("Rp5000/jam"),
+                            ("Rp." + item.harga.toString() + "/jam"),
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: secondaryTextColor,
@@ -184,12 +185,17 @@ void displayBottomSheet(BuildContext context) {
                         ),
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
-                          child: Text(
-                            ("Buka Google Maps"),
-                            style: TextStyle(
-                              fontSize: caption.sp - 2,
-                              color: primaryColor,
+                          child: InkWell(
+                            child: new Text(
+                              ("Buka Google Maps"),
+                              style: TextStyle(
+                                fontSize: caption.sp - 2,
+                                color: primaryColor,
+                              ),
                             ),
+                            onTap: () async {
+                              await launch(item.linkMap);
+                            },
                           ),
                         ),
                       ],
@@ -204,7 +210,7 @@ void displayBottomSheet(BuildContext context) {
                     ),
                     child: Column(
                       children: [
-                        bookingButton(context),
+                        bookingButton(context, item),
                       ],
                     ),
                   ),
@@ -218,7 +224,7 @@ void displayBottomSheet(BuildContext context) {
   );
 }
 
-Widget bookingButton(BuildContext context) {
+Widget bookingButton(BuildContext context, item) {
   return ElevatedButton(
     child: Text(
       'Booking Sekarang',
@@ -242,7 +248,7 @@ Widget bookingButton(BuildContext context) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
           builder: (_) {
-            return BookingScreen();
+            return BookingScreen(item: item);
           },
         ),
       );

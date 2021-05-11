@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
@@ -17,12 +18,19 @@ class RegisterScreenPage extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
+  final formKey = GlobalKey<FormState>();
+
+  String name = '';
+  String email = '';
+  String number = '';
+  String typeTC = 'Mobil';
+  String password = '';
+  String confirmPassword = '';
+
   TextEditingController nameTC = TextEditingController();
   TextEditingController emailTC = TextEditingController();
   TextEditingController numberTC = TextEditingController();
   TextEditingController passTC = TextEditingController();
-
-  final formKey = GlobalKey<FormState>();
 
   void registerHandler() async {
     log(nameTC.text);
@@ -34,31 +42,90 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
       if (formKey.currentState.validate()) {
         formKey.currentState.save();
         await AuthService.register(
-                nameTC.text, emailTC.text, numberTC.text, typeTC, passTC.text)
-            .then((value) {
-          if (value is UserModel) {
-            print('Register Successful');
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return LoginScreen();
+          nameTC.text,
+          emailTC.text,
+          numberTC.text,
+          typeTC,
+          passTC.text,
+        ).then(
+          (value) {
+            if (value is UserModel) {
+              print('Berhasil Daftar');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.SUCCES,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Berhasil Daftar',
+                desc: 'Anda Berhasil Daftar',
+                btnOkText: 'Masuk Sekarang',
+                btnOkOnPress: () {
+                  debugPrint('Berhasil Daftar');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
                 },
-              ),
-            );
-          }
-        });
+                onDissmissCallback: () {
+                  debugPrint('Berhasil Daftar');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return LoginScreen();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            } else {
+              print('Gagal Daftar');
+              AwesomeDialog(
+                context: context,
+                animType: AnimType.SCALE,
+                dialogType: DialogType.ERROR,
+                headerAnimationLoop: false,
+                dismissOnTouchOutside: false,
+                dismissOnBackKeyPress: false,
+                autoHide: Duration(seconds: 5),
+                title: 'Gagal Daftar',
+                desc: 'Anda Gagal Daftar',
+                btnOkText: 'Isi Form Dengan Benar',
+                btnOkOnPress: () {
+                  debugPrint('Gagal Daftar');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return RegisterScreenPage();
+                      },
+                    ),
+                  );
+                },
+                onDissmissCallback: () {
+                  debugPrint('Gagal Daftar');
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return RegisterScreenPage();
+                      },
+                    ),
+                  );
+                },
+              )..show();
+            }
+          },
+        );
       }
     } catch (e) {
+      print('catch error');
       print(e.toString());
     }
   }
-
-  String name = '';
-  String email = '';
-  String number = '';
-  String typeTC = 'Mobil';
-  String password = '';
-  String confirmPassword = '';
 
   Widget build(context) {
     SizeConfig().init(context);
