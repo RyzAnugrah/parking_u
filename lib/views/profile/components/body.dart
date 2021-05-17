@@ -86,19 +86,6 @@ class Body extends StatelessWidget {
           ),
           SizedBox(height: defaultPadding),
           ProfileMenu(
-            text: "Notifikasi",
-            icon: Icons.notifications_none_outlined,
-            press: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NotificationScreen(),
-                ),
-              ),
-            },
-          ),
-          Divider(),
-          ProfileMenu(
             text: "Tentang Kami",
             icon: Icons.question_answer_outlined,
             press: () => {

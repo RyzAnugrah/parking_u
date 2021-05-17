@@ -11,8 +11,10 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(20),
+      padding: EdgeInsets.only(
+        left: getProportionateScreenWidth(20),
+        right: getProportionateScreenWidth(20),
+        bottom: getProportionateScreenWidth(20),
       ),
       child: TextField(
         style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),

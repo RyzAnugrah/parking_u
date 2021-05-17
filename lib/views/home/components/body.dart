@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/home/components/filter.dart';
 import 'package:parking_u/views/home/components/header.dart';
 import 'package:parking_u/views/home/components/list_park.dart';
 import 'package:parking_u/views/home/components/search.dart';
@@ -59,7 +58,6 @@ class Body extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(
                       top: size.height * 0.04,
-                      bottom: size.height * 0.03,
                     ),
                     decoration: BoxDecoration(
                       color: primaryBackgroundColor,
@@ -73,7 +71,6 @@ class Body extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SearchField(),
-                        Filter(),
                         ListPark(),
                       ],
                     ),

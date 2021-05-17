@@ -8,7 +8,10 @@ void displayBottomSheet(BuildContext context, riwayat) {
   SizeConfig().init(context);
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
-      borderRadius: borderRadius,
+      borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
+                    ),
     ),
     context: context,
     builder: (ctx) {
@@ -254,14 +257,14 @@ void displayBottomSheet(BuildContext context, riwayat) {
 Widget bookingButton() {
   return ElevatedButton(
     child: Text(
-      'Scan QR',
+      'Konfirmasi Pesanan',
       style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
     ),
     style: ElevatedButton.styleFrom(
       primary: secondaryColor,
       elevation: 5,
       padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(100),
+        horizontal: getProportionateScreenWidth(90),
         vertical: getProportionateScreenHeight(17),
       ),
       shape: new RoundedRectangleBorder(

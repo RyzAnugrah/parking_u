@@ -36,18 +36,6 @@ class Header extends StatelessWidget {
                       ),
                     ),
                   ),
-                  NotificationIcon(
-                    svgSrc: "",
-                    numOfitem: 3,
-                    press: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationScreen(),
-                        ),
-                      )
-                    },
-                  ),
                 ],
               ),
               Row(

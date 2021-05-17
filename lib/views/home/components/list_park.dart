@@ -48,7 +48,7 @@ class _ListParkState extends State<ListPark> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 50.0.h,
+            height: 59.0.h,
             child: loading
                 ? Center(
                     child: CircularProgressIndicator(),
