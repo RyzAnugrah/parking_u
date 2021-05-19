@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
+import 'package:parking_u/models/parkir_model.dart';
+import 'package:parking_u/services/parkir_service.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -10,6 +13,19 @@ class SearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void fetchSearchParkirList() async {
+      try {
+        await ParkirService.getSearchParkir(searchKeyword).then((value) {
+          if (value is List<ParkirModel>) {
+            print('Success');
+            listParkir.addAll(value);
+          }
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+
     return Padding(
       padding: EdgeInsets.only(
         left: getProportionateScreenWidth(20),
@@ -19,7 +35,11 @@ class SearchField extends StatelessWidget {
       child: TextField(
         style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
         cursorColor: secondaryTextColor,
-        onChanged: (value) => print(value),
+        onSubmitted: (value) {
+          searchKeyword = value;
+          print(searchKeyword);
+          fetchSearchParkirList();
+        },
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(10),

@@ -11,9 +11,9 @@ void displayBottomSheet(BuildContext context, item) {
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0),
-                    ),
+        topLeft: Radius.circular(8.0),
+        topRight: Radius.circular(8.0),
+      ),
     ),
     context: context,
     builder: (ctx) {

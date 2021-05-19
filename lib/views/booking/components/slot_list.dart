@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+// import 'package:parking_u/main.dart';
+import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 
 class SlotList extends StatefulWidget {
-  const SlotList({
-    Key key,
-  }) : super(key: key);
+  final ParkirModel item;
+
+  const SlotList({Key key, this.item}) : super(key: key);
 
   @override
   _SlotListState createState() => _SlotListState();
@@ -19,54 +21,73 @@ class _SlotListState extends State<SlotList> {
       children: [
         SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child: GridView.count(
+          child: GridView.builder(
+            itemCount: widget.item.lahanTersedia ~/ 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 4.0,
+            ),
             primary: false,
             padding: const EdgeInsets.all(10.0),
-            crossAxisSpacing: 10.0,
-            crossAxisCount: 2,
             shrinkWrap: true,
-            children: [
-              SlotListCard(
-                number: 1,
-                available: false,
-                press: () {},
-              ),
-              SlotListCard(
-                number: 2,
+            itemBuilder: (BuildContext context, int index) {
+              return SlotListCard(
+                number: ++index,
                 available: true,
                 press: () {},
-              ),
-              SlotListCard(
-                number: 3,
+              );
+            },
+            // children: [
+            //   SlotListCard(
+            //     number: 1,
+            //     available: false,
+            //     press: () {},
+            //   ),
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: GridView.builder(
+            itemCount: widget.item.lahanTidakTersedia,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 4.0,
+            ),
+            primary: false,
+            padding: const EdgeInsets.all(10.0),
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return SlotListCard(
+                number: ++index + (widget.item.lahanTersedia ~/ 2),
+                available: false,
+                press: () {},
+              );
+            },
+          ),
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: GridView.builder(
+            itemCount: widget.item.lahanTersedia ~/ 2,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10.0,
+              mainAxisSpacing: 4.0,
+            ),
+            primary: false,
+            padding: const EdgeInsets.all(10.0),
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return SlotListCard(
+                number: ++index +
+                    (widget.item.lahanTersedia ~/ 2) +
+                    (widget.item.lahanTidakTersedia),
                 available: true,
                 press: () {},
-              ),
-              SlotListCard(
-                number: 4,
-                available: true,
-                press: () {},
-              ),
-              SlotListCard(
-                number: 5,
-                available: false,
-                press: () {},
-              ),
-              SlotListCard(
-                number: 6,
-                available: false,
-                press: () {},
-              ),
-              SlotListCard(
-                number: 7,
-                available: false,
-                press: () {},
-              ),
-              SlotListCard(
-                number: 8,
-                available: false,
-                press: () {},
-              ),
-            ],
+              );
+            },
           ),
         ),
       ],
@@ -104,7 +125,9 @@ class _SlotListCardState extends State<SlotListCard> {
   Widget build(BuildContext context) {
     return InkWell(
       child: GestureDetector(
-        onTap: () => setState(() => _colorTap = !_colorTap),
+        onTap: () => {
+          setState(() => _colorTap = !_colorTap),
+        },
         onDoubleTap: widget.press,
         child: SizedBox(
           width: getProportionateScreenWidth(150),

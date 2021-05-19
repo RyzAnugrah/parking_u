@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -16,7 +17,6 @@ class ListPark extends StatefulWidget {
 }
 
 class _ListParkState extends State<ListPark> {
-  List<ParkirModel> listParkir = [];
   bool loading = false;
 
   void fetchParkirList() async {

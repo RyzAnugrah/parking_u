@@ -3,8 +3,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
-import 'package:parking_u/views/home/components/notification_icon.dart';
-import 'package:parking_u/views/notification/notification_screen.dart';
+// import 'package:parking_u/views/home/components/notification_icon.dart';
+// import 'package:parking_u/views/notification/notification_screen.dart';
 
 class Header extends StatelessWidget {
   const Header({
@@ -53,7 +53,7 @@ class Header extends StatelessWidget {
                   SizedBox(
                     width: SizeConfig.screenWidth * 0.7,
                     child: AutoSizeText(
-                      ("Lapangan Parkir PPBS D"),
+                      ("Parking.u"),
                       maxLines: 2,
                       style: TextStyle(
                         fontSize: bodyText1.sp,

@@ -9,9 +9,9 @@ void displayBottomSheet(BuildContext context, riwayat) {
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0),
-                    ),
+        topLeft: Radius.circular(8.0),
+        topRight: Radius.circular(8.0),
+      ),
     ),
     context: context,
     builder: (ctx) {
@@ -240,7 +240,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                     ),
                     child: Column(
                       children: [
-                        bookingButton(),
+                        bookingButton(context),
                       ],
                     ),
                   ),
@@ -254,7 +254,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
   );
 }
 
-Widget bookingButton() {
+Widget bookingButton(context) {
   return ElevatedButton(
     child: Text(
       'Konfirmasi Pesanan',
@@ -271,6 +271,8 @@ Widget bookingButton() {
         borderRadius: borderRadius,
       ),
     ),
-    onPressed: () {},
+    onPressed: () {
+      Navigator.pop(context);
+    },
   );
 }

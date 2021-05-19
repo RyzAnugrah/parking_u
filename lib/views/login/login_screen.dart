@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
@@ -51,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Berhasil Masuk',
                 desc: 'Anda Berhasil Masuk',
                 btnOkText: 'Masuk Sekarang',
@@ -85,29 +86,30 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Gagal Masuk',
                 desc: 'Anda Gagal Masuk',
                 btnOkText: 'Email dan Password Tidak Cocok',
+                btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Masuk');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return LoginScreen();
-                      },
-                    ),
-                  );
+                  // Navigator.of(context).pushReplacement(
+                  //   MaterialPageRoute(
+                  //     builder: (_) {
+                  //       return LoginScreen();
+                  //     },
+                  //   ),
+                  // );
                 },
                 onDissmissCallback: () {
                   debugPrint('Gagal Masuk');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return LoginScreen();
-                      },
-                    ),
-                  );
+                  // Navigator.of(context).pushReplacement(
+                  //   MaterialPageRoute(
+                  //     builder: (_) {
+                  //       return LoginScreen();
+                  //     },
+                  //   ),
+                  // );
                 },
               )..show();
             }
@@ -135,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                 ),
               ),
               new TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
+                onPressed: () => SystemNavigator.pop(),
                 child: new Text(
                   'Yes',
                   style: TextStyle(color: primaryColor),

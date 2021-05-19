@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
+// import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/booking/components/booking_details.dart';
 import 'package:parking_u/views/booking/components/payment.dart';
 import 'package:parking_u/views/booking/components/time_list.dart';
-import 'package:parking_u/views/home/home_screen.dart';
+// import 'package:parking_u/views/home/home_screen.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   final ParkirModel item;
 
   const Body({Key key, this.item}) : super(key: key);
 
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -32,7 +37,7 @@ class Body extends StatelessWidget {
             child: SizedBox(
               width: SizeConfig.screenWidth * 0.9,
               child: Text(
-                item.namaParkir,
+                widget.item.namaParkir,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -62,7 +67,7 @@ class Body extends StatelessWidget {
                   SizedBox(
                     width: SizeConfig.screenWidth * 0.7,
                     child: Text(
-                      item.lokasiParkir,
+                      widget.item.lokasiParkir,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -84,12 +89,13 @@ class Body extends StatelessWidget {
                 children: <Widget>[
                   GestureDetector(
                     onTap: () => {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => BookingDetails(),
+                          builder: (_) {
+                            return BookingDetails(item: widget.item);
+                          },
                         ),
-                      )
+                      ),
                     },
                     child: Text(
                       ("Pilih Lahan Parkir"),
@@ -112,9 +118,9 @@ class Body extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Lahan Tersedia: " +
-                            item.lahanTersedia.toString() +
+                            widget.item.lahanTersedia.toString() +
                             " / " +
-                            item.totalLahan.toString(),
+                            widget.item.totalLahan.toString(),
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -136,9 +142,9 @@ class Body extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Lahan Tidak Tersedia: " +
-                            item.lahanTidakTersedia.toString() +
+                            widget.item.lahanTidakTersedia.toString() +
                             " / " +
-                            item.totalLahan.toString(),
+                            widget.item.totalLahan.toString(),
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -159,7 +165,7 @@ class Body extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Waktu Buka:" + item.jam,
+                        "Waktu Buka:" + widget.item.jam,
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -195,7 +201,7 @@ class Body extends StatelessWidget {
               ),
             ),
           ),
-          TimeList(),
+          TimeList(item: widget.item),
           Divider(),
           SizedBox(
             height: getProportionateScreenHeight(10),
@@ -231,32 +237,33 @@ Widget bookingButton(BuildContext context) {
         borderRadius: borderRadius,
       ),
     ),
-    onPressed: () {
-      AwesomeDialog(
-          context: context,
-          animType: AnimType.SCALE,
-          headerAnimationLoop: false,
-          dialogType: DialogType.SUCCES,
-          title: 'Checkout Berhasil',
-          desc: 'Lakukan Validasi Pesanan di Tempat Masuk Parkir',
-          btnOkOnPress: () {
-            debugPrint('Success');
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) {
-                return HomeScreen();
-              }),
-            );
-          },
-          btnOkIcon: Icons.check_circle,
-          onDissmissCallback: () {
-            debugPrint('Dialog Dissmiss from callback');
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) {
-                return HomeScreen();
-              }),
-            );
-          })
-        ..show();
-    },
+    // onPressed: checkoutHandler,
+    // onPressed: () {
+    //   AwesomeDialog(
+    //       context: context,
+    //       animType: AnimType.SCALE,
+    //       headerAnimationLoop: false,
+    //       dialogType: DialogType.SUCCES,
+    //       title: 'Checkout Berhasil',
+    //       desc: 'Lakukan Validasi Pesanan di Tempat Masuk Parkir',
+    //       btnOkOnPress: () {
+    //         debugPrint('Success');
+    //         Navigator.of(context).pushReplacement(
+    //           MaterialPageRoute(builder: (_) {
+    //             return HomeScreen();
+    //           }),
+    //         );
+    //       },
+    //       btnOkIcon: Icons.check_circle,
+    //       onDissmissCallback: () {
+    //         debugPrint('Dialog Dissmiss from callback');
+    //         Navigator.of(context).pushReplacement(
+    //           MaterialPageRoute(builder: (_) {
+    //             return HomeScreen();
+    //           }),
+    //         );
+    //       })
+    //     ..show();
+    // },
   );
 }

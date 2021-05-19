@@ -6,7 +6,7 @@ import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/about/about_screen.dart';
 import 'package:parking_u/views/account/account_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
-import 'package:parking_u/views/notification/notification_screen.dart';
+// import 'package:parking_u/views/notification/notification_screen.dart';
 import 'package:parking_u/views/profile/components/profile_menu.dart';
 
 class Body extends StatelessWidget {
@@ -30,7 +30,7 @@ class Body extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         backgroundImage:
-                            AssetImage("assets/images/profile-pic.jpg"),
+                            AssetImage("assets/images/profile-pic-user.png"),
                       ),
                     ],
                   ),
@@ -43,7 +43,7 @@ class Body extends StatelessWidget {
                       SizedBox(
                         width: SizeConfig.screenWidth * 0.46,
                         child: Text(
-                          ("Jane Da"),
+                          ("Akun Saya"),
                           maxLines: 2,
                           style: TextStyle(
                             fontSize: headline6,

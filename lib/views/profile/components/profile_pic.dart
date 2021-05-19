@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:parking_u/constants.dart';
+// import 'package:parking_u/constants.dart';
 
 class ProfilePic extends StatelessWidget {
   const ProfilePic({
@@ -16,29 +16,7 @@ class ProfilePic extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/images/profile-pic.jpg"),
-          ),
-          Positioned(
-            right: -16,
-            bottom: 0,
-            child: SizedBox(
-              height: 46,
-              width: 46,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                    side: BorderSide(color: Colors.white),
-                  ),
-                  backgroundColor: Color(0xFFF5F6F9),
-                ),
-                onPressed: () {},
-                child: Icon(
-                  Icons.camera_alt_outlined,
-                  color: primaryColor,
-                ),
-              ),
-            ),
+            backgroundImage: AssetImage("assets/images/profile-pic-user.png"),
           ),
         ],
       ),

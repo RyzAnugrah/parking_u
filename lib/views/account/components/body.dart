@@ -73,7 +73,7 @@ class _BodyState extends State<Body> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Berhasil Edit',
                 desc: 'Anda Berhasil Edit',
                 btnOkText: 'Kembali',
@@ -107,10 +107,11 @@ class _BodyState extends State<Body> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Gagal Edit',
                 desc: 'Anda Gagal Edit',
                 btnOkText: 'Isi Form Dengan Benar',
+                btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Edit');
                   Navigator.of(context).pushReplacement(
