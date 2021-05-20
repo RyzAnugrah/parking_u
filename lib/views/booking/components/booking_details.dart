@@ -102,22 +102,22 @@ class _BookingDetailsState extends State<BookingDetails> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/ellipse-blue.png",
-                        ),
-                        SizedBox(width: 2.0.w),
-                        Text(
-                          'Dipilih',
-                          style: TextStyle(
-                            color: secondaryTextColor,
-                            fontSize: bodyText2,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Image.asset(
+                    //       "assets/images/ellipse-blue.png",
+                    //     ),
+                    //     SizedBox(width: 2.0.w),
+                    //     Text(
+                    //       'Dipilih',
+                    //       style: TextStyle(
+                    //         color: secondaryTextColor,
+                    //         fontSize: bodyText2,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -139,7 +139,7 @@ class _BookingDetailsState extends State<BookingDetails> {
 Widget bookingButton(BuildContext context) {
   return ElevatedButton(
     child: Text(
-      'Pilih',
+      'Kembali',
       style: TextStyle(
         fontSize: bodyText2.sp,
         color: primaryTextColor,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -19,11 +20,11 @@ class _ListActivityState extends State<ListActivity> {
 
   void fetchRiwayatList() async {
     try {
-      await RiwayatService.getRiwayat('1').then((value) {
-        if (value is RiwayatModel) {
+      await RiwayatService.getAllRiwayat().then((value) {
+        if (value is List<RiwayatModel>) {
           print('Success');
+          listRiwayat.addAll(value);
           setState(() {
-            riwayat = value;
             loading = false;
           });
         }
@@ -32,6 +33,22 @@ class _ListActivityState extends State<ListActivity> {
       print(e.toString());
     }
   }
+
+  // void fetchRiwayatList() async {
+  //   try {
+  //     await RiwayatService.getRiwayat().then((value) {
+  //       if (value is RiwayatModel) {
+  //         print('Success');
+  //         setState(() {
+  //           riwayat = value;
+  //           loading = false;
+  //         });
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   @override
   void initState() {
@@ -46,26 +63,49 @@ class _ListActivityState extends State<ListActivity> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 25.0.h,
+            // height: 25.0.h,
+            height: 75.0.h,
             child: loading
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 2.0.w,
-                      vertical: 4.0.w,
-                    ),
-                    child: ListActivityHere(
-                      image: "assets/images/list_parking/anu-jaya.png",
-                      lahanTerpilih: riwayat.lahanTerpilih,
-                      tarif: riwayat.tarif,
-                      jenisPembayaran: riwayat.jenisPembayaran,
-                      statusPembayaran: riwayat.statusPembayaran,
-                      waktuBooking: riwayat.waktuBooking,
-                      press: () => displayBottomSheet(context, riwayat),
-                    ),
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: listRiwayat.length,
+                    itemBuilder: (context, index) {
+                      RiwayatModel riwayat = listRiwayat[index];
+                      return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 2.0.w,
+                          vertical: 4.0.w,
+                        ),
+                        child: ListActivityHere(
+                          image: "assets/images/list_parking/anu-jaya.png",
+                          lahanTerpilih: riwayat.lahanTerpilih,
+                          tarif: riwayat.tarif,
+                          jenisPembayaran: riwayat.jenisPembayaran,
+                          statusPembayaran: riwayat.statusPembayaran,
+                          waktuBooking: riwayat.waktuBooking,
+                          press: () => displayBottomSheet(context, riwayat),
+                        ),
+                      );
+                    },
                   ),
+            // : Padding(
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: 2.0.w,
+            //       vertical: 4.0.w,
+            //     ),
+            //     child: ListActivityHere(
+            //       image: "assets/images/list_parking/anu-jaya.png",
+            //       lahanTerpilih: riwayat.lahanTerpilih,
+            //       tarif: riwayat.tarif,
+            //       jenisPembayaran: riwayat.jenisPembayaran,
+            //       statusPembayaran: riwayat.statusPembayaran,
+            //       waktuBooking: riwayat.waktuBooking,
+            //       press: () => displayBottomSheet(context, riwayat),
+            //     ),
+            //   ),
           ),
           // SizedBox(
           //   height: getProportionateScreenHeight(20),

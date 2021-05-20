@@ -56,12 +56,22 @@ class AuthService {
     };
 
     try {
+      String token = await SharedPref.getToken();
+      print(token);
+
       Response res = await Dio().put(
         '${Const.baseUrl}/user/$userID',
         data: data,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Accept': 'application/json',
+          },
+          contentType: Headers.formUrlEncodedContentType
+        ),
       );
       print(res.data);
-      return UserModel.fromJson(res.data);
+      return UserModel.fromJson(res.data['User']);
     } on DioError catch (_) {
       print('catch error');
     }

@@ -1,12 +1,20 @@
+import 'dart:developer';
+
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
+import 'package:parking_u/mixins/validation.dart';
+import 'package:parking_u/models/booking_model.dart';
 import 'package:parking_u/models/parkir_model.dart';
+import 'package:parking_u/services/booking_service.dart';
+import 'package:parking_u/views/home/home_screen.dart';
 import 'package:sizer/sizer.dart';
 // import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/views/booking/components/booking_details.dart';
 import 'package:parking_u/views/booking/components/payment.dart';
-import 'package:parking_u/views/booking/components/time_list.dart';
+// import 'package:parking_u/views/booking/components/time_list.dart';
 // import 'package:parking_u/views/home/home_screen.dart';
 
 class Body extends StatefulWidget {
@@ -18,7 +26,108 @@ class Body extends StatefulWidget {
   _BodyState createState() => _BodyState();
 }
 
-class _BodyState extends State<Body> {
+class _BodyState extends State<Body> with Validation {
+  final formKey = GlobalKey<FormState>();
+
+  String lahan = '';
+  String tarifTC = '3000';
+  String jenisPembayaran = 'Cash';
+  String statusPembayaran = 'Pending';
+  String timeTC = '1';
+  String number = user.nopol;
+  String typeTC = user.jenisKendaraan;
+  String name = user.namaLengkap;
+
+  TextEditingController lahanTC = TextEditingController();
+  TextEditingController numberTC = TextEditingController();
+  TextEditingController nameTC = TextEditingController();
+
+  void checkoutHandler() async {
+    log(lahanTC.text);
+    log(tarifTC);
+    log(jenisPembayaran);
+    log(statusPembayaran);
+    log(timeTC);
+    log(number);
+    log(typeTC);
+    log(name);
+    try {
+      await BookingService.createBooking(
+        lahanTC.text,
+        tarifTC,
+        jenisPembayaran,
+        statusPembayaran,
+        timeTC,
+        number,
+        typeTC,
+        name,
+      ).then(
+        (value) {
+          if (value is BookingModel) {
+            print('Berhasil Booking');
+            AwesomeDialog(
+              context: context,
+              animType: AnimType.SCALE,
+              dialogType: DialogType.SUCCES,
+              headerAnimationLoop: false,
+              dismissOnTouchOutside: false,
+              dismissOnBackKeyPress: false,
+              autoHide: Duration(seconds: 6),
+              title: 'Berhasil Booking',
+              desc: 'Anda Berhasil Booking',
+              btnOkText: 'Oke',
+              btnOkOnPress: () {
+                debugPrint('Berhasil Booking');
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
+              },
+              onDissmissCallback: () {
+                debugPrint('Berhasil Booking');
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (_) {
+                      return HomeScreen();
+                    },
+                  ),
+                );
+              },
+            )..show();
+          } else {
+            print('Test ' + value);
+            print('Gagal Booking');
+            AwesomeDialog(
+              context: context,
+              animType: AnimType.SCALE,
+              dialogType: DialogType.ERROR,
+              headerAnimationLoop: false,
+              dismissOnTouchOutside: false,
+              dismissOnBackKeyPress: false,
+              autoHide: Duration(seconds: 6),
+              title: 'Gagal Booking',
+              desc: 'Anda Gagal Booking',
+              btnOkText: 'Isi Form Dengan Benar',
+              btnOkColor: errorColor,
+              btnOkOnPress: () {
+                debugPrint('Gagal Booking');
+              },
+              onDissmissCallback: () {
+                debugPrint('Gagal Booking');
+              },
+            )..show();
+          }
+        },
+      );
+    } catch (e) {
+      print('catch error');
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -98,7 +207,7 @@ class _BodyState extends State<Body> {
                       ),
                     },
                     child: Text(
-                      ("Pilih Lahan Parkir"),
+                      ("Lihat Lahan Parkir"),
                       maxLines: 2,
                       style: TextStyle(
                           fontSize: caption.sp - 1,
@@ -165,7 +274,7 @@ class _BodyState extends State<Body> {
                   Column(
                     children: <Widget>[
                       Text(
-                        "Waktu Buka:" + widget.item.jam,
+                        "Waktu Buka: " + widget.item.jam,
                         maxLines: 2,
                         style: TextStyle(
                           fontSize: caption.sp - 2,
@@ -180,6 +289,32 @@ class _BodyState extends State<Body> {
             ),
           ),
           Divider(),
+          // Container(
+          //   child: SizedBox(
+          //     child: Row(
+          //       children: [
+          //         Column(
+          //           children: <Widget>[
+          //             Text(
+          //               ("Pilih Waktu"),
+          //               maxLines: 2,
+          //               style: TextStyle(
+          //                 fontSize: caption.sp - 1,
+          //                 color: secondaryTextColor,
+          //                 fontWeight: FontWeight.w700,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          // TimeList(item: widget.item),
+          // Divider(),
+          SizedBox(
+            height: getProportionateScreenHeight(defaultPadding),
+          ),
           Container(
             child: SizedBox(
               child: Row(
@@ -187,12 +322,11 @@ class _BodyState extends State<Body> {
                   Column(
                     children: <Widget>[
                       Text(
-                        ("Pilih Waktu"),
-                        maxLines: 2,
+                        "Isi Data Pesanan",
                         style: TextStyle(
-                          fontSize: caption.sp - 1,
+                          fontSize: caption.sp - 2,
                           color: secondaryTextColor,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                     ],
@@ -201,12 +335,32 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          TimeList(item: widget.item),
           Divider(),
+          lahanField(),
           SizedBox(
-            height: getProportionateScreenHeight(10),
+            height: getProportionateScreenHeight(defaultPadding),
           ),
-          Payment(),
+          // timeField(),
+          // SizedBox(
+          //   height: getProportionateScreenHeight(defaultPadding),
+          // ),
+          tarifField(),
+          SizedBox(
+            height: getProportionateScreenHeight(defaultPadding),
+          ),
+          // numberField(),
+          // SizedBox(
+          //   height: getProportionateScreenHeight(defaultPadding),
+          // ),
+          // typeField(),
+          // SizedBox(
+          //   height: getProportionateScreenHeight(defaultPadding),
+          // ),
+          // nameField(),
+          // SizedBox(
+          //   height: getProportionateScreenHeight(defaultPadding),
+          // ),
+          Payment(item: widget.item),
           SizedBox(
             height: getProportionateScreenHeight(defaultPadding),
           ),
@@ -215,55 +369,330 @@ class _BodyState extends State<Body> {
       ),
     );
   }
-}
 
-Widget bookingButton(BuildContext context) {
-  return ElevatedButton(
-    child: Text(
-      'Checkout',
+  Widget lahanField() {
+    return TextFormField(
+      controller: lahanTC,
+      keyboardType: TextInputType.number,
       style: TextStyle(
-        fontSize: bodyText1.sp,
+        fontSize: bodyText2,
         color: secondaryTextColor,
       ),
-    ),
-    style: ElevatedButton.styleFrom(
-      primary: secondaryColor,
-      elevation: 5,
-      padding: EdgeInsets.symmetric(
-        horizontal: getProportionateScreenWidth(120),
-        vertical: getProportionateScreenHeight(17),
+      cursorColor: secondaryTextColor,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.map_sharp,
+          color: Colors.grey,
+        ),
+        labelText: 'Nomor Lahan Parkir',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'Isi Nomor Lahan Parkir',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+          borderSide: BorderSide(color: primaryColor, width: 2.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
       ),
-      shape: new RoundedRectangleBorder(
-        borderRadius: borderRadius,
+      // validator: validateName,
+      onSaved: (String value) {
+        lahan = value;
+      },
+    );
+  }
+
+  Widget tarifField() {
+    return Container(
+      alignment: Alignment.topLeft,
+      child: DropdownButtonFormField(
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(defaultPadding + 25),
+              vertical: getProportionateScreenHeight(12),
+            ),
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: borderRadius,
+              borderSide: BorderSide(
+                color: primaryColor,
+                width: 2.0,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: borderRadius,
+            ),
+            labelStyle: TextStyle(
+              fontSize: bodyText2,
+              color: Colors.grey,
+            ),
+            labelText: 'Pilih Waktu - Tarif'),
+        value: tarifTC,
+        isExpanded: true,
+        items: [
+          DropdownMenuItem(
+            child: Text(
+              "1 jam - Rp.3000",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: '3000',
+          ),
+          DropdownMenuItem(
+            child: Text(
+              "2 jam - Rp.5000",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: '5000',
+          ),
+          DropdownMenuItem(
+            child: Text(
+              "3 jam - Rp.7000",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: '7000',
+          ),
+        ],
+        onChanged: (value) {
+          setState(
+            () {
+              tarifTC = value;
+              if (tarifTC == '3000') {
+                timeTC = '1';
+              } else if (tarifTC == '5000') {
+                timeTC = '2';
+              } else {
+                timeTC = '3';
+              }
+            },
+          );
+        },
       ),
-    ),
-    // onPressed: checkoutHandler,
-    // onPressed: () {
-    //   AwesomeDialog(
-    //       context: context,
-    //       animType: AnimType.SCALE,
-    //       headerAnimationLoop: false,
-    //       dialogType: DialogType.SUCCES,
-    //       title: 'Checkout Berhasil',
-    //       desc: 'Lakukan Validasi Pesanan di Tempat Masuk Parkir',
-    //       btnOkOnPress: () {
-    //         debugPrint('Success');
-    //         Navigator.of(context).pushReplacement(
-    //           MaterialPageRoute(builder: (_) {
-    //             return HomeScreen();
-    //           }),
-    //         );
-    //       },
-    //       btnOkIcon: Icons.check_circle,
-    //       onDissmissCallback: () {
-    //         debugPrint('Dialog Dissmiss from callback');
-    //         Navigator.of(context).pushReplacement(
-    //           MaterialPageRoute(builder: (_) {
-    //             return HomeScreen();
-    //           }),
-    //         );
-    //       })
-    //     ..show();
-    // },
-  );
+    );
+  }
+
+  // Widget timeField() {
+  //   return TextFormField(
+  //     controller: timeTC,
+  //     keyboardType: TextInputType.number,
+  //     style: TextStyle(
+  //       fontSize: bodyText2,
+  //       color: secondaryTextColor,
+  //     ),
+  //     cursorColor: secondaryTextColor,
+  //     decoration: InputDecoration(
+  //       prefixIcon: Icon(
+  //         Icons.timer,
+  //         color: Colors.grey,
+  //       ),
+  //       labelText: 'Waktu Booking',
+  //       labelStyle: TextStyle(
+  //         color: Colors.grey,
+  //       ),
+  //       hintText: '09.00 - 10.00',
+  //       contentPadding: EdgeInsets.symmetric(
+  //         horizontal: getProportionateScreenWidth(defaultPadding - 5),
+  //         vertical: getProportionateScreenHeight(12),
+  //       ),
+  //       fillColor: Colors.white,
+  //       focusedBorder: OutlineInputBorder(
+  //         borderRadius: borderRadius,
+  //         borderSide: BorderSide(color: primaryColor, width: 2.0),
+  //       ),
+  //       enabledBorder: OutlineInputBorder(
+  //         borderRadius: borderRadius,
+  //       ),
+  //     ),
+  //     // validator: validateName,
+  //     onSaved: (String value) {
+  //       time = value;
+  //     },
+  //   );
+  // }
+
+  Widget numberField() {
+    return TextFormField(
+      controller: numberTC,
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
+      cursorColor: secondaryTextColor,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.straighten_outlined,
+          color: Colors.grey,
+        ),
+        labelText: 'Konfirmasi Plat No. Kendaraan',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'XX-0000-YY',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      validator: validateNumber,
+      onSaved: (String value) {
+        number = value;
+      },
+    );
+  }
+
+  Widget typeField() {
+    return Container(
+      alignment: Alignment.topLeft,
+      child: DropdownButtonFormField(
+        decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(defaultPadding + 25),
+              vertical: getProportionateScreenHeight(12),
+            ),
+            fillColor: Colors.white,
+            focusedBorder: OutlineInputBorder(
+              borderRadius: borderRadius,
+              borderSide: BorderSide(
+                color: primaryColor,
+                width: 2.0,
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: borderRadius,
+            ),
+            labelStyle: TextStyle(
+              fontSize: bodyText2,
+              color: Colors.grey,
+            ),
+            labelText: 'Jenis Kendaraan'),
+        value: typeTC,
+        isExpanded: true,
+        items: [
+          DropdownMenuItem(
+            child: Text(
+              "Mobil",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: 'Mobil',
+          ),
+          DropdownMenuItem(
+            child: Text(
+              "Motor",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: 'Motor',
+          ),
+        ],
+        onChanged: (value) {
+          setState(
+            () {
+              typeTC = value;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget nameField() {
+    return TextFormField(
+      controller: nameTC,
+      style: TextStyle(
+        fontSize: bodyText2,
+        color: secondaryTextColor,
+      ),
+      cursorColor: secondaryTextColor,
+      decoration: InputDecoration(
+        prefixIcon: Icon(
+          Icons.person_outline,
+          color: Colors.grey,
+        ),
+        labelText: 'Nama Lengkap',
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        ),
+        hintText: 'Isi Nama Lengkap',
+        contentPadding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(defaultPadding - 5),
+          vertical: getProportionateScreenHeight(12),
+        ),
+        fillColor: Colors.white,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+          borderSide: BorderSide(color: primaryColor, width: 2.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      validator: validateName,
+      onSaved: (String value) {
+        name = value;
+      },
+    );
+  }
+
+  Widget bookingButton(BuildContext context) {
+    return ElevatedButton(
+      child: Text(
+        'Checkout',
+        style: TextStyle(
+          fontSize: bodyText1.sp,
+          color: secondaryTextColor,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: secondaryColor,
+        elevation: 5,
+        padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(120),
+          vertical: getProportionateScreenHeight(17),
+        ),
+        shape: new RoundedRectangleBorder(
+          borderRadius: borderRadius,
+        ),
+      ),
+      onPressed: checkoutHandler,
+      // onPressed: () {
+      //   AwesomeDialog(
+      //       context: context,
+      //       animType: AnimType.SCALE,
+      //       headerAnimationLoop: false,
+      //       dialogType: DialogType.SUCCES,
+      //       title: 'Checkout Berhasil',
+      //       desc: 'Lakukan Validasi Pesanan di Tempat Masuk Parkir',
+      //       btnOkOnPress: () {
+      //         debugPrint('Success');
+      //         Navigator.of(context).pushReplacement(
+      //           MaterialPageRoute(builder: (_) {
+      //             return HomeScreen();
+      //           }),
+      //         );
+      //       },
+      //       btnOkIcon: Icons.check_circle,
+      //       onDissmissCallback: () {
+      //         debugPrint('Dialog Dissmiss from callback');
+      //         Navigator.of(context).pushReplacement(
+      //           MaterialPageRoute(builder: (_) {
+      //             return HomeScreen();
+      //           }),
+      //         );
+      //       })
+      //     ..show();
+      // },
+    );
+  }
 }

@@ -18,6 +18,7 @@ class ListPark extends StatefulWidget {
 
 class _ListParkState extends State<ListPark> {
   bool loading = false;
+  TextEditingController editingController = TextEditingController();
 
   void fetchParkirList() async {
     try {
@@ -42,11 +43,81 @@ class _ListParkState extends State<ListPark> {
     loading = true;
   }
 
+  void fetchSearchParkirList(searchKeyword) async {
+    if (searchKeyword.isNotEmpty) {
+      try {
+        await ParkirService.getSearchParkir(searchKeyword).then((value) {
+          if (value is List<ParkirModel>) {
+            print('Success');
+            setState(() {
+              loading = false;
+              listParkir.clear();
+              listParkir.addAll(value);
+            });
+          }
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    } else {
+      try {
+        await ParkirService.getAllParkir().then((value) {
+          if (value is List<ParkirModel>) {
+            print('Success');
+            listParkir.addAll(value);
+            setState(() {
+              listParkir.clear();
+              listParkir.addAll(value);
+              loading = false;
+            });
+          }
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+              left: getProportionateScreenWidth(20),
+              right: getProportionateScreenWidth(20),
+              bottom: getProportionateScreenWidth(20),
+            ),
+            child: TextField(
+              onChanged: (value) {
+                fetchSearchParkirList(value);
+              },
+              controller: editingController,
+              style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+              cursorColor: secondaryTextColor,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(10),
+                  vertical: getProportionateScreenWidth(12),
+                ),
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
+                  borderSide: BorderSide(color: primaryColor, width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
+                ),
+                hintText: "Cari lokasi",
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: secondaryTextColor,
+                  size: 6.0.w,
+                ),
+              ),
+            ),
+          ),
           SizedBox(
             height: 59.0.h,
             child: loading

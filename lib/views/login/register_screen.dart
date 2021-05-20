@@ -99,23 +99,9 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                 btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Daftar');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return RegisterScreenPage();
-                      },
-                    ),
-                  );
                 },
                 onDissmissCallback: () {
                   debugPrint('Gagal Daftar');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return RegisterScreenPage();
-                      },
-                    ),
-                  );
                 },
               )..show();
             }

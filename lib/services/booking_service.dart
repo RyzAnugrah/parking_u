@@ -4,25 +4,41 @@ import 'package:parking_u/utils/const.dart';
 import 'package:parking_u/utils/shared_prefs.dart';
 
 class BookingService {
-  static Future createBooking(String lahanTerpilih, String tarif, String jenisPembayaran, String statusPembayaran, String waktuBooking, String nomorKendaraan, String kendaraan, String namaPengguna) async {
+  static Future createBooking(
+      String lahanTerpilih,
+      String tarif,
+      String jenisPembayaran,
+      String statusPembayaran,
+      String waktuBooking,
+      String nomorKendaraan,
+      String kendaraan,
+      String namaPengguna) async {
     Map<String, dynamic> data = {
       'lahan_terpilih': lahanTerpilih,
       'tarif': tarif,
       'jenis_pembayaran': jenisPembayaran,
       'status_pembayaran': statusPembayaran,
       'waktu_booking': waktuBooking,
-      'nomor_bendaraan': nomorKendaraan,
+      'nomor_kendaraan': nomorKendaraan,
       'kendaraan': kendaraan,
       'nama_pengguna': namaPengguna,
     };
 
     try {
+      String token = await SharedPref.getToken();
+      print(token);
+
       Response res = await Dio().post(
         '${Const.baseUrl}/booking/add',
         data: data,
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Accept': 'application/json',
+          },
+        ),
       );
       print(res.data);
-      SharedPref.saveToken(res.data['token']);
       return BookingModel.fromJson(res.data['booking']);
     } on DioError catch (_) {
       return 'catch error';

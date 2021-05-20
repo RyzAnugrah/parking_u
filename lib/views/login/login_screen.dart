@@ -43,7 +43,9 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         ).then(
           (value) {
             if (value is UserModel) {
-              user = value;
+              setState(() {
+                user = value;
+              });
               print('Berhasil Masuk');
               AwesomeDialog(
                 context: context,
@@ -93,23 +95,9 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
                 btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Masuk');
-                  // Navigator.of(context).pushReplacement(
-                  //   MaterialPageRoute(
-                  //     builder: (_) {
-                  //       return LoginScreen();
-                  //     },
-                  //   ),
-                  // );
                 },
                 onDissmissCallback: () {
                   debugPrint('Gagal Masuk');
-                  // Navigator.of(context).pushReplacement(
-                  //   MaterialPageRoute(
-                  //     builder: (_) {
-                  //       return LoginScreen();
-                  //     },
-                  //   ),
-                  // );
                 },
               )..show();
             }

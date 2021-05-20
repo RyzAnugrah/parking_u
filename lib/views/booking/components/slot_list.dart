@@ -126,7 +126,7 @@ class _SlotListCardState extends State<SlotListCard> {
     return InkWell(
       child: GestureDetector(
         onTap: () => {
-          setState(() => _colorTap = !_colorTap),
+          // setState(() => _colorTap = !_colorTap),
         },
         onDoubleTap: widget.press,
         child: SizedBox(
