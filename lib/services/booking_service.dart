@@ -12,7 +12,9 @@ class BookingService {
       String waktuBooking,
       String nomorKendaraan,
       String kendaraan,
-      String namaPengguna) async {
+      String namaPengguna,
+      String email,
+      String namaParkir) async {
     Map<String, dynamic> data = {
       'lahan_terpilih': lahanTerpilih,
       'tarif': tarif,
@@ -22,6 +24,8 @@ class BookingService {
       'nomor_kendaraan': nomorKendaraan,
       'kendaraan': kendaraan,
       'nama_pengguna': namaPengguna,
+      'email': email,
+      'nama_parkir': namaParkir,
     };
 
     try {

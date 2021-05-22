@@ -20,7 +20,7 @@ class _ListActivityState extends State<ListActivity> {
 
   void fetchRiwayatList() async {
     try {
-      await RiwayatService.getAllRiwayat().then((value) {
+      await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
         if (value is List<RiwayatModel>) {
           print('Success');
           listRiwayat.addAll(value);
@@ -80,7 +80,8 @@ class _ListActivityState extends State<ListActivity> {
                           vertical: 4.0.w,
                         ),
                         child: ListActivityHere(
-                          image: "assets/images/list_parking/anu-jaya.png",
+                          image: "assets/images/list_parking/parkir-area.jpg",
+                          namaParkir: riwayat.namaParkir,
                           lahanTerpilih: riwayat.lahanTerpilih,
                           tarif: riwayat.tarif,
                           jenisPembayaran: riwayat.jenisPembayaran,
@@ -130,6 +131,7 @@ class _ListActivityState extends State<ListActivity> {
 class ListActivityHere extends StatelessWidget {
   const ListActivityHere({
     Key key,
+    @required this.namaParkir,
     @required this.lahanTerpilih,
     @required this.image,
     @required this.tarif,
@@ -139,7 +141,8 @@ class ListActivityHere extends StatelessWidget {
     @required this.press,
   }) : super(key: key);
 
-  final String lahanTerpilih,
+  final String namaParkir,
+      lahanTerpilih,
       image,
       tarif,
       jenisPembayaran,
@@ -204,13 +207,13 @@ class ListActivityHere extends StatelessWidget {
                           Container(
                             width: 20.0.w,
                             child: Text(
-                              '$lahanTerpilih',
+                              '$namaParkir',
                               style: TextStyle(
                                 color: secondaryTextColor,
                                 fontSize: caption.sp - 1,
                                 fontWeight: FontWeight.w800,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.clip,
                               maxLines: 2,
                             ),
                           ),
@@ -227,7 +230,7 @@ class ListActivityHere extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'Total Tarif',
+                                  '/$waktuBooking jam',
                                   style: TextStyle(
                                     fontSize: overline.sp - 2,
                                     color: Colors.grey,
@@ -269,7 +272,7 @@ class ListActivityHere extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '$waktuBooking',
+                              'Blok $lahanTerpilih',
                               style: TextStyle(
                                 fontSize: overline.sp - 3,
                               ),

@@ -15,6 +15,8 @@ class RiwayatModel {
         this.nomorKendaraan,
         this.kendaraan,
         this.namaPengguna,
+        this.email,
+        this.namaParkir,
         this.createdAt,
         this.updatedAt,
     });
@@ -28,6 +30,8 @@ class RiwayatModel {
     String nomorKendaraan;
     String kendaraan;
     String namaPengguna;
+    String email;
+    String namaParkir;
     DateTime createdAt;
     DateTime updatedAt;
 
@@ -41,6 +45,8 @@ class RiwayatModel {
         nomorKendaraan: json["nomor_kendaraan"],
         kendaraan: json["kendaraan"],
         namaPengguna: json["nama_pengguna"],
+        email: json["email"],
+        namaParkir: json["nama_parkir"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
@@ -55,6 +61,8 @@ class RiwayatModel {
         "nomor_kendaraan": nomorKendaraan,
         "kendaraan": kendaraan,
         "nama_pengguna": namaPengguna,
+        "email": email,
+        "nama_parkir": namaParkir,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
     };

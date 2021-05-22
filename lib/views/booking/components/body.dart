@@ -31,12 +31,14 @@ class _BodyState extends State<Body> with Validation {
 
   String lahan = '';
   String tarifTC = '3000';
-  String jenisPembayaran = 'Cash';
-  String statusPembayaran = 'Pending';
+  String jenisPembayaran = 'CASH';
+  String statusPembayaran = 'PENDING';
   String timeTC = '1';
   String number = user.nopol;
   String typeTC = user.jenisKendaraan;
-  String name = user.namaLengkap;
+  String namaPengguna = user.namaLengkap;
+  String email = user.email;
+  String namaParkir = '';
 
   TextEditingController lahanTC = TextEditingController();
   TextEditingController numberTC = TextEditingController();
@@ -50,7 +52,9 @@ class _BodyState extends State<Body> with Validation {
     log(timeTC);
     log(number);
     log(typeTC);
-    log(name);
+    log(namaPengguna);
+    log(email);
+    log(namaParkir);
     try {
       await BookingService.createBooking(
         lahanTC.text,
@@ -60,7 +64,9 @@ class _BodyState extends State<Body> with Validation {
         timeTC,
         number,
         typeTC,
-        name,
+        namaPengguna,
+        email,
+        namaParkir,
       ).then(
         (value) {
           if (value is BookingModel) {
@@ -110,7 +116,7 @@ class _BodyState extends State<Body> with Validation {
               autoHide: Duration(seconds: 6),
               title: 'Gagal Booking',
               desc: 'Anda Gagal Booking',
-              btnOkText: 'Isi Form Dengan Benar',
+              btnOkText: 'Isi Data Dengan Benar',
               btnOkColor: errorColor,
               btnOkOnPress: () {
                 debugPrint('Gagal Booking');
@@ -131,6 +137,9 @@ class _BodyState extends State<Body> with Validation {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    setState(() {
+      namaParkir = widget.item.namaParkir;
+    });
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(
         vertical: getProportionateScreenHeight(defaultPadding),
@@ -439,33 +448,49 @@ class _BodyState extends State<Body> with Validation {
         items: [
           DropdownMenuItem(
             child: Text(
-              "1 jam - Rp.3000",
+              'Pilih Waktu dan Tarif',
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
             value: '3000',
           ),
           DropdownMenuItem(
             child: Text(
-              "2 jam - Rp.5000",
+              (widget.item.tarif1 != null)
+                  ? "1 jam - Rp. " + widget.item.tarif1.toString()
+                  : "1 jam - Rp. 3000",
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
-            value: '5000',
+            value: widget.item.tarif1.toString(),
           ),
           DropdownMenuItem(
             child: Text(
-              "3 jam - Rp.7000",
+              (widget.item.tarif2 != null)
+                  ? "2 jam - Rp. " + widget.item.tarif2.toString()
+                  : "2 jam - Rp. 5000",
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
-            value: '7000',
+            value: widget.item.tarif2.toString(),
+          ),
+          DropdownMenuItem(
+            child: Text(
+              (widget.item.tarif3 != null)
+                  ? "3 jam - Rp. " + widget.item.tarif3.toString()
+                  : "3 jam - Rp. 7000",
+              style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
+            ),
+            value: widget.item.tarif3.toString(),
           ),
         ],
         onChanged: (value) {
           setState(
             () {
               tarifTC = value;
+
               if (tarifTC == '3000') {
                 timeTC = '1';
-              } else if (tarifTC == '5000') {
+              } else if (tarifTC == widget.item.tarif1.toString()) {
+                timeTC = '1';
+              } else if (tarifTC == widget.item.tarif2.toString()) {
                 timeTC = '2';
               } else {
                 timeTC = '3';
@@ -640,7 +665,7 @@ class _BodyState extends State<Body> with Validation {
       ),
       validator: validateName,
       onSaved: (String value) {
-        name = value;
+        namaPengguna = value;
       },
     );
   }

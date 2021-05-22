@@ -93,6 +93,7 @@ class _ListParkState extends State<ListPark> {
               onChanged: (value) {
                 fetchSearchParkirList(value);
               },
+              textCapitalization: TextCapitalization.words,
               controller: editingController,
               style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
               cursorColor: secondaryTextColor,
@@ -242,7 +243,7 @@ class ListParkHere extends StatelessWidget {
                                 fontSize: caption.sp - 1,
                                 fontWeight: FontWeight.w800,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.clip,
                               maxLines: 2,
                             ),
                           ),
@@ -272,15 +273,15 @@ class ListParkHere extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          // Text(
+                          //   '$length Km',
+                          //   style: TextStyle(
+                          //     fontSize: overline.sp - 1,
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
                           Text(
-                            '$length Km',
-                            style: TextStyle(
-                              fontSize: overline.sp - 1,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            ' - $availability',
+                            '$availability',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
                               color: successColor,

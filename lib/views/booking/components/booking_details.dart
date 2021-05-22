@@ -36,7 +36,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                 ),
               ),
               Text(
-                'Pilih Parkiranmu !',
+                'Pilih Blok Parkirmu!',
                 style: TextStyle(
                   color: secondaryTextColor,
                   fontSize: headline5,

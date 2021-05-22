@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
@@ -96,6 +97,28 @@ class _PaymentState extends State<Payment> {
     );
   }
 
+  void displayAwesomeDialogue() {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.SCALE,
+      dialogType: DialogType.WARNING,
+      headerAnimationLoop: false,
+      dismissOnTouchOutside: false,
+      dismissOnBackKeyPress: false,
+      autoHide: Duration(seconds: 6),
+      title: 'Dompet Digital Dalam Pengembangan',
+      desc: 'Dompet Digital Dalam Pengembangan',
+      btnOkText: 'Pilih Cash',
+      btnOkColor: pendingColor,
+      btnOkOnPress: () {
+        debugPrint('Berhasil Booking');
+      },
+      onDissmissCallback: () {
+        debugPrint('Berhasil Booking');
+      },
+    )..show();
+  }
+
   void displayBottomSheet(BuildContext context) {
     SizeConfig().init(context);
     // Size size = MediaQuery.of(context).size;
@@ -159,7 +182,9 @@ class _PaymentState extends State<Payment> {
                           //   ),
                           // ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
                             child: Container(
                               padding: EdgeInsets.all(10),
                               margin: EdgeInsets.symmetric(horizontal: 10.0),
@@ -179,7 +204,9 @@ class _PaymentState extends State<Payment> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
                             child: Container(
                               padding: EdgeInsets.all(10),
                               margin: EdgeInsets.symmetric(horizontal: 10.0),
@@ -199,7 +226,9 @@ class _PaymentState extends State<Payment> {
                             ),
                           ),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
                             child: Container(
                               padding: EdgeInsets.all(10),
                               margin: EdgeInsets.symmetric(horizontal: 10.0),
@@ -230,37 +259,45 @@ class _PaymentState extends State<Payment> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.item.namaParkir,
-                              style: TextStyle(
-                                fontSize: bodyText2.sp,
-                                color: secondaryTextColor,
-                                fontWeight: FontWeight.w800,
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.item.namaParkir,
+                                style: TextStyle(
+                                  fontSize: bodyText2.sp,
+                                  color: secondaryTextColor,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                overflow: TextOverflow.clip,
+                                maxLines: 2,
                               ),
-                            ),
-                            Text(
-                              widget.item.jam,
-                              style: TextStyle(
-                                fontSize: caption.sp,
-                                color: secondaryTextColor,
+                              Text(
+                                widget.item.lokasiParkir,
+                                style: TextStyle(
+                                  fontSize: caption.sp,
+                                  color: secondaryTextColor,
+                                ),
+                                overflow: TextOverflow.clip,
+                                maxLines: 2,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.item.lokasiParkir,
+                              widget.item.jam,
                               style: TextStyle(
                                 fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
+                              overflow: TextOverflow.clip,
+                              maxLines: 2,
                             ),
                             Text(
                               'Rp. ' + widget.item.harga.toString(),
@@ -268,6 +305,8 @@ class _PaymentState extends State<Payment> {
                                 fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
+                              overflow: TextOverflow.clip,
+                              maxLines: 2,
                             ),
                           ],
                         ),

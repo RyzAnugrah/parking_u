@@ -29,7 +29,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                       topRight: Radius.circular(8.0),
                     ),
                     child: Image.asset(
-                      'assets/images/list_parking/anu-jaya.png',
+                      'assets/images/list_parking/parkir-area-width.png',
                       // width: 300,
                       height: getProportionateScreenHeight(180),
                       fit: BoxFit.fill,
@@ -47,7 +47,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.5,
                           child: AutoSizeText(
-                            riwayat.lahanTerpilih,
+                            riwayat.namaParkir,
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: bodyText2.sp,
@@ -89,7 +89,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            riwayat.jenisPembayaran,
+                            'Blok ' + riwayat.lahanTerpilih,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -115,7 +115,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                             right: 10,
                           ),
                           child: Icon(
-                            Icons.date_range_outlined,
+                            Icons.payments,
                             color: secondaryTextColor,
                             size: 5.0.w,
                           ),
@@ -123,7 +123,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            riwayat.kendaraan,
+                            riwayat.jenisPembayaran,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -157,7 +157,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                         SizedBox(
                           width: SizeConfig.screenWidth * 0.7,
                           child: Text(
-                            riwayat.waktuBooking,
+                            riwayat.waktuBooking + ' jam',
                             style: TextStyle(
                               fontSize: caption.sp - 2,
                               color: secondaryTextColor,
@@ -213,7 +213,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                             right: 10,
                           ),
                           child: Icon(
-                            Icons.map_outlined,
+                            Icons.emoji_transportation,
                             color: secondaryTextColor,
                             size: 5.0.w,
                           ),
@@ -224,7 +224,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                             riwayat.kendaraan,
                             style: TextStyle(
                               fontSize: caption.sp - 2,
-                              color: primaryColor,
+                              color: secondaryTextColor,
                             ),
                           ),
                         ),
@@ -243,6 +243,9 @@ void displayBottomSheet(BuildContext context, riwayat) {
                         bookingButton(context),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(defaultPadding),
                   ),
                 ],
               ),

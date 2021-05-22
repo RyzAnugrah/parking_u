@@ -217,6 +217,9 @@ void displayBottomSheet(BuildContext context, item) {
                       ],
                     ),
                   ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(defaultPadding),
+                  ),
                 ],
               ),
             ],
