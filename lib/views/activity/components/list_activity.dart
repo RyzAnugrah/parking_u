@@ -23,6 +23,7 @@ class _ListActivityState extends State<ListActivity> {
       await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
         if (value is List<RiwayatModel>) {
           print('Success');
+          listRiwayat.clear();
           listRiwayat.addAll(value);
           setState(() {
             loading = false;
@@ -80,7 +81,9 @@ class _ListActivityState extends State<ListActivity> {
                           vertical: 4.0.w,
                         ),
                         child: ListActivityHere(
-                          image: "assets/images/list_parking/parkir-area.jpg",
+                          image: riwayat.statusPembayaran == 'PENDING'
+                              ? "assets/images/list_parking/riwayat-pending.png"
+                              : "assets/images/list_parking/riwayat-success.png",
                           namaParkir: riwayat.namaParkir,
                           lahanTerpilih: riwayat.lahanTerpilih,
                           tarif: riwayat.tarif,
@@ -254,7 +257,10 @@ class ListActivityHere extends StatelessWidget {
                             ' - $statusPembayaran',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
-                              color: successColor,
+                              color:
+                                  '$statusPembayaran'.toUpperCase() == 'PENDING'
+                                      ? pendingColor
+                                      : successColor,
                             ),
                           ),
                         ],

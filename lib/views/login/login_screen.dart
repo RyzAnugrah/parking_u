@@ -114,20 +114,20 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     return (await showDialog(
           context: context,
           builder: (context) => new AlertDialog(
-            title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
+            title: new Text('Anda yakin?'),
+            content: new Text('Ingin keluar dari aplikasi ini'),
             actions: <Widget>[
               new TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
                 child: new Text(
-                  'No',
+                  'Tidak',
                   style: TextStyle(color: secondaryTextColor),
                 ),
               ),
               new TextButton(
                 onPressed: () => SystemNavigator.pop(),
                 child: new Text(
-                  'Yes',
+                  'Ya',
                   style: TextStyle(color: primaryColor),
                 ),
               ),

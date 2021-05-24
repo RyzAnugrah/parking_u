@@ -65,7 +65,9 @@ void displayBottomSheet(BuildContext context, item) {
                             item.statusLahan,
                             style: TextStyle(
                               fontSize: caption.sp,
-                              color: successColor,
+                              color: item.statusLahan.toUpperCase() == 'TERSEDIA'
+                                  ? successColor
+                                  : errorColor,
                             ),
                           ),
                         ),

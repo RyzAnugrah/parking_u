@@ -25,8 +25,9 @@ class _ListParkState extends State<ListPark> {
       await ParkirService.getAllParkir().then((value) {
         if (value is List<ParkirModel>) {
           print('Success');
-          listParkir.addAll(value);
           setState(() {
+            listParkir.clear();
+            listParkir.addAll(value);
             loading = false;
           });
         }
@@ -50,9 +51,9 @@ class _ListParkState extends State<ListPark> {
           if (value is List<ParkirModel>) {
             print('Success');
             setState(() {
-              loading = false;
               listParkir.clear();
               listParkir.addAll(value);
+              loading = false;
             });
           }
         });
@@ -64,7 +65,6 @@ class _ListParkState extends State<ListPark> {
         await ParkirService.getAllParkir().then((value) {
           if (value is List<ParkirModel>) {
             print('Success');
-            listParkir.addAll(value);
             setState(() {
               listParkir.clear();
               listParkir.addAll(value);
@@ -284,7 +284,9 @@ class ListParkHere extends StatelessWidget {
                             '$availability',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
-                              color: successColor,
+                              color: '$availability'.toUpperCase() == 'TERSEDIA'
+                                  ? successColor
+                                  : errorColor,
                             ),
                           ),
                         ],

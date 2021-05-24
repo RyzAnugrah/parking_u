@@ -7,7 +7,7 @@ import 'package:parking_u/mixins/validation.dart';
 import 'package:parking_u/models/booking_model.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:parking_u/services/booking_service.dart';
-import 'package:parking_u/views/home/home_screen.dart';
+import 'package:parking_u/views/activity/activity_screen.dart';
 import 'package:sizer/sizer.dart';
 // import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:parking_u/constants.dart';
@@ -30,7 +30,7 @@ class _BodyState extends State<Body> with Validation {
   final formKey = GlobalKey<FormState>();
 
   String lahan = '';
-  String tarifTC = '3000';
+  String tarifTC = '500';
   String jenisPembayaran = 'CASH';
   String statusPembayaran = 'PENDING';
   String timeTC = '1';
@@ -87,7 +87,7 @@ class _BodyState extends State<Body> with Validation {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (_) {
-                      return HomeScreen();
+                      return ActivityScreen();
                     },
                   ),
                 );
@@ -97,7 +97,7 @@ class _BodyState extends State<Body> with Validation {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (_) {
-                      return HomeScreen();
+                      return ActivityScreen();
                     },
                   ),
                 );
@@ -451,7 +451,7 @@ class _BodyState extends State<Body> with Validation {
               'Pilih Waktu dan Tarif',
               style: TextStyle(fontSize: bodyText2, color: secondaryTextColor),
             ),
-            value: '3000',
+            value: "500",
           ),
           DropdownMenuItem(
             child: Text(
@@ -486,7 +486,7 @@ class _BodyState extends State<Body> with Validation {
             () {
               tarifTC = value;
 
-              if (tarifTC == '3000') {
+              if (tarifTC == '500') {
                 timeTC = '1';
               } else if (tarifTC == widget.item.tarif1.toString()) {
                 timeTC = '1';

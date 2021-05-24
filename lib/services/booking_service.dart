@@ -48,4 +48,26 @@ class BookingService {
       return 'catch error';
     }
   }
+
+  static Future cancelBooking(String riwayatID) async {
+    try {
+      String token = await SharedPref.getToken();
+      print(token);
+      
+      Response res = await Dio().delete(
+        '${Const.baseUrl}/booking/$riwayatID',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Accept': 'application/json',
+          },
+        ),
+      );
+      print(res.data);
+      return (res.data);
+    } catch (e) {
+      print('catch error');
+      print(e.toString());
+    }
+  }
 }

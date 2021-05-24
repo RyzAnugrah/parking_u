@@ -108,13 +108,13 @@ class _PaymentState extends State<Payment> {
       autoHide: Duration(seconds: 6),
       title: 'Dompet Digital Dalam Pengembangan',
       desc: 'Dompet Digital Dalam Pengembangan',
-      btnOkText: 'Pilih Cash',
+      btnOkText: 'Silahkan Pilih Cash',
       btnOkColor: pendingColor,
       btnOkOnPress: () {
-        debugPrint('Berhasil Booking');
+        debugPrint('Dompet Digital Dalam Pengembangan');
       },
       onDissmissCallback: () {
-        debugPrint('Berhasil Booking');
+        debugPrint('Dompet Digital Dalam Pengembangan');
       },
     )..show();
   }
