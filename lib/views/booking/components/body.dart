@@ -187,7 +187,7 @@ class _BodyState extends State<Body> with Validation {
                     child: Text(
                       widget.item.lokasiParkir,
                       maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.clip,
                       style: TextStyle(
                         fontSize: caption.sp - 2,
                         color: secondaryTextColor,
