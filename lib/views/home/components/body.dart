@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
+import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/home/components/header.dart';
 import 'package:parking_u/views/home/components/list_park.dart';
 // import 'package:parking_u/views/home/components/search.dart';
@@ -108,7 +109,10 @@ class _BodyState extends State<Body> {
                 ),
               ),
               new TextButton(
-                onPressed: () => SystemNavigator.pop(),
+                onPressed: () {
+                  SharedPref.removeToken();
+                  SystemNavigator.pop();
+                },
                 child: new Text(
                   'Ya',
                   style: TextStyle(color: primaryColor),
