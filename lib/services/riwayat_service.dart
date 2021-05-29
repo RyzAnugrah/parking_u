@@ -4,13 +4,13 @@ import 'package:parking_u/utils/const.dart';
 import 'package:parking_u/utils/shared_prefs.dart';
 
 class RiwayatService {
-  static Future getRiwayat(String riwayatID) async {
+  static Future getSpecifiedRiwayat(String email) async {
     try {
       String token = await SharedPref.getToken();
       print(token);
       
       Response res = await Dio().get(
-        '${Const.baseUrl}/riwayat/$riwayatID',
+        '${Const.baseUrl}/riwayat/$email',
         options: Options(
           headers: {
             'Authorization': 'Bearer $token',
@@ -18,11 +18,63 @@ class RiwayatService {
           },
         ),
       );
-      print(res.data);
-      return RiwayatModel.fromJson(res.data);
+      print(res.data[0]);
+      List<RiwayatModel> list = [];
+      (res.data[0] as List).forEach((item) {
+        list.add(RiwayatModel.fromJson(item));
+      });
+      return list;
     } catch (e) {
       print('catch error');
       print(e.toString());
     }
   }
+  
+  // static Future getAllRiwayat() async {
+  //   try {
+  //     String token = await SharedPref.getToken();
+  //     print(token);
+      
+  //     Response res = await Dio().get(
+  //       '${Const.baseUrl}/riwayat',
+  //       options: Options(
+  //         headers: {
+  //           'Authorization': 'Bearer $token',
+  //           'Accept': 'application/json',
+  //         },
+  //       ),
+  //     );
+  //     print(res.data);
+  //     List<RiwayatModel> list = [];
+  //     (res.data as List).forEach((item) {
+  //       list.add(RiwayatModel.fromJson(item));
+  //     });
+  //     return list;
+  //   } catch (e) {
+  //     print('catch error');
+  //     print(e.toString());
+  //   }
+  // }
+  
+  // static Future getRiwayat() async {
+  //   try {
+  //     String token = await SharedPref.getToken();
+  //     print(token);
+      
+  //     Response res = await Dio().get(
+  //       '${Const.baseUrl}/riwayat',
+  //       options: Options(
+  //         headers: {
+  //           'Authorization': 'Bearer $token',
+  //           'Accept': 'application/json',
+  //         },
+  //       ),
+  //     );
+  //     print(res.data);
+  //     return RiwayatModel.fromJson(res.data);
+  //   } catch (e) {
+  //     print('catch error');
+  //     print(e.toString());
+  //   }
+  // }
 }

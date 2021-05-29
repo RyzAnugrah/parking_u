@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -15,15 +16,19 @@ class ListActivity extends StatefulWidget {
 
 class _ListActivityState extends State<ListActivity> {
   RiwayatModel riwayat;
+  List<RiwayatModel> listRiwayatReverse = [];
   bool loading = false;
 
   void fetchRiwayatList() async {
     try {
-      await RiwayatService.getRiwayat('1').then((value) {
-        if (value is RiwayatModel) {
+      await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
+        Future.delayed(Duration(seconds: 2));
+        if (value is List<RiwayatModel>) {
           print('Success');
+          listRiwayat.clear();
+          listRiwayat.addAll(value);
+          listRiwayatReverse = listRiwayat.reversed.toList();
           setState(() {
-            riwayat = value;
             loading = false;
           });
         }
@@ -32,6 +37,41 @@ class _ListActivityState extends State<ListActivity> {
       print(e.toString());
     }
   }
+
+  Future<void> fetchRefreshRiwayatList() async {
+    try {
+      await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
+        Future.delayed(Duration(seconds: 2));
+        if (value is List<RiwayatModel>) {
+          print('Success');
+          listRiwayat.clear();
+          listRiwayat.addAll(value);
+          listRiwayatReverse = listRiwayat.reversed.toList();
+          setState(() {
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  // void fetchRiwayatList() async {
+  //   try {
+  //     await RiwayatService.getRiwayat().then((value) {
+  //       if (value is RiwayatModel) {
+  //         print('Success');
+  //         setState(() {
+  //           riwayat = value;
+  //           loading = false;
+  //         });
+  //       }
+  //     });
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 
   @override
   void initState() {
@@ -46,26 +86,55 @@ class _ListActivityState extends State<ListActivity> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            height: 25.0.h,
+            // height: 25.0.h,
+            height: 75.0.h,
             child: loading
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 2.0.w,
-                      vertical: 4.0.w,
-                    ),
-                    child: ListActivityHere(
-                      image: "assets/images/list_parking/anu-jaya.png",
-                      lahanTerpilih: riwayat.lahanTerpilih,
-                      tarif: riwayat.tarif,
-                      jenisPembayaran: riwayat.jenisPembayaran,
-                      statusPembayaran: riwayat.statusPembayaran,
-                      waktuBooking: riwayat.waktuBooking,
-                      press: () => displayBottomSheet(context, riwayat),
+                : RefreshIndicator(
+                    onRefresh: fetchRefreshRiwayatList,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: listRiwayatReverse.length,
+                      itemBuilder: (context, index) {
+                        RiwayatModel riwayat = listRiwayatReverse[index];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 2.0.w,
+                            vertical: 4.0.w,
+                          ),
+                          child: ListActivityHere(
+                            image: riwayat.statusPembayaran.toUpperCase() == 'PENDING'
+                                ? "assets/images/list_parking/riwayat-pending.png"
+                                : "assets/images/list_parking/riwayat-success.png",
+                            namaParkir: riwayat.namaParkir,
+                            lahanTerpilih: riwayat.lahanTerpilih,
+                            tarif: riwayat.tarif,
+                            jenisPembayaran: riwayat.jenisPembayaran,
+                            statusPembayaran: riwayat.statusPembayaran,
+                            waktuBooking: riwayat.waktuBooking,
+                            press: () => displayBottomSheet(context, riwayat),
+                          ),
+                        );
+                      },
                     ),
                   ),
+            // : Padding(
+            //     padding: EdgeInsets.symmetric(
+            //       horizontal: 2.0.w,
+            //       vertical: 4.0.w,
+            //     ),
+            //     child: ListActivityHere(
+            //       image: "assets/images/list_parking/anu-jaya.png",
+            //       lahanTerpilih: riwayat.lahanTerpilih,
+            //       tarif: riwayat.tarif,
+            //       jenisPembayaran: riwayat.jenisPembayaran,
+            //       statusPembayaran: riwayat.statusPembayaran,
+            //       waktuBooking: riwayat.waktuBooking,
+            //       press: () => displayBottomSheet(context, riwayat),
+            //     ),
+            //   ),
           ),
           // SizedBox(
           //   height: getProportionateScreenHeight(20),
@@ -90,6 +159,7 @@ class _ListActivityState extends State<ListActivity> {
 class ListActivityHere extends StatelessWidget {
   const ListActivityHere({
     Key key,
+    @required this.namaParkir,
     @required this.lahanTerpilih,
     @required this.image,
     @required this.tarif,
@@ -99,7 +169,8 @@ class ListActivityHere extends StatelessWidget {
     @required this.press,
   }) : super(key: key);
 
-  final String lahanTerpilih,
+  final String namaParkir,
+      lahanTerpilih,
       image,
       tarif,
       jenisPembayaran,
@@ -164,13 +235,13 @@ class ListActivityHere extends StatelessWidget {
                           Container(
                             width: 20.0.w,
                             child: Text(
-                              '$lahanTerpilih',
+                              '$namaParkir',
                               style: TextStyle(
                                 color: secondaryTextColor,
                                 fontSize: caption.sp - 1,
                                 fontWeight: FontWeight.w800,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.clip,
                               maxLines: 2,
                             ),
                           ),
@@ -187,7 +258,7 @@ class ListActivityHere extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  'Total Tarif',
+                                  '/$waktuBooking jam',
                                   style: TextStyle(
                                     fontSize: overline.sp - 2,
                                     color: Colors.grey,
@@ -211,7 +282,10 @@ class ListActivityHere extends StatelessWidget {
                             ' - $statusPembayaran',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
-                              color: successColor,
+                              color:
+                                  '$statusPembayaran'.toUpperCase() == 'PENDING'
+                                      ? pendingColor
+                                      : successColor,
                             ),
                           ),
                         ],
@@ -229,7 +303,7 @@ class ListActivityHere extends StatelessWidget {
                             ),
                             alignment: Alignment.center,
                             child: Text(
-                              '$waktuBooking',
+                              'Blok $lahanTerpilih',
                               style: TextStyle(
                                 fontSize: overline.sp - 3,
                               ),

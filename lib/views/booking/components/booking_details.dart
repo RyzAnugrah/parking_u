@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -7,14 +8,17 @@ import 'package:parking_u/views/booking/components/slot_list.dart';
 class BookingDetails extends StatefulWidget {
   static String routeName = "/notification";
 
-  const BookingDetails({Key key}) : super(key: key);
+  final ParkirModel item;
+
+  const BookingDetails({Key key, this.item}) : super(key: key);
 
   @override
   _BookingDetailsState createState() => _BookingDetailsState();
 }
 
 class _BookingDetailsState extends State<BookingDetails> {
-  Widget build(context) {
+  @override
+  Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -32,7 +36,7 @@ class _BookingDetailsState extends State<BookingDetails> {
                 ),
               ),
               Text(
-                'Pilih Parkiranmu !',
+                'Pilih Blok Parkirmu!',
                 style: TextStyle(
                   color: secondaryTextColor,
                   fontSize: headline5,
@@ -48,7 +52,7 @@ class _BookingDetailsState extends State<BookingDetails> {
               ),
               SizedBox(height: defaultPadding),
               Text(
-                'Lantai 1 Anu Jaya',
+                widget.item.namaParkir,
                 style: TextStyle(
                   color: secondaryTextColor,
                   fontSize: bodyText1,
@@ -58,7 +62,7 @@ class _BookingDetailsState extends State<BookingDetails> {
               SizedBox(height: defaultPadding),
               Container(
                 padding: EdgeInsets.only(right: defaultPadding),
-                child: SlotList(),
+                child: SlotList(item: widget.item),
               ),
               SizedBox(height: defaultPadding),
               Container(
@@ -98,22 +102,22 @@ class _BookingDetailsState extends State<BookingDetails> {
                         ),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          "assets/images/ellipse-blue.png",
-                        ),
-                        SizedBox(width: 2.0.w),
-                        Text(
-                          'Dipilih',
-                          style: TextStyle(
-                            color: secondaryTextColor,
-                            fontSize: bodyText2,
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Image.asset(
+                    //       "assets/images/ellipse-blue.png",
+                    //     ),
+                    //     SizedBox(width: 2.0.w),
+                    //     Text(
+                    //       'Dipilih',
+                    //       style: TextStyle(
+                    //         color: secondaryTextColor,
+                    //         fontSize: bodyText2,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -135,7 +139,7 @@ class _BookingDetailsState extends State<BookingDetails> {
 Widget bookingButton(BuildContext context) {
   return ElevatedButton(
     child: Text(
-      'Pilih',
+      'Kembali',
       style: TextStyle(
         fontSize: bodyText2.sp,
         color: primaryTextColor,

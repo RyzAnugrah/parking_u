@@ -29,4 +29,30 @@ class ParkirService {
       print(e.toString());
     }
   }
+
+  static Future getSearchParkir(String searchKeyword) async {
+    try {
+      String token = await SharedPref.getToken();
+      print(token);
+      
+      Response res = await Dio().get(
+        '${Const.baseUrl}/parkir/search/$searchKeyword',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+            'Accept': 'application/json',
+          },
+        ),
+      );
+      print(res.data[0]);
+      List<ParkirModel> list = [];
+      (res.data[0] as List).forEach((item) {
+        list.add(ParkirModel.fromJson(item));
+      });
+      return list;
+    } catch (e) {
+      print('catch error');
+      print(e.toString());
+    }
+  }
 }

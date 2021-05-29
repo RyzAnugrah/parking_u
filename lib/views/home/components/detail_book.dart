@@ -11,9 +11,9 @@ void displayBottomSheet(BuildContext context, item) {
   showModalBottomSheet(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0),
-                    ),
+        topLeft: Radius.circular(8.0),
+        topRight: Radius.circular(8.0),
+      ),
     ),
     context: context,
     builder: (ctx) {
@@ -65,7 +65,9 @@ void displayBottomSheet(BuildContext context, item) {
                             item.statusLahan,
                             style: TextStyle(
                               fontSize: caption.sp,
-                              color: successColor,
+                              color: item.statusLahan.toUpperCase() == 'TERSEDIA'
+                                  ? successColor
+                                  : errorColor,
                             ),
                           ),
                         ),
@@ -216,6 +218,9 @@ void displayBottomSheet(BuildContext context, item) {
                         bookingButton(context, item),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: getProportionateScreenHeight(defaultPadding),
                   ),
                 ],
               ),

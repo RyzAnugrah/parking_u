@@ -58,7 +58,7 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Berhasil Daftar',
                 desc: 'Anda Berhasil Daftar',
                 btnOkText: 'Masuk Sekarang',
@@ -92,29 +92,16 @@ class _RegisterScreenState extends State<RegisterScreenPage> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Gagal Daftar',
                 desc: 'Anda Gagal Daftar',
                 btnOkText: 'Isi Form Dengan Benar',
+                btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Daftar');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return RegisterScreenPage();
-                      },
-                    ),
-                  );
                 },
                 onDissmissCallback: () {
                   debugPrint('Gagal Daftar');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return RegisterScreenPage();
-                      },
-                    ),
-                  );
                 },
               )..show();
             }

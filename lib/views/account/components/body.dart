@@ -8,8 +8,10 @@ import 'package:parking_u/size_config.dart';
 import 'package:parking_u/main.dart';
 import 'package:parking_u/models/auth_model.dart';
 import 'package:parking_u/services/auth_service.dart';
+import 'package:parking_u/utils/shared_prefs.dart';
+import 'package:parking_u/views/login/login_screen.dart';
 import 'package:parking_u/views/profile/components/profile_pic.dart';
-import 'package:parking_u/views/profile/profile_screen.dart';
+// import 'package:parking_u/views/profile/profile_screen.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -73,27 +75,25 @@ class _BodyState extends State<Body> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Berhasil Edit',
                 desc: 'Anda Berhasil Edit',
-                btnOkText: 'Kembali',
+                btnOkText: 'Silahkan Login Kembali',
                 btnOkOnPress: () {
                   debugPrint('Berhasil Edit');
+                  SharedPref.removeToken();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (_) {
-                        return ProfileScreen();
-                      },
+                      builder: (context) => LoginScreen(),
                     ),
                   );
                 },
                 onDissmissCallback: () {
                   debugPrint('Berhasil Edit');
+                  SharedPref.removeToken();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (_) {
-                        return ProfileScreen();
-                      },
+                      builder: (context) => LoginScreen(),
                     ),
                   );
                 },
@@ -107,29 +107,16 @@ class _BodyState extends State<Body> with Validation {
                 headerAnimationLoop: false,
                 dismissOnTouchOutside: false,
                 dismissOnBackKeyPress: false,
-                autoHide: Duration(seconds: 5),
+                autoHide: Duration(seconds: 6),
                 title: 'Gagal Edit',
                 desc: 'Anda Gagal Edit',
                 btnOkText: 'Isi Form Dengan Benar',
+                btnOkColor: errorColor,
                 btnOkOnPress: () {
                   debugPrint('Gagal Edit');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return Body();
-                      },
-                    ),
-                  );
                 },
                 onDissmissCallback: () {
                   debugPrint('Gagal Edit');
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (_) {
-                        return Body();
-                      },
-                    ),
-                  );
                 },
               )..show();
             }

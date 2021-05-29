@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/main.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
@@ -16,16 +17,17 @@ class ListPark extends StatefulWidget {
 }
 
 class _ListParkState extends State<ListPark> {
-  List<ParkirModel> listParkir = [];
   bool loading = false;
+  TextEditingController editingController = TextEditingController();
 
   void fetchParkirList() async {
     try {
       await ParkirService.getAllParkir().then((value) {
         if (value is List<ParkirModel>) {
           print('Success');
-          listParkir.addAll(value);
           setState(() {
+            listParkir.clear();
+            listParkir.addAll(value);
             loading = false;
           });
         }
@@ -42,45 +44,147 @@ class _ListParkState extends State<ListPark> {
     loading = true;
   }
 
+  void fetchSearchParkirList(searchKeyword) async {
+    if (searchKeyword.isNotEmpty) {
+      try {
+        await ParkirService.getSearchParkir(searchKeyword).then((value) {
+          if (value is List<ParkirModel>) {
+            print('Success');
+            setState(() {
+              listParkir.clear();
+              listParkir.addAll(value);
+              loading = false;
+            });
+          }
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    } else {
+      try {
+        await ParkirService.getAllParkir().then((value) {
+          if (value is List<ParkirModel>) {
+            print('Success');
+            setState(() {
+              listParkir.clear();
+              listParkir.addAll(value);
+              loading = false;
+            });
+          }
+        });
+      } catch (e) {
+        print(e.toString());
+      }
+    }
+  }
+
+  Future<void> fetchRefreshParkirList() async {
+    try {
+      await ParkirService.getAllParkir().then((value) {
+        if (value is List<ParkirModel>) {
+          print('Success');
+          setState(() {
+            listParkir.clear();
+            listParkir.addAll(value);
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(
+              left: getProportionateScreenWidth(20),
+              right: getProportionateScreenWidth(20),
+              bottom: getProportionateScreenWidth(20),
+            ),
+            child: TextField(
+              onChanged: (value) {
+                fetchSearchParkirList(value.capitalizeFirstofEach);
+                print(value.capitalizeFirstofEach);
+              },
+              textCapitalization: TextCapitalization.words,
+              controller: editingController,
+              style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+              cursorColor: secondaryTextColor,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(10),
+                  vertical: getProportionateScreenWidth(12),
+                ),
+                fillColor: Colors.white,
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
+                  borderSide: BorderSide(color: primaryColor, width: 2.0),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
+                ),
+                hintText: "Cari lokasi",
+                prefixIcon: Icon(
+                  Icons.search,
+                  color: secondaryTextColor,
+                  size: 6.0.w,
+                ),
+              ),
+            ),
+          ),
           SizedBox(
             height: 59.0.h,
             child: loading
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listParkir.length,
-                    itemBuilder: (context, index) {
-                      ParkirModel item = listParkir[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 2.0.w,
-                          vertical: 4.0.w,
-                        ),
-                        child: ListParkHere(
-                          image: item.linkImage,
-                          name: item.namaParkir,
-                          price: item.harga,
-                          length: item.jarak,
-                          availability: item.statusLahan,
-                          rating: item.rating,
-                          times: item.jam,
-                          press: () => displayBottomSheet(context, item),
-                        ),
-                      );
-                    },
+                : RefreshIndicator(
+                    onRefresh: fetchRefreshParkirList,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: listParkir.length,
+                      itemBuilder: (context, index) {
+                        ParkirModel item = listParkir[index];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 2.0.w,
+                            vertical: 4.0.w,
+                          ),
+                          child: ListParkHere(
+                            image: item.linkImage,
+                            name: item.namaParkir,
+                            price: item.harga,
+                            length: item.jarak,
+                            availability: item.statusLahan,
+                            rating: item.rating,
+                            times: item.jam,
+                            press: () => displayBottomSheet(context, item),
+                          ),
+                        );
+                      },
+                    ),
                   ),
           ),
         ],
       ),
     );
   }
+}
+
+extension CapExtension on String {
+  String get inCaps =>
+      this.length > 0 ? '${this[0].toUpperCase()}${this.substring(1)}' : '';
+  String get allInCaps => this.toUpperCase();
+  String get capitalizeFirstofEach => this
+      .replaceAll(RegExp(' +'), ' ')
+      .split(" ")
+      .map((str) => str.inCaps)
+      .join(" ");
 }
 
 class ListParkHere extends StatelessWidget {
@@ -171,7 +275,7 @@ class ListParkHere extends StatelessWidget {
                                 fontSize: caption.sp - 1,
                                 fontWeight: FontWeight.w800,
                               ),
-                              overflow: TextOverflow.ellipsis,
+                              overflow: TextOverflow.clip,
                               maxLines: 2,
                             ),
                           ),
@@ -201,18 +305,20 @@ class ListParkHere extends StatelessWidget {
                       ),
                       Row(
                         children: [
+                          // Text(
+                          //   '$length Km',
+                          //   style: TextStyle(
+                          //     fontSize: overline.sp - 1,
+                          //     color: Colors.grey,
+                          //   ),
+                          // ),
                           Text(
-                            '$length Km',
+                            '$availability',
                             style: TextStyle(
                               fontSize: overline.sp - 1,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Text(
-                            ' - $availability',
-                            style: TextStyle(
-                              fontSize: overline.sp - 1,
-                              color: successColor,
+                              color: '$availability'.toUpperCase() == 'TERSEDIA'
+                                  ? successColor
+                                  : errorColor,
                             ),
                           ),
                         ],

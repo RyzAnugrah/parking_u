@@ -1,10 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 
 class Payment extends StatefulWidget {
-  Payment();
+  final ParkirModel item;
+
+  const Payment({Key key, this.item}) : super(key: key);
 
   @override
   _PaymentState createState() => _PaymentState();
@@ -14,8 +18,8 @@ class _PaymentState extends State<Payment> {
   int _filterGroup = 1;
 
   final List<RadioGroup> _filterList = [
-    RadioGroup(index: 1, text: "Dompet Digital"),
-    RadioGroup(index: 2, text: "Cash"),
+    RadioGroup(index: 1, text: "Cash"),
+    RadioGroup(index: 2, text: "Dompet Digital"),
   ];
 
   @override
@@ -93,6 +97,28 @@ class _PaymentState extends State<Payment> {
     );
   }
 
+  void displayAwesomeDialogue() {
+    AwesomeDialog(
+      context: context,
+      animType: AnimType.SCALE,
+      dialogType: DialogType.WARNING,
+      headerAnimationLoop: false,
+      dismissOnTouchOutside: false,
+      dismissOnBackKeyPress: false,
+      autoHide: Duration(seconds: 6),
+      title: 'Dompet Digital Dalam Pengembangan',
+      desc: 'Dompet Digital Dalam Pengembangan',
+      btnOkText: 'Silahkan Pilih Cash',
+      btnOkColor: pendingColor,
+      btnOkOnPress: () {
+        debugPrint('Dompet Digital Dalam Pengembangan');
+      },
+      onDissmissCallback: () {
+        debugPrint('Dompet Digital Dalam Pengembangan');
+      },
+    )..show();
+  }
+
   void displayBottomSheet(BuildContext context) {
     SizeConfig().init(context);
     // Size size = MediaQuery.of(context).size;
@@ -124,54 +150,107 @@ class _PaymentState extends State<Payment> {
                   SizedBox(
                     height: defaultPadding,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset(
-                            "assets/images/virtual-payment-gopay.png",
-                            fit: BoxFit.cover,
-                            height: 50.0,
-                            width: 50.0,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset(
-                            "assets/images/virtual-payment-dana.png",
-                            fit: BoxFit.cover,
-                            height: 50.0,
-                            width: 50.0,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset(
-                            "assets/images/virtual-payment-ovo.png",
-                            fit: BoxFit.cover,
-                            height: 50.0,
-                            width: 50.0,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.asset(
-                            "assets/images/virtual-payment-linkaja.png",
-                            fit: BoxFit.cover,
-                            height: 50.0,
-                            width: 50.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  _buildRadioButton(),
                   SizedBox(
                     height: defaultPadding,
                   ),
-                  _buildRadioButton(),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          // GestureDetector(
+                          //   onTap: () {},
+                          //   child: Container(
+                          //     padding: EdgeInsets.all(10.0),
+                          //     margin: EdgeInsets.symmetric(horizontal: 10.0),
+                          //     decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(50),
+                          //       border: Border.all(
+                          //         color: primaryColor,
+                          //         width: 5,
+                          //       ),
+                          //     ),
+                          //     child: Image.asset(
+                          //       "assets/images/virtual-payment-gopay.png",
+                          //       fit: BoxFit.cover,
+                          //       height: 50.0,
+                          //       width: 50.0,
+                          //     ),
+                          //   ),
+                          // ),
+                          GestureDetector(
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: primaryColor,
+                                  width: 5,
+                                ),
+                              ),
+                              child: Image.asset(
+                                "assets/images/virtual-payment-dana.png",
+                                fit: BoxFit.cover,
+                                height: 50.0,
+                                width: 50.0,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: primaryColor,
+                                  width: 5,
+                                ),
+                              ),
+                              child: Image.asset(
+                                "assets/images/virtual-payment-ovo.png",
+                                fit: BoxFit.cover,
+                                height: 50.0,
+                                width: 50.0,
+                              ),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              displayAwesomeDialogue();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              margin: EdgeInsets.symmetric(horizontal: 10.0),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                border: Border.all(
+                                  color: primaryColor,
+                                  width: 5,
+                                ),
+                              ),
+                              child: Image.asset(
+                                "assets/images/virtual-payment-linkaja.png",
+                                fit: BoxFit.cover,
+                                height: 50.0,
+                                width: 50.0,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: defaultPadding,
                   ),
@@ -180,44 +259,54 @@ class _PaymentState extends State<Payment> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Anu Jaya',
-                              style: TextStyle(
-                                fontSize: bodyText2.sp,
-                                color: secondaryTextColor,
-                                fontWeight: FontWeight.w800,
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.item.namaParkir,
+                                style: TextStyle(
+                                  fontSize: bodyText2.sp,
+                                  color: secondaryTextColor,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                overflow: TextOverflow.clip,
+                                maxLines: 2,
                               ),
-                            ),
-                            Text(
-                              '15.50 WIB',
-                              style: TextStyle(
-                                fontSize: caption.sp,
-                                color: secondaryTextColor,
+                              Text(
+                                widget.item.lokasiParkir,
+                                style: TextStyle(
+                                  fontSize: caption.sp,
+                                  color: secondaryTextColor,
+                                ),
+                                overflow: TextOverflow.clip,
+                                maxLines: 2,
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Lantai 1',
+                              widget.item.jam,
                               style: TextStyle(
                                 fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
+                              overflow: TextOverflow.clip,
+                              maxLines: 2,
                             ),
                             Text(
-                              'No.3',
+                              'Rp. ' + widget.item.harga.toString(),
                               style: TextStyle(
                                 fontSize: caption.sp,
                                 color: secondaryTextColor,
                               ),
+                              overflow: TextOverflow.clip,
+                              maxLines: 2,
                             ),
                           ],
                         ),

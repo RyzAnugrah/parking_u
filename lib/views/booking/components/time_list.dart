@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 
-class TimeList extends StatelessWidget {
-  const TimeList({
-    Key key,
-  }) : super(key: key);
+class TimeList extends StatefulWidget {
+  final ParkirModel item;
 
+  const TimeList({Key key, this.item}) : super(key: key);
+
+  @override
+  _TimeListState createState() => _TimeListState();
+}
+
+class _TimeListState extends State<TimeList> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,43 +24,81 @@ class TimeList extends StatelessWidget {
             children: [
               TimeListCard(
                 hours: "0 - 1",
-                cost: 3000,
+                cost: widget.item.tarif1==null ? 3000 : widget.item.tarif1,
+                // available: widget.item.tarif1==null ? false : widget.item.tarif1,
+                available: true,
                 press: () {},
               ),
               TimeListCard(
                 hours: "1 - 2",
-                cost: 5000,
+                cost: widget.item.tarif2==null ? 5000 : widget.item.tarif2,
+                // available: widget.item.tarif2==null ? false : widget.item.tarif2,
+                available: true,
                 press: () {},
               ),
               TimeListCard(
                 hours: "2 - 3",
-                cost: 7000,
+                cost: widget.item.tarif3==null ? 7000 : widget.item.tarif3,
+                // available: widget.item.tarif3==null ? false : widget.item.tarif3,
+                available: true,
                 press: () {},
               ),
-              TimeListCard(
-                hours: "3 - 4",
-                cost: 9000,
-                press: () {},
+            ],
+          ),
+        ),
+        SizedBox(height: defaultPadding),
+        Container(
+          padding: EdgeInsets.only(right: defaultPadding),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/ellipse-green.png",
+                  ),
+                  SizedBox(width: 1.0.w),
+                  Text(
+                    'Tersedia',
+                    style: TextStyle(
+                      color: secondaryTextColor,
+                      fontSize: bodyText2,
+                    ),
+                  ),
+                ],
               ),
-              TimeListCard(
-                hours: "4 - 5",
-                cost: 11000,
-                press: () {},
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/ellipse-orange.png",
+                  ),
+                  SizedBox(width: 2.0.w),
+                  Text(
+                    'Tidak Tersedia',
+                    style: TextStyle(
+                      color: secondaryTextColor,
+                      fontSize: bodyText2,
+                    ),
+                  ),
+                ],
               ),
-              TimeListCard(
-                hours: "5 - 6",
-                cost: 13000,
-                press: () {},
-              ),
-              TimeListCard(
-                hours: "6 - 7",
-                cost: 15000,
-                press: () {},
-              ),
-              TimeListCard(
-                hours: "7 - 8",
-                cost: 17000,
-                press: () {},
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    "assets/images/ellipse-blue.png",
+                  ),
+                  SizedBox(width: 2.0.w),
+                  Text(
+                    'Dipilih',
+                    style: TextStyle(
+                      color: secondaryTextColor,
+                      fontSize: bodyText2,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -64,23 +108,42 @@ class TimeList extends StatelessWidget {
   }
 }
 
-class TimeListCard extends StatelessWidget {
+class TimeListCard extends StatefulWidget {
   const TimeListCard({
     Key key,
     @required this.hours,
     @required this.cost,
+    @required this.available,
     @required this.press,
   }) : super(key: key);
 
   final String hours;
   final int cost;
+  final bool available;
   final GestureTapCallback press;
+
+  @override
+  _TimeListCardState createState() => _TimeListCardState();
+}
+
+class _TimeListCardState extends State<TimeListCard> {
+  bool availableColor;
+  bool _colorTap = false;
+
+  @override
+  void initState() {
+    super.initState();
+    availableColor = widget.available;
+  }
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: GestureDetector(
-        onTap: press,
+        onTap: () => {
+          setState(() => _colorTap = !_colorTap),
+        },
+        onDoubleTap: widget.press,
         child: SizedBox(
           width: getProportionateScreenWidth(150),
           height: getProportionateScreenWidth(150),
@@ -93,7 +156,9 @@ class TimeListCard extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: (availableColor
+                        ? (_colorTap ? infoColor : successColor)
+                        : pendingColor),
                     border: Border.all(color: secondaryTextColor),
                     borderRadius: borderRadius,
                   ),
@@ -104,9 +169,9 @@ class TimeListCard extends StatelessWidget {
                     children: [
                       Container(
                         child: Text(
-                          '$hours',
+                          '${widget.hours}',
                           style: TextStyle(
-                            color: secondaryTextColor,
+                            color: primaryTextColor,
                             fontSize: bodyText2.sp,
                             fontWeight: FontWeight.w700,
                           ),
@@ -119,7 +184,7 @@ class TimeListCard extends StatelessWidget {
                         child: Text(
                           'per jam',
                           style: TextStyle(
-                            color: secondaryTextColor,
+                            color: primaryTextColor,
                             fontSize: caption.sp - 2,
                             fontWeight: FontWeight.w100,
                           ),
@@ -131,9 +196,9 @@ class TimeListCard extends StatelessWidget {
                       SizedBox(height: 10),
                       Container(
                         child: Text(
-                          'Rp$cost',
+                          'Rp${widget.cost}',
                           style: TextStyle(
-                            color: secondaryTextColor,
+                            color: primaryTextColor,
                             fontSize: caption.sp - 1,
                             fontWeight: FontWeight.w700,
                           ),
