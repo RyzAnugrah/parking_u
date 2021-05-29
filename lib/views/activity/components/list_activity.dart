@@ -16,15 +16,37 @@ class ListActivity extends StatefulWidget {
 
 class _ListActivityState extends State<ListActivity> {
   RiwayatModel riwayat;
+  List<RiwayatModel> listRiwayatReverse = [];
   bool loading = false;
 
   void fetchRiwayatList() async {
     try {
       await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
+        Future.delayed(Duration(seconds: 2));
         if (value is List<RiwayatModel>) {
           print('Success');
           listRiwayat.clear();
           listRiwayat.addAll(value);
+          listRiwayatReverse = listRiwayat.reversed.toList();
+          setState(() {
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<void> fetchRefreshRiwayatList() async {
+    try {
+      await RiwayatService.getSpecifiedRiwayat(user.email).then((value) {
+        Future.delayed(Duration(seconds: 2));
+        if (value is List<RiwayatModel>) {
+          print('Success');
+          listRiwayat.clear();
+          listRiwayat.addAll(value);
+          listRiwayatReverse = listRiwayat.reversed.toList();
           setState(() {
             loading = false;
           });
@@ -70,30 +92,33 @@ class _ListActivityState extends State<ListActivity> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listRiwayat.length,
-                    itemBuilder: (context, index) {
-                      RiwayatModel riwayat = listRiwayat[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 2.0.w,
-                          vertical: 4.0.w,
-                        ),
-                        child: ListActivityHere(
-                          image: riwayat.statusPembayaran == 'PENDING'
-                              ? "assets/images/list_parking/riwayat-pending.png"
-                              : "assets/images/list_parking/riwayat-success.png",
-                          namaParkir: riwayat.namaParkir,
-                          lahanTerpilih: riwayat.lahanTerpilih,
-                          tarif: riwayat.tarif,
-                          jenisPembayaran: riwayat.jenisPembayaran,
-                          statusPembayaran: riwayat.statusPembayaran,
-                          waktuBooking: riwayat.waktuBooking,
-                          press: () => displayBottomSheet(context, riwayat),
-                        ),
-                      );
-                    },
+                : RefreshIndicator(
+                    onRefresh: fetchRefreshRiwayatList,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: listRiwayatReverse.length,
+                      itemBuilder: (context, index) {
+                        RiwayatModel riwayat = listRiwayatReverse[index];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 2.0.w,
+                            vertical: 4.0.w,
+                          ),
+                          child: ListActivityHere(
+                            image: riwayat.statusPembayaran.toUpperCase() == 'PENDING'
+                                ? "assets/images/list_parking/riwayat-pending.png"
+                                : "assets/images/list_parking/riwayat-success.png",
+                            namaParkir: riwayat.namaParkir,
+                            lahanTerpilih: riwayat.lahanTerpilih,
+                            tarif: riwayat.tarif,
+                            jenisPembayaran: riwayat.jenisPembayaran,
+                            statusPembayaran: riwayat.statusPembayaran,
+                            waktuBooking: riwayat.waktuBooking,
+                            press: () => displayBottomSheet(context, riwayat),
+                          ),
+                        );
+                      },
+                    ),
                   ),
             // : Padding(
             //     padding: EdgeInsets.symmetric(

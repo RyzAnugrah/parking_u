@@ -98,6 +98,7 @@ class _HeaderState extends State<Header> {
                   Container(
                     width: SizeConfig.screenWidth * 0.8,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         if (_currentPosition != null && _currentAddress != null)
                           Text(
@@ -106,6 +107,16 @@ class _HeaderState extends State<Header> {
                             maxLines: 3,
                             style: TextStyle(
                               fontSize: caption.sp - 3,
+                              color: primaryTextColor,
+                            ),
+                          ),
+                        if (_currentPosition == null || _currentAddress == null)
+                          Text(
+                            'Parking.u',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
+                            style: TextStyle(
+                              fontSize: caption.sp,
                               color: primaryTextColor,
                             ),
                           ),

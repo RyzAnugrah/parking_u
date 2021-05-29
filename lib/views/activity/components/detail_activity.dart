@@ -32,7 +32,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                       topRight: Radius.circular(8.0),
                     ),
                     child: Image.asset(
-                      riwayat.statusPembayaran == 'PENDING'
+                      riwayat.statusPembayaran.toUpperCase() == 'PENDING'
                           ? "assets/images/list_parking/riwayat-pending.png"
                           : "assets/images/list_parking/riwayat-success.png",
                       width: 50,
@@ -248,6 +248,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                     ),
                     child: Column(
                       children: [
+                        if (riwayat.statusPembayaran.toUpperCase() == 'PENDING')
                         bookingButton(context),
                       ],
                     ),
@@ -261,6 +262,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                     ),
                     child: Column(
                       children: [
+                        if (riwayat.statusPembayaran.toUpperCase() == 'PENDING')
                         cancelBookingButton(context, riwayat),
                       ],
                     ),

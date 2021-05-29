@@ -78,6 +78,23 @@ class _ListParkState extends State<ListPark> {
     }
   }
 
+  Future<void> fetchRefreshParkirList() async {
+    try {
+      await ParkirService.getAllParkir().then((value) {
+        if (value is List<ParkirModel>) {
+          print('Success');
+          setState(() {
+            listParkir.clear();
+            listParkir.addAll(value);
+            loading = false;
+          });
+        }
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -125,28 +142,31 @@ class _ListParkState extends State<ListPark> {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: listParkir.length,
-                    itemBuilder: (context, index) {
-                      ParkirModel item = listParkir[index];
-                      return Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 2.0.w,
-                          vertical: 4.0.w,
-                        ),
-                        child: ListParkHere(
-                          image: item.linkImage,
-                          name: item.namaParkir,
-                          price: item.harga,
-                          length: item.jarak,
-                          availability: item.statusLahan,
-                          rating: item.rating,
-                          times: item.jam,
-                          press: () => displayBottomSheet(context, item),
-                        ),
-                      );
-                    },
+                : RefreshIndicator(
+                    onRefresh: fetchRefreshParkirList,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: listParkir.length,
+                      itemBuilder: (context, index) {
+                        ParkirModel item = listParkir[index];
+                        return Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 2.0.w,
+                            vertical: 4.0.w,
+                          ),
+                          child: ListParkHere(
+                            image: item.linkImage,
+                            name: item.namaParkir,
+                            price: item.harga,
+                            length: item.jarak,
+                            availability: item.statusLahan,
+                            rating: item.rating,
+                            times: item.jam,
+                            press: () => displayBottomSheet(context, item),
+                          ),
+                        );
+                      },
+                    ),
                   ),
           ),
         ],
