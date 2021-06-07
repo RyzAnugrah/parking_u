@@ -57,22 +57,6 @@ class _ListActivityState extends State<ListActivity> {
     }
   }
 
-  // void fetchRiwayatList() async {
-  //   try {
-  //     await RiwayatService.getRiwayat().then((value) {
-  //       if (value is RiwayatModel) {
-  //         print('Success');
-  //         setState(() {
-  //           riwayat = value;
-  //           loading = false;
-  //         });
-  //       }
-  //     });
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -86,8 +70,7 @@ class _ListActivityState extends State<ListActivity> {
       child: Column(
         children: <Widget>[
           SizedBox(
-            // height: 25.0.h,
-            height: 75.0.h,
+            height: 82.0.h,
             child: loading
                 ? Center(
                     child: CircularProgressIndicator(),
@@ -120,36 +103,7 @@ class _ListActivityState extends State<ListActivity> {
                       },
                     ),
                   ),
-            // : Padding(
-            //     padding: EdgeInsets.symmetric(
-            //       horizontal: 2.0.w,
-            //       vertical: 4.0.w,
-            //     ),
-            //     child: ListActivityHere(
-            //       image: "assets/images/list_parking/anu-jaya.png",
-            //       lahanTerpilih: riwayat.lahanTerpilih,
-            //       tarif: riwayat.tarif,
-            //       jenisPembayaran: riwayat.jenisPembayaran,
-            //       statusPembayaran: riwayat.statusPembayaran,
-            //       waktuBooking: riwayat.waktuBooking,
-            //       press: () => displayBottomSheet(context, riwayat),
-            //     ),
-            //   ),
           ),
-          // SizedBox(
-          //   height: getProportionateScreenHeight(20),
-          // ),
-          // ListActivityHere(
-          //   image: "assets/images/list_parking/anu-jaya.png",
-          //   name: "Fadlan Sentosa",
-          //   price: 3000,
-          //   length: 2,
-          //   availability: 'Sedang Parkir',
-          //   rating: 5,
-          //   startTimes: '09:00',
-          //   finishTimes: '20:00',
-          //   press: () {},
-          // ),
         ],
       ),
     );
@@ -212,7 +166,6 @@ class ListActivityHere extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: borderRadius,
                     child: Image(
-                      // width: 200.0,
                       image: AssetImage(
                         image,
                       ),

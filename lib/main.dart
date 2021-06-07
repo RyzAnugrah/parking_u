@@ -1,9 +1,5 @@
-// import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter/foundation.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:parking_u/models/riwayat_model.dart';
@@ -17,7 +13,6 @@ import 'package:parking_u/views/home/home_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
 
 UserModel user;
-// ParkirModel item;
 String searchKeyword;
 List<ParkirModel> listParkir = [];
 List<RiwayatModel> listRiwayat = [];

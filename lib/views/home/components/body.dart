@@ -5,7 +5,6 @@ import 'package:parking_u/size_config.dart';
 import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/home/components/header.dart';
 import 'package:parking_u/views/home/components/list_park.dart';
-// import 'package:parking_u/views/home/components/search.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -79,7 +78,6 @@ class _BodyState extends State<Body> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          // SearchField(),
                           ListPark(),
                         ],
                       ),

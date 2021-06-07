@@ -305,13 +305,6 @@ class ListParkHere extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          // Text(
-                          //   '$length Km',
-                          //   style: TextStyle(
-                          //     fontSize: overline.sp - 1,
-                          //     color: Colors.grey,
-                          //   ),
-                          // ),
                           Text(
                             '$availability',
                             style: TextStyle(

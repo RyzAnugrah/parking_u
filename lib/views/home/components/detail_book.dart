@@ -60,7 +60,6 @@ void displayBottomSheet(BuildContext context, item) {
                         ),
                         Spacer(),
                         SizedBox(
-                          // width: SizeConfig.screenWidth * 0.7,
                           child: Text(
                             item.statusLahan,
                             style: TextStyle(

@@ -76,7 +76,6 @@ class _PaymentState extends State<Payment> {
                           ),
                           Spacer(),
                           Container(
-                            // width: 50.0.w,
                             child: Column(
                               children: <Widget>[
                                 Icon(Icons.arrow_forward_ios_outlined,
@@ -121,10 +120,12 @@ class _PaymentState extends State<Payment> {
 
   void displayBottomSheet(BuildContext context) {
     SizeConfig().init(context);
-    // Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
-        borderRadius: borderRadius,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8.0),
+          topRight: Radius.circular(8.0),
+        ),
       ),
       context: context,
       builder: (ctx) {
@@ -161,26 +162,6 @@ class _PaymentState extends State<Payment> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          // GestureDetector(
-                          //   onTap: () {},
-                          //   child: Container(
-                          //     padding: EdgeInsets.all(10.0),
-                          //     margin: EdgeInsets.symmetric(horizontal: 10.0),
-                          //     decoration: BoxDecoration(
-                          //       borderRadius: BorderRadius.circular(50),
-                          //       border: Border.all(
-                          //         color: primaryColor,
-                          //         width: 5,
-                          //       ),
-                          //     ),
-                          //     child: Image.asset(
-                          //       "assets/images/virtual-payment-gopay.png",
-                          //       fit: BoxFit.cover,
-                          //       height: 50.0,
-                          //       width: 50.0,
-                          //     ),
-                          //   ),
-                          // ),
                           GestureDetector(
                             onTap: () {
                               displayAwesomeDialogue();

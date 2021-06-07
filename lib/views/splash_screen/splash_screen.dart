@@ -4,7 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
 import 'package:parking_u/size_config.dart';
 import 'package:parking_u/main.dart';
-// import 'package:parking_u/views/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static String routeName = "/splash_screen";

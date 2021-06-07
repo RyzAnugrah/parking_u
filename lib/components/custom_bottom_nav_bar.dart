@@ -22,7 +22,7 @@ class CustomBottomNavBar extends StatelessWidget {
     return SafeArea(
       child: Container(
         height: 8.0.h,
-        padding: EdgeInsets.symmetric(vertical: 0),
+        padding: EdgeInsets.only(right: defaultPadding),
         decoration: BoxDecoration(
           color: primaryBackgroundColor,
           boxShadow: [

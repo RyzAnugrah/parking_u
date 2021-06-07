@@ -102,22 +102,6 @@ class _BookingDetailsState extends State<BookingDetails> {
                         ),
                       ],
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Image.asset(
-                    //       "assets/images/ellipse-blue.png",
-                    //     ),
-                    //     SizedBox(width: 2.0.w),
-                    //     Text(
-                    //       'Dipilih',
-                    //       style: TextStyle(
-                    //         color: secondaryTextColor,
-                    //         fontSize: bodyText2,
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                   ],
                 ),
               ),

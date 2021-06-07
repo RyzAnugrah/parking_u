@@ -249,7 +249,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                     child: Column(
                       children: [
                         if (riwayat.statusPembayaran.toUpperCase() == 'PENDING')
-                        bookingButton(context),
+                          bookingButton(context),
                       ],
                     ),
                   ),
@@ -263,7 +263,7 @@ void displayBottomSheet(BuildContext context, riwayat) {
                     child: Column(
                       children: [
                         if (riwayat.statusPembayaran.toUpperCase() == 'PENDING')
-                        cancelBookingButton(context, riwayat),
+                          cancelBookingButton(context, riwayat),
                       ],
                     ),
                   ),
@@ -426,7 +426,7 @@ Widget cancelBookingButton(context, riwayat) {
   return ElevatedButton(
     child: Text(
       'Batalkan Pesanan',
-      style: TextStyle(fontSize: caption.sp, color: secondaryTextColor),
+      style: TextStyle(fontSize: caption.sp, color: primaryTextColor),
     ),
     style: ElevatedButton.styleFrom(
       primary: errorColor,
@@ -440,27 +440,5 @@ Widget cancelBookingButton(context, riwayat) {
       ),
     ),
     onPressed: onCancelBookingHandler,
-    // onPressed: () {
-    // Navigator.pop(context);
-    // AwesomeDialog(
-    //   context: context,
-    //   animType: AnimType.SCALE,
-    //   dialogType: DialogType.WARNING,
-    //   headerAnimationLoop: false,
-    //   dismissOnTouchOutside: false,
-    //   dismissOnBackKeyPress: false,
-    //   autoHide: Duration(seconds: 6),
-    //   title: 'Konfirmasi Pemesanan Berhasil',
-    //   desc: 'Konfirmasi Pemesanan Berhasil',
-    //   btnOkText: 'Silahkan Tunggu Admin Untuk Mengonfirmasi',
-    //   btnOkColor: pendingColor,
-    //   btnOkOnPress: () {
-    //     debugPrint('Konfirmasi Pemesanan Berhasil');
-    //   },
-    //   onDissmissCallback: () {
-    //     debugPrint('Konfirmasi Pemesanan Berhasil');
-    //   },
-    // )..show();
-    // },
   );
 }

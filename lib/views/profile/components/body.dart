@@ -6,10 +6,14 @@ import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/about/about_screen.dart';
 import 'package:parking_u/views/account/account_screen.dart';
 import 'package:parking_u/views/login/login_screen.dart';
-// import 'package:parking_u/views/notification/notification_screen.dart';
 import 'package:parking_u/views/profile/components/profile_menu.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -102,16 +106,45 @@ class Body extends StatelessWidget {
             text: "Log Out",
             icon: Icons.logout,
             press: () {
-              SharedPref.removeToken();
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
-                ),
-              );
+              _onWillPop();
             },
           ),
         ],
       ),
     );
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text('Anda yakin?'),
+            content: new Text('Ingin logout dari aplikasi ini'),
+            actions: <Widget>[
+              new TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text(
+                  'Tidak',
+                  style: TextStyle(color: secondaryTextColor),
+                ),
+              ),
+              new TextButton(
+                onPressed: () {
+                  SharedPref.removeToken();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                  );
+                },
+                child: new Text(
+                  'Ya',
+                  style: TextStyle(color: primaryColor),
+                ),
+              ),
+            ],
+          ),
+        )) ??
+        false;
   }
 }

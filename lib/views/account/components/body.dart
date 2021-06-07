@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:parking_u/constants.dart';
@@ -11,7 +10,6 @@ import 'package:parking_u/services/auth_service.dart';
 import 'package:parking_u/utils/shared_prefs.dart';
 import 'package:parking_u/views/login/login_screen.dart';
 import 'package:parking_u/views/profile/components/profile_pic.dart';
-// import 'package:parking_u/views/profile/profile_screen.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -402,7 +400,7 @@ class _BodyState extends State<Body> with Validation {
   Widget confirmPasswordField() {
     return TextFormField(
       style: TextStyle(
-        fontSize: bodyText2,
+        fontSize: bodyText1,
         color: secondaryTextColor,
       ),
       cursorColor: secondaryTextColor,

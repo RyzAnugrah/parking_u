@@ -14,7 +14,7 @@ class ActivityScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          "Riwayat",
+          "Riwayat Pesanan",
           style: TextStyle(
             color: primaryTextColor,
             fontSize: headline6,

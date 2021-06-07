@@ -18,7 +18,7 @@ class _AboutScreenState extends State<AboutScreen> {
       body: Container(
         padding: EdgeInsets.only(
           left: defaultPadding,
-          bottom: defaultPadding,
+          // bottom: defaultPadding,
         ),
         child: SafeArea(
           child: ListView(
@@ -91,7 +91,7 @@ class _AboutScreenState extends State<AboutScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text(
-                      'The increase in the number of vehicles and reduced parking space in urban areas makes it difficult for people to find parking space, sometimes the available parking lots are full, making us have to find another parking space.',
+                      'Pertambahan jumlah kendaraan dan berkurangnya lahan parkir di perkotaan membuat masyarakat kesulitan mencari lahan parkir, terkadang lahan parkir yang tersedia penuh sehingga membuat kita harus mencari lahan parkir lain.',
                       style: TextStyle(
                         color: secondaryTextColor,
                         fontSize: bodyText2,
@@ -100,7 +100,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     SizedBox(height: defaultPadding),
                     Text(
-                      'Parking.u is a mobile app that use to find and book a parking area easily with various payment method.',
+                      'Parking.u adalah aplikasi mobile yang digunakan untuk mencari dan memesan tempat parkir dengan mudah dengan berbagai metode pembayaran.',
                       style: TextStyle(
                         color: secondaryTextColor,
                         fontSize: bodyText2,
@@ -109,7 +109,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     ),
                     SizedBox(height: defaultPadding),
                     Text(
-                      'With geo-location icon to represent a location that people use to find parking space and power button to represent a vehicle. we bring our app with cheerfull and trustness with jonquil and shapired blue as primary color and secondary color. with this brand identity we hope user can find parking space easily',
+                      'Dengan ikon geo-lokasi untuk mewakili lokasi yang digunakan orang untuk menemukan tempat parkir dan ikon daya bertuliskan huruf "U" untuk mewakili kendaraanmu. Kami membawa aplikasi kami dengan ceria dan kepercayaan dengan warna kuning muda dan warna biru sebagai identitas aplikasi ini. Kami berharap pengguna dapat menemukan tempat parkir dengan mudah dan cepat.',
                       style: TextStyle(
                         color: secondaryTextColor,
                         fontSize: bodyText2,

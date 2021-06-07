@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:parking_u/main.dart';
 import 'package:parking_u/models/parkir_model.dart';
 import 'package:sizer/sizer.dart';
 import 'package:parking_u/constants.dart';
@@ -38,12 +37,6 @@ class _SlotListState extends State<SlotList> {
                 press: () {},
               );
             },
-            // children: [
-            //   SlotListCard(
-            //     number: 1,
-            //     available: false,
-            //     press: () {},
-            //   ),
           ),
         ),
         SingleChildScrollView(
@@ -126,7 +119,6 @@ class _SlotListCardState extends State<SlotListCard> {
     return InkWell(
       child: GestureDetector(
         onTap: () => {
-          // setState(() => _colorTap = !_colorTap),
         },
         onDoubleTap: widget.press,
         child: SizedBox(

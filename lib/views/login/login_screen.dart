@@ -147,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
       context: context,
       builder: (ctx) {
         return Container(
-          // padding: EdgeInsets.all(10.0.w),
           padding: EdgeInsets.symmetric(
             horizontal: getProportionateScreenWidth(defaultPadding),
             vertical: getProportionateScreenHeight(defaultPadding + 10),
@@ -408,8 +407,6 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
       ),
       style: ElevatedButton.styleFrom(
         primary: primaryColor,
-        // onPrimary: Colors.white,
-        // shadowColor: secondaryColor,
         elevation: 5,
         padding: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(142),
