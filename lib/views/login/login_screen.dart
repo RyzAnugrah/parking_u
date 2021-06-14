@@ -25,6 +25,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> with Validation {
   final formKey = GlobalKey<FormState>();
 
+  bool isHiddenPassword = true;
+
   TextEditingController emailTC = TextEditingController();
   TextEditingController passTC = TextEditingController();
 
@@ -358,7 +360,7 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
     return TextFormField(
       controller: passTC,
       cursorColor: secondaryTextColor,
-      obscureText: true,
+      obscureText: isHiddenPassword,
       style: TextStyle(
         fontSize: caption,
         color: secondaryTextColor,
@@ -367,6 +369,16 @@ class _LoginScreenState extends State<LoginScreen> with Validation {
         prefixIcon: Icon(
           Icons.lock_outline,
           color: Colors.grey,
+        ),
+        suffixIcon: InkWell(
+          onTap: () {
+            setState(() {
+              isHiddenPassword = !isHiddenPassword;
+            });
+          },
+          child: Icon(
+            isHiddenPassword ? Icons.visibility_off : Icons.visibility
+            ),
         ),
         labelText: 'Kata Sandi',
         labelStyle: TextStyle(

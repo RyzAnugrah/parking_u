@@ -21,6 +21,9 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> with Validation {
   final formKey = GlobalKey<FormState>();
 
+  bool isHiddenPassword = true;
+  bool isHiddenConfirmPassword = true;
+
   String name = '';
   String email = '';
   String number = '';
@@ -364,11 +367,20 @@ class _BodyState extends State<Body> with Validation {
         color: secondaryTextColor,
       ),
       cursorColor: secondaryTextColor,
-      obscureText: true,
+      obscureText: isHiddenPassword,
       decoration: InputDecoration(
         prefixIcon: Icon(
           Icons.lock_outline,
           color: Colors.grey,
+        ),
+        suffixIcon: InkWell(
+          onTap: () {
+            setState(() {
+              isHiddenPassword = !isHiddenPassword;
+            });
+          },
+          child:
+              Icon(isHiddenPassword ? Icons.visibility_off : Icons.visibility),
         ),
         labelText: 'Kata Sandi',
         labelStyle: TextStyle(
@@ -404,11 +416,20 @@ class _BodyState extends State<Body> with Validation {
         color: secondaryTextColor,
       ),
       cursorColor: secondaryTextColor,
-      obscureText: true,
+      obscureText: isHiddenConfirmPassword,
       decoration: InputDecoration(
         prefixIcon: Icon(
           Icons.lock_outline,
           color: Colors.grey,
+        ),
+        suffixIcon: InkWell(
+          onTap: () {
+            setState(() {
+              isHiddenConfirmPassword = !isHiddenConfirmPassword;
+            });
+          },
+          child:
+              Icon(isHiddenConfirmPassword ? Icons.visibility_off : Icons.visibility),
         ),
         labelText: 'Konfirmasi Kata Sandi',
         labelStyle: TextStyle(
